@@ -2,7 +2,7 @@ import { useState } from "react";
 import UploadPanel from "@/components/UploadPanel";
 import ProcessingCenter from "@/components/ProcessingCenter";
 import OutputPanel from "@/components/OutputPanel";
-import ExportBar from "@/components/ExportBar";
+import ExportButton from "@/components/ExportButton";
 import MagiGuide from "@/components/MagiGuide";
 import { MeetingAnalysis } from "@shared/schema";
 
@@ -26,12 +26,19 @@ export default function Home() {
               <div className="text-xs text-cyber-teal">TOKYO-3 NERV</div>
             </div>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-6">
+            {/* Export Options */}
+            <div className="flex items-center space-x-2">
+              <div className="text-xs text-cyber-cyan font-mono mr-2">EXPORT:</div>
+              <ExportButton type="copy" analysis={analysis} />
+              <ExportButton type="download" analysis={analysis} />
+              <ExportButton type="notion" analysis={analysis} />
+            </div>
             <MagiGuide />
             <div className="text-right text-xs text-cyber-cyan font-mono">
-              <div>DIRECT LINK CONNECTION: <span className="text-cyber-orange">OPENROUTER-01</span></div>
-              <div>ACCESS MODE: <span className="text-cyber-orange animate-pulse">SUPERUSER</span></div>
-              <div>SYSTEM STATUS: <span className="text-cyber-teal">ONLINE</span></div>
+              <div>DIRECT LINK: <span className="text-cyber-orange">OPENROUTER-01</span></div>
+              <div>ACCESS: <span className="text-cyber-orange animate-pulse">SUPERUSER</span></div>
+              <div>STATUS: <span className="text-cyber-teal">ONLINE</span></div>
             </div>
           </div>
         </div>
@@ -64,9 +71,6 @@ export default function Home() {
         
         <OutputPanel analysis={analysis} />
       </main>
-
-      {/* Export Bar */}
-      <ExportBar analysis={analysis} />
 
       {/* Terminal Status Bar */}
       <div className="fixed bottom-0 left-0 right-0 bg-cyber-bg border-t border-cyber-orange p-2 text-xs text-cyber-cyan">

@@ -8,6 +8,14 @@ MEETRO is a cyberpunk-themed meeting recovery system that helps users extract ac
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes
+
+### January 13, 2025
+- **Export UI Redesign**: Moved export options (copy, download, Notion) from footer to top navigation bar
+- **Component Refactoring**: Replaced ExportBar component with individual ExportButton components
+- **Navbar Enhancement**: Added export functionality to header with compact button design
+- **Layout Optimization**: Removed footer export bar to create cleaner interface
+
 ## System Architecture
 
 ### Frontend Architecture
@@ -41,7 +49,7 @@ Preferred communication style: Simple, everyday language.
 - **UploadPanel**: File upload and form inputs for meeting context
 - **ProcessingCenter**: Analysis controls and status display with interactive MAGI selection
 - **OutputPanel**: Structured display of meeting insights
-- **ExportBar**: Export functionality for analysis results
+- **ExportButton**: Individual export buttons for copy, download, and Notion integration
 - **FileUpload**: Drag-and-drop file upload component with validation
 - **MagiGuide**: Interactive guide explaining MAGI system metaphors and usage
 
