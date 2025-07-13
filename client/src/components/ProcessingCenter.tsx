@@ -91,10 +91,10 @@ export default function ProcessingCenter({
           {/* Top Hexagon - Balthasar */}
           <button
             onClick={() => setSelectedMode("balthasar")}
-            className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 hex-clip flex items-center justify-center transition-all duration-300 cursor-pointer z-10 ${
+            className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button ${
               selectedMode === "balthasar" 
                 ? "magi-panel animate-pulse-glow scale-110" 
-                : "bg-cyber-panel cyber-border hover:magi-panel hover:scale-105"
+                : "bg-cyber-panel cyber-border hover:magi-panel"
             }`}
           >
             <div className="text-center relative z-10">
@@ -107,10 +107,10 @@ export default function ProcessingCenter({
           {/* Bottom Left Hexagon - Melchior */}
           <button
             onClick={() => setSelectedMode("melchior")}
-            className={`absolute bottom-0 left-8 w-32 h-32 hex-clip flex items-center justify-center transition-all duration-300 cursor-pointer z-10 ${
+            className={`absolute bottom-0 left-8 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button ${
               selectedMode === "melchior" 
                 ? "magi-panel animate-pulse-glow scale-110" 
-                : "bg-cyber-panel cyber-border hover:magi-panel hover:scale-105"
+                : "bg-cyber-panel cyber-border hover:magi-panel"
             }`}
           >
             <div className="text-center relative z-10">
@@ -123,10 +123,10 @@ export default function ProcessingCenter({
           {/* Bottom Right Hexagon - Casper */}
           <button
             onClick={() => setSelectedMode("casper")}
-            className={`absolute bottom-0 right-8 w-32 h-32 hex-clip flex items-center justify-center transition-all duration-300 cursor-pointer z-10 ${
+            className={`absolute bottom-0 right-8 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button ${
               selectedMode === "casper" 
                 ? "magi-panel animate-pulse-glow scale-110" 
-                : "bg-cyber-panel cyber-border hover:magi-panel hover:scale-105"
+                : "bg-cyber-panel cyber-border hover:magi-panel"
             }`}
           >
             <div className="text-center relative z-10">

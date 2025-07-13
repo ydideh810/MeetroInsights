@@ -75,6 +75,7 @@
       inset 0 0 20px rgba(255, 69, 0, 0.1);
     position: relative;
     overflow: hidden;
+    transition: all 0.2s ease-out;
   }
   
   .magi-panel::before {
@@ -86,6 +87,15 @@
     bottom: 0;
     background: linear-gradient(45deg, transparent, rgba(255, 69, 0, 0.05), transparent);
     animation: scan-sweep 4s ease-in-out infinite;
+  }
+
+  .magi-button {
+    transition: all 0.2s ease-out;
+    transform-origin: center;
+  }
+
+  .magi-button:hover {
+    transform: scale(1.02);
   }
   
   .tokyo-3-grid {
