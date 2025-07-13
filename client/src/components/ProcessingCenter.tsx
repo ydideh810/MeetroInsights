@@ -4,6 +4,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { MeetingAnalysis } from "@shared/schema";
+import MagiGuide from "./MagiGuide";
 
 interface ProcessingCenterProps {
   transcript: string;
@@ -80,6 +81,9 @@ export default function ProcessingCenter({
           <div className="text-sm text-cyber-cyan mb-2 font-tektur tracking-wider">MAGI SYSTEM</div>
           <div className="text-3xl font-bold cyber-glow animate-pulse font-doto">TOKYO-3</div>
           <div className="text-sm text-cyber-orange font-tektur">NERV</div>
+          <div className="mt-4">
+            <MagiGuide />
+          </div>
         </div>
         
         {/* Hexagonal MAGI Layout */}

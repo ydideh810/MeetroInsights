@@ -39,10 +39,11 @@ Preferred communication style: Simple, everyday language.
 ### Frontend Components
 - **Home Page**: Main interface with three-column layout (upload, processing, output)
 - **UploadPanel**: File upload and form inputs for meeting context
-- **ProcessingCenter**: Analysis controls and status display
+- **ProcessingCenter**: Analysis controls and status display with interactive MAGI selection
 - **OutputPanel**: Structured display of meeting insights
 - **ExportBar**: Export functionality for analysis results
 - **FileUpload**: Drag-and-drop file upload component with validation
+- **MagiGuide**: Interactive guide explaining MAGI system metaphors and usage
 
 ### Backend Services
 - **File Parser**: Handles .txt, .docx, and .srt file processing

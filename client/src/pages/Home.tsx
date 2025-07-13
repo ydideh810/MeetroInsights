@@ -3,6 +3,7 @@ import UploadPanel from "@/components/UploadPanel";
 import ProcessingCenter from "@/components/ProcessingCenter";
 import OutputPanel from "@/components/OutputPanel";
 import ExportBar from "@/components/ExportBar";
+import MagiGuide from "@/components/MagiGuide";
 import { MeetingAnalysis } from "@shared/schema";
 
 export default function Home() {
@@ -25,10 +26,13 @@ export default function Home() {
               <div className="text-xs text-cyber-teal">TOKYO-3 NERV</div>
             </div>
           </div>
-          <div className="text-right text-xs text-cyber-cyan font-mono">
-            <div>DIRECT LINK CONNECTION: <span className="text-cyber-orange">OPENROUTER-01</span></div>
-            <div>ACCESS MODE: <span className="text-cyber-orange animate-pulse">SUPERUSER</span></div>
-            <div>SYSTEM STATUS: <span className="text-cyber-teal">ONLINE</span></div>
+          <div className="flex items-center space-x-4">
+            <MagiGuide />
+            <div className="text-right text-xs text-cyber-cyan font-mono">
+              <div>DIRECT LINK CONNECTION: <span className="text-cyber-orange">OPENROUTER-01</span></div>
+              <div>ACCESS MODE: <span className="text-cyber-orange animate-pulse">SUPERUSER</span></div>
+              <div>SYSTEM STATUS: <span className="text-cyber-teal">ONLINE</span></div>
+            </div>
           </div>
         </div>
       </header>
