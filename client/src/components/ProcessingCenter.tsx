@@ -91,7 +91,7 @@ export default function ProcessingCenter({
           {/* Top Hexagon - Balthasar */}
           <button
             onClick={() => setSelectedMode("balthasar")}
-            className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button ${
+            className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button magi-sync-animation magi-delay-2 ${
               selectedMode === "balthasar" 
                 ? "magi-panel animate-pulse-glow scale-110" 
                 : "bg-cyber-panel cyber-border hover:magi-panel"
@@ -107,7 +107,7 @@ export default function ProcessingCenter({
           {/* Bottom Left Hexagon - Melchior */}
           <button
             onClick={() => setSelectedMode("melchior")}
-            className={`absolute bottom-0 left-8 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button ${
+            className={`absolute bottom-0 left-8 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button magi-sync-animation magi-delay-1 ${
               selectedMode === "melchior" 
                 ? "magi-panel animate-pulse-glow scale-110" 
                 : "bg-cyber-panel cyber-border hover:magi-panel"
@@ -123,7 +123,7 @@ export default function ProcessingCenter({
           {/* Bottom Right Hexagon - Casper */}
           <button
             onClick={() => setSelectedMode("casper")}
-            className={`absolute bottom-0 right-8 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button ${
+            className={`absolute bottom-0 right-8 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button magi-sync-animation magi-delay-3 ${
               selectedMode === "casper" 
                 ? "magi-panel animate-pulse-glow scale-110" 
                 : "bg-cyber-panel cyber-border hover:magi-panel"

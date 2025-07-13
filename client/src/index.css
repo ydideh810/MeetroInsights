@@ -97,6 +97,58 @@
   .magi-button:hover {
     transform: scale(1.02);
   }
+
+  .magi-sync-animation {
+    animation: magi-sync-pulse 3s ease-in-out infinite;
+  }
+
+  .magi-sync-animation.magi-delay-1 {
+    animation-delay: 0s;
+  }
+
+  .magi-sync-animation.magi-delay-2 {
+    animation-delay: 0.5s;
+  }
+
+  .magi-sync-animation.magi-delay-3 {
+    animation-delay: 1s;
+  }
+
+  @keyframes magi-sync-pulse {
+    0%, 100% {
+      box-shadow: 0 0 10px rgba(255, 69, 0, 0.3);
+      border-color: rgba(255, 69, 0, 0.8);
+    }
+    50% {
+      box-shadow: 0 0 25px rgba(255, 69, 0, 0.6), 0 0 50px rgba(0, 255, 255, 0.3);
+      border-color: rgba(255, 69, 0, 1);
+    }
+  }
+
+  .magi-sync-animation::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    background: var(--cyber-orange);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: magi-sync-dot 3s ease-in-out infinite;
+  }
+
+  @keyframes magi-sync-dot {
+    0%, 100% {
+      opacity: 0.5;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.5);
+      box-shadow: 0 0 10px var(--cyber-orange);
+    }
+  }
   
   .tokyo-3-grid {
     background-image: 
