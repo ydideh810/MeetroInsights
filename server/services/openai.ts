@@ -135,7 +135,7 @@ Focus on human dynamics, emotional subtext, and interpersonal elements. Perfect 
         messages: [
           {
             role: "system",
-            content: "You are a meeting analysis expert. Always respond with valid JSON in the specified format."
+            content: "You are a meeting analysis expert. Always respond with valid JSON in the exact format specified. Do not include any markdown formatting, code blocks, or explanatory text - only the raw JSON object."
           },
           {
             role: "user",
@@ -151,7 +151,25 @@ Focus on human dynamics, emotional subtext, and interpersonal elements. Perfect 
     }
 
     const data = await response.json();
-    const result = JSON.parse(data.choices[0].message.content || "{}");
+    let content = data.choices[0].message.content || "{}";
+    
+    // Extract JSON from markdown code blocks if present
+    if (content.includes('```')) {
+      // Handle various markdown formats
+      const jsonMatch = content.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```?/);
+      if (jsonMatch) {
+        content = jsonMatch[1];
+      } else {
+        // Try to extract everything between first { and last }
+        const startIndex = content.indexOf('{');
+        const lastIndex = content.lastIndexOf('}');
+        if (startIndex !== -1 && lastIndex !== -1 && lastIndex > startIndex) {
+          content = content.substring(startIndex, lastIndex + 1);
+        }
+      }
+    }
+    
+    const result = JSON.parse(content);
     
     return {
       summary: result.summary || "No summary available",
