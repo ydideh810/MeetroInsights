@@ -91,7 +91,7 @@ export default function ProcessingCenter({
           {/* Top Hexagon - Balthasar */}
           <button
             onClick={() => setSelectedMode("balthasar")}
-            className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 hex-clip flex items-center justify-center transition-all duration-300 cursor-pointer ${
+            className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 hex-clip flex items-center justify-center transition-all duration-300 cursor-pointer z-10 ${
               selectedMode === "balthasar" 
                 ? "magi-panel animate-pulse-glow scale-110" 
                 : "bg-cyber-panel cyber-border hover:magi-panel hover:scale-105"
@@ -107,7 +107,7 @@ export default function ProcessingCenter({
           {/* Bottom Left Hexagon - Melchior */}
           <button
             onClick={() => setSelectedMode("melchior")}
-            className={`absolute bottom-0 left-8 w-32 h-32 hex-clip flex items-center justify-center transition-all duration-300 cursor-pointer ${
+            className={`absolute bottom-0 left-8 w-32 h-32 hex-clip flex items-center justify-center transition-all duration-300 cursor-pointer z-10 ${
               selectedMode === "melchior" 
                 ? "magi-panel animate-pulse-glow scale-110" 
                 : "bg-cyber-panel cyber-border hover:magi-panel hover:scale-105"
@@ -123,7 +123,7 @@ export default function ProcessingCenter({
           {/* Bottom Right Hexagon - Casper */}
           <button
             onClick={() => setSelectedMode("casper")}
-            className={`absolute bottom-0 right-8 w-32 h-32 hex-clip flex items-center justify-center transition-all duration-300 cursor-pointer ${
+            className={`absolute bottom-0 right-8 w-32 h-32 hex-clip flex items-center justify-center transition-all duration-300 cursor-pointer z-10 ${
               selectedMode === "casper" 
                 ? "magi-panel animate-pulse-glow scale-110" 
                 : "bg-cyber-panel cyber-border hover:magi-panel hover:scale-105"
@@ -137,7 +137,7 @@ export default function ProcessingCenter({
           </button>
           
           {/* Connection Lines */}
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 384 384">
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 384 384" style={{ zIndex: 1 }}>
             <path 
               d="M192 80 L120 260 L264 260 Z" 
               fill="none" 
@@ -159,7 +159,7 @@ export default function ProcessingCenter({
           </svg>
           
           {/* Central Status Display */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-5">
             <div className="text-xs text-cyber-cyan font-tektur mb-1">MODE</div>
             <div className="text-sm font-bold text-cyber-orange font-doto">
               {isProcessing ? "PROCESSING" : selectedMode.toUpperCase()}
