@@ -87,15 +87,15 @@ export default function ProcessingCenter({
           {/* Top Hexagon - Balthasar */}
           <button
             onClick={() => setSelectedMode("balthasar")}
-            className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 hex-clip flex items-center justify-center transition-all cursor-pointer ${
+            className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 hex-clip flex items-center justify-center transition-all duration-300 cursor-pointer ${
               selectedMode === "balthasar" 
-                ? "magi-panel animate-pulse-glow" 
-                : "bg-cyber-panel cyber-border hover:magi-panel"
+                ? "magi-panel animate-pulse-glow scale-110" 
+                : "bg-cyber-panel cyber-border hover:magi-panel hover:scale-105"
             }`}
           >
             <div className="text-center relative z-10">
               <div className="text-xs text-cyber-cyan font-tektur mb-1">MAGI</div>
-              <div className="text-sm font-bold text-cyber-teal font-tourney">BALTHASAR-2</div>
+              <div className={`text-sm font-bold font-tourney ${selectedMode === "balthasar" ? "text-cyber-orange" : "text-cyber-teal"}`}>BALTHASAR-2</div>
               <div className="text-xs text-cyber-orange mt-1 font-tektur">💡 STRATEGIST</div>
             </div>
           </button>
@@ -103,15 +103,15 @@ export default function ProcessingCenter({
           {/* Bottom Left Hexagon - Melchior */}
           <button
             onClick={() => setSelectedMode("melchior")}
-            className={`absolute bottom-0 left-8 w-32 h-32 hex-clip flex items-center justify-center transition-all cursor-pointer ${
+            className={`absolute bottom-0 left-8 w-32 h-32 hex-clip flex items-center justify-center transition-all duration-300 cursor-pointer ${
               selectedMode === "melchior" 
-                ? "magi-panel animate-pulse-glow" 
-                : "bg-cyber-panel cyber-border hover:magi-panel"
+                ? "magi-panel animate-pulse-glow scale-110" 
+                : "bg-cyber-panel cyber-border hover:magi-panel hover:scale-105"
             }`}
           >
             <div className="text-center relative z-10">
               <div className="text-xs text-cyber-cyan font-tektur mb-1">MAGI</div>
-              <div className="text-sm font-bold text-cyber-teal font-tourney">MELCHIOR-1</div>
+              <div className={`text-sm font-bold font-tourney ${selectedMode === "melchior" ? "text-cyber-orange" : "text-cyber-teal"}`}>MELCHIOR-1</div>
               <div className="text-xs text-cyber-red mt-1 font-tektur">📊 ANALYST</div>
             </div>
           </button>
@@ -119,23 +119,39 @@ export default function ProcessingCenter({
           {/* Bottom Right Hexagon - Casper */}
           <button
             onClick={() => setSelectedMode("casper")}
-            className={`absolute bottom-0 right-8 w-32 h-32 hex-clip flex items-center justify-center transition-all cursor-pointer ${
+            className={`absolute bottom-0 right-8 w-32 h-32 hex-clip flex items-center justify-center transition-all duration-300 cursor-pointer ${
               selectedMode === "casper" 
-                ? "magi-panel animate-pulse-glow" 
-                : "bg-cyber-panel cyber-border hover:magi-panel"
+                ? "magi-panel animate-pulse-glow scale-110" 
+                : "bg-cyber-panel cyber-border hover:magi-panel hover:scale-105"
             }`}
           >
             <div className="text-center relative z-10">
               <div className="text-xs text-cyber-cyan font-tektur mb-1">MAGI</div>
-              <div className="text-sm font-bold text-cyber-teal font-tourney">CASPER-3</div>
+              <div className={`text-sm font-bold font-tourney ${selectedMode === "casper" ? "text-cyber-orange" : "text-cyber-teal"}`}>CASPER-3</div>
               <div className="text-xs text-cyber-cyan mt-1 font-tektur">🧬 HUMAN</div>
             </div>
           </button>
           
           {/* Connection Lines */}
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 384 384">
-            <path d="M192 80 L120 260 L264 260 Z" fill="none" stroke="#FF4500" strokeWidth="2" opacity="0.6"/>
-            <circle cx="192" cy="200" r="80" fill="none" stroke="#00FFFF" strokeWidth="1" opacity="0.3"/>
+            <path 
+              d="M192 80 L120 260 L264 260 Z" 
+              fill="none" 
+              stroke="#FF4500" 
+              strokeWidth="2" 
+              opacity={selectedMode ? "0.8" : "0.6"}
+              className={selectedMode ? "animate-pulse" : ""}
+            />
+            <circle 
+              cx="192" 
+              cy="200" 
+              r="80" 
+              fill="none" 
+              stroke="#00FFFF" 
+              strokeWidth="1" 
+              opacity={selectedMode ? "0.5" : "0.3"}
+              className={selectedMode ? "animate-pulse" : ""}
+            />
           </svg>
           
           {/* Central Status Display */}
@@ -189,6 +205,11 @@ export default function ProcessingCenter({
                 "HUMAN DYNAMICS MODE"
             }
           </div>
+          {!isProcessing && (
+            <div className="text-xs text-cyber-orange mt-2 animate-pulse">
+              Click other MAGI units to switch analysis modes
+            </div>
+          )}
         </div>
       </div>
     </div>
