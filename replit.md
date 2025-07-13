@@ -114,7 +114,12 @@ Preferred communication style: Simple, everyday language.
 
 ### AI Integration
 - **OpenRouter API with DeepSeek R1**: Cost-effective AI model access with high-quality reasoning
-- **Prompt Engineering**: Separate modes for standard analysis and emergency recovery
+- **Enhanced System Prompts**: Comprehensive Meetro personality with specialized MAGI modes
+- **Three Analysis Modes**:
+  - MELCHIOR (Analyst): Facts, clarity, structured output
+  - BALTHASAR (Strategist): Priorities, execution, foresight
+  - CASPER (Human Layer): Emotion, tone, interpersonal dynamics
+- **Emergency Recovery Mode**: Plausible reconstruction from limited information
 - **Error Handling**: Comprehensive error management for API failures
 
 ### File Processing
