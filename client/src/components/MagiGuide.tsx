@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 
 export default function MagiGuide() {
@@ -79,9 +79,9 @@ export default function MagiGuide() {
           <DialogTitle className="text-2xl font-bold text-cyber-orange font-doto cyber-glow">
             MAGI SYSTEM GUIDE
           </DialogTitle>
-          <div className="text-sm text-cyber-cyan font-tektur">
+          <DialogDescription className="text-sm text-cyber-cyan font-tektur">
             TOKYO-3 • NERV • MEETING ANALYSIS PROTOCOLS
-          </div>
+          </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-6 mt-6">
