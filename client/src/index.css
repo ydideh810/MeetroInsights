@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Tourney:wght@100;200;300;400;500;600;700;800;900&family=Stalinist+One&family=Tektur:wght@400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -40,7 +42,7 @@
   }
 
   body {
-    @apply font-mono antialiased bg-background text-foreground;
+    @apply font-cyber antialiased bg-background text-foreground;
     background-image: 
       linear-gradient(rgba(255, 69, 0, 0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 69, 0, 0.05) 1px, transparent 1px),

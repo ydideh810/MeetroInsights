@@ -77,9 +77,9 @@ export default function ProcessingCenter({
       {/* MAGI System Display */}
       <div className="relative">
         <div className="text-center mb-8">
-          <div className="text-sm text-cyber-cyan mb-2 font-mono tracking-wider">MAGI SYSTEM</div>
-          <div className="text-3xl font-bold cyber-glow animate-pulse">TOKYO-3</div>
-          <div className="text-sm text-cyber-orange font-mono">NERV</div>
+          <div className="text-sm text-cyber-cyan mb-2 font-tektur tracking-wider">MAGI SYSTEM</div>
+          <div className="text-3xl font-bold cyber-glow animate-pulse font-stalinist">TOKYO-3</div>
+          <div className="text-sm text-cyber-orange font-tektur">NERV</div>
         </div>
         
         {/* Hexagonal MAGI Layout */}
@@ -94,9 +94,9 @@ export default function ProcessingCenter({
             }`}
           >
             <div className="text-center relative z-10">
-              <div className="text-xs text-cyber-cyan font-mono mb-1">MAGI</div>
-              <div className="text-sm font-bold text-cyber-teal">BALTHASAR-2</div>
-              <div className="text-xs text-cyber-orange mt-1">💡 STRATEGIST</div>
+              <div className="text-xs text-cyber-cyan font-tektur mb-1">MAGI</div>
+              <div className="text-sm font-bold text-cyber-teal font-tourney">BALTHASAR-2</div>
+              <div className="text-xs text-cyber-orange mt-1 font-tektur">💡 STRATEGIST</div>
             </div>
           </button>
           
@@ -110,9 +110,9 @@ export default function ProcessingCenter({
             }`}
           >
             <div className="text-center relative z-10">
-              <div className="text-xs text-cyber-cyan font-mono mb-1">MAGI</div>
-              <div className="text-sm font-bold text-cyber-teal">MELCHIOR-1</div>
-              <div className="text-xs text-cyber-red mt-1">📊 ANALYST</div>
+              <div className="text-xs text-cyber-cyan font-tektur mb-1">MAGI</div>
+              <div className="text-sm font-bold text-cyber-teal font-tourney">MELCHIOR-1</div>
+              <div className="text-xs text-cyber-red mt-1 font-tektur">📊 ANALYST</div>
             </div>
           </button>
           
@@ -126,9 +126,9 @@ export default function ProcessingCenter({
             }`}
           >
             <div className="text-center relative z-10">
-              <div className="text-xs text-cyber-cyan font-mono mb-1">MAGI</div>
-              <div className="text-sm font-bold text-cyber-teal">CASPER-3</div>
-              <div className="text-xs text-cyber-cyan mt-1">🧬 HUMAN</div>
+              <div className="text-xs text-cyber-cyan font-tektur mb-1">MAGI</div>
+              <div className="text-sm font-bold text-cyber-teal font-tourney">CASPER-3</div>
+              <div className="text-xs text-cyber-cyan mt-1 font-tektur">🧬 HUMAN</div>
             </div>
           </button>
           
@@ -140,11 +140,11 @@ export default function ProcessingCenter({
           
           {/* Central Status Display */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <div className="text-xs text-cyber-cyan font-mono mb-1">MODE</div>
-            <div className="text-sm font-bold text-cyber-orange">
+            <div className="text-xs text-cyber-cyan font-tektur mb-1">MODE</div>
+            <div className="text-sm font-bold text-cyber-orange font-stalinist">
               {isProcessing ? "PROCESSING" : selectedMode.toUpperCase()}
             </div>
-            <div className="text-xs text-cyber-teal mt-1">
+            <div className="text-xs text-cyber-teal mt-1 font-tektur">
               {selectedMode === "melchior" && "FACTUAL ANALYSIS"}
               {selectedMode === "balthasar" && "STRATEGIC FOCUS"}
               {selectedMode === "casper" && "HUMAN DYNAMICS"}
@@ -157,8 +157,8 @@ export default function ProcessingCenter({
       <div className="w-full max-w-md">
         <div className="auth-panel p-6 mb-4">
           <div className="text-center mb-4">
-            <div className="text-sm text-cyber-cyan font-mono mb-2">NERV ONLY</div>
-            <div className="text-xs text-cyber-orange font-mono">認証が必要です</div>
+            <div className="text-sm text-cyber-cyan font-tektur mb-2">NERV ONLY</div>
+            <div className="text-xs text-cyber-orange font-tektur">認証が必要です</div>
           </div>
           
           <Button
@@ -166,7 +166,7 @@ export default function ProcessingCenter({
             disabled={isProcessing || analyzeMutation.isPending}
             className="w-full nerv-unlock text-black px-8 py-4 rounded-lg font-bold text-xl transition-all animate-pulse-glow"
           >
-            <div className="flex items-center justify-center space-x-2">
+            <div className="flex items-center justify-center space-x-2 font-stalinist">
               <span>{isProcessing ? "PROCESSING..." : `ANALYZE WITH ${selectedMode.toUpperCase()}`}</span>
               <span className="text-2xl">▶</span>
             </div>
@@ -174,7 +174,7 @@ export default function ProcessingCenter({
         </div>
         
         {/* Status Display */}
-        <div className="text-center text-sm text-cyber-cyan font-mono">
+        <div className="text-center text-sm text-cyber-cyan font-tektur">
           <div className="mb-2">
             {isProcessing 
               ? "RESULT OF THE DELIBERATION" 

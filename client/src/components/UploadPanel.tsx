@@ -99,8 +99,8 @@ export default function UploadPanel({
     <div className="space-y-4">
       <div className="magi-panel rounded-lg p-6">
         <div className="relative z-10">
-          <h2 className="text-xl font-bold mb-4 cyber-glow tracking-wide">INPUT MODULE</h2>
-          <div className="text-xs text-cyber-cyan mb-4 font-mono">MAGI MELCHIOR-1 • ONLINE</div>
+          <h2 className="text-xl font-bold mb-4 cyber-glow tracking-wide font-stalinist">INPUT MODULE</h2>
+          <div className="text-xs text-cyber-cyan mb-4 font-tektur">MAGI MELCHIOR-1 • ONLINE</div>
         
           {/* File Upload Area */}
         <FileUpload

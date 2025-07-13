@@ -10,6 +10,14 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        'tourney': ['Tourney', 'sans-serif'],
+        'stalinist': ['Stalinist One', 'sans-serif'],
+        'tektur': ['Tektur', 'monospace'],
+        'cyber': ['Tourney', 'Tektur', 'monospace'],
+        'cyber-display': ['Stalinist One', 'Tourney', 'sans-serif'],
+        'cyber-mono': ['Tektur', 'monospace'],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
