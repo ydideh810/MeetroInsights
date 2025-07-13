@@ -12,10 +12,10 @@ export default {
       },
       fontFamily: {
         'tourney': ['Tourney', 'sans-serif'],
-        'stalinist': ['Stalinist One', 'sans-serif'],
+        'doto': ['Doto', 'sans-serif'],
         'tektur': ['Tektur', 'monospace'],
         'cyber': ['Tourney', 'Tektur', 'monospace'],
-        'cyber-display': ['Stalinist One', 'Tourney', 'sans-serif'],
+        'cyber-display': ['Doto', 'Tourney', 'sans-serif'],
         'cyber-mono': ['Tektur', 'monospace'],
       },
       colors: {

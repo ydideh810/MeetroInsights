@@ -15,6 +15,7 @@ Preferred communication style: Simple, everyday language.
 - **Build Tool**: Vite for fast development and optimized builds
 - **UI Framework**: Radix UI components with shadcn/ui styling system
 - **Styling**: Tailwind CSS with custom cyberpunk theme (dark background, orange/cyan accent colors)
+- **Typography**: Doto font for display text, Tourney for headings, Tektur for monospace
 - **State Management**: React Query (TanStack Query) for server state management
 - **Routing**: Wouter for lightweight client-side routing
 - **Form Handling**: React Hook Form with Zod validation

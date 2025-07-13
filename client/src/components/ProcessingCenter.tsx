@@ -78,7 +78,7 @@ export default function ProcessingCenter({
       <div className="relative">
         <div className="text-center mb-8">
           <div className="text-sm text-cyber-cyan mb-2 font-tektur tracking-wider">MAGI SYSTEM</div>
-          <div className="text-3xl font-bold cyber-glow animate-pulse font-stalinist">TOKYO-3</div>
+          <div className="text-3xl font-bold cyber-glow animate-pulse font-doto">TOKYO-3</div>
           <div className="text-sm text-cyber-orange font-tektur">NERV</div>
         </div>
         
@@ -141,7 +141,7 @@ export default function ProcessingCenter({
           {/* Central Status Display */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
             <div className="text-xs text-cyber-cyan font-tektur mb-1">MODE</div>
-            <div className="text-sm font-bold text-cyber-orange font-stalinist">
+            <div className="text-sm font-bold text-cyber-orange font-doto">
               {isProcessing ? "PROCESSING" : selectedMode.toUpperCase()}
             </div>
             <div className="text-xs text-cyber-teal mt-1 font-tektur">
@@ -166,7 +166,7 @@ export default function ProcessingCenter({
             disabled={isProcessing || analyzeMutation.isPending}
             className="w-full nerv-unlock text-black px-8 py-4 rounded-lg font-bold text-xl transition-all animate-pulse-glow"
           >
-            <div className="flex items-center justify-center space-x-2 font-stalinist">
+            <div className="flex items-center justify-center space-x-2 font-doto">
               <span>{isProcessing ? "PROCESSING..." : `ANALYZE WITH ${selectedMode.toUpperCase()}`}</span>
               <span className="text-2xl">▶</span>
             </div>
