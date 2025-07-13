@@ -55,7 +55,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         validatedData.topic,
         validatedData.attendees,
         validatedData.knownInfo,
-        validatedData.mode
+        validatedData.mode as "melchior" | "balthasar" | "casper" | "emergency"
       );
       
       res.json({ 

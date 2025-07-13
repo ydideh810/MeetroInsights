@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -14,6 +15,8 @@ interface ProcessingCenterProps {
   setAnalysis: (value: MeetingAnalysis | null) => void;
 }
 
+type MagiMode = "melchior" | "balthasar" | "casper";
+
 export default function ProcessingCenter({
   transcript,
   topic,
@@ -24,15 +27,16 @@ export default function ProcessingCenter({
   setAnalysis,
 }: ProcessingCenterProps) {
   const { toast } = useToast();
+  const [selectedMode, setSelectedMode] = useState<MagiMode>("melchior");
 
   const analyzeMutation = useMutation({
-    mutationFn: async () => {
+    mutationFn: async (mode: MagiMode) => {
       const response = await apiRequest('POST', '/api/analyze', {
         transcript,
         topic,
         attendees,
         knownInfo,
-        mode: "standard",
+        mode,
       });
       return response.json();
     },
@@ -65,7 +69,7 @@ export default function ProcessingCenter({
     }
     
     setIsProcessing(true);
-    analyzeMutation.mutate();
+    analyzeMutation.mutate(selectedMode);
   };
 
   return (
@@ -80,32 +84,53 @@ export default function ProcessingCenter({
         
         {/* Hexagonal MAGI Layout */}
         <div className="relative w-96 h-96 mx-auto">
-          {/* Top Hexagon - Balthazar */}
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 magi-panel hex-clip flex items-center justify-center">
+          {/* Top Hexagon - Balthasar */}
+          <button
+            onClick={() => setSelectedMode("balthasar")}
+            className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 hex-clip flex items-center justify-center transition-all cursor-pointer ${
+              selectedMode === "balthasar" 
+                ? "magi-panel animate-pulse-glow" 
+                : "bg-cyber-panel cyber-border hover:magi-panel"
+            }`}
+          >
             <div className="text-center relative z-10">
               <div className="text-xs text-cyber-cyan font-mono mb-1">MAGI</div>
-              <div className="text-sm font-bold text-cyber-teal">BALTHAZAR-2</div>
-              <div className="text-xs text-cyber-orange mt-1">承認</div>
+              <div className="text-sm font-bold text-cyber-teal">BALTHASAR-2</div>
+              <div className="text-xs text-cyber-orange mt-1">💡 STRATEGIST</div>
             </div>
-          </div>
+          </button>
           
           {/* Bottom Left Hexagon - Melchior */}
-          <div className="absolute bottom-0 left-8 w-32 h-32 magi-panel hex-clip flex items-center justify-center">
+          <button
+            onClick={() => setSelectedMode("melchior")}
+            className={`absolute bottom-0 left-8 w-32 h-32 hex-clip flex items-center justify-center transition-all cursor-pointer ${
+              selectedMode === "melchior" 
+                ? "magi-panel animate-pulse-glow" 
+                : "bg-cyber-panel cyber-border hover:magi-panel"
+            }`}
+          >
             <div className="text-center relative z-10">
               <div className="text-xs text-cyber-cyan font-mono mb-1">MAGI</div>
               <div className="text-sm font-bold text-cyber-teal">MELCHIOR-1</div>
-              <div className="text-xs text-cyber-red mt-1">否定</div>
+              <div className="text-xs text-cyber-red mt-1">📊 ANALYST</div>
             </div>
-          </div>
+          </button>
           
           {/* Bottom Right Hexagon - Casper */}
-          <div className="absolute bottom-0 right-8 w-32 h-32 magi-panel hex-clip flex items-center justify-center">
+          <button
+            onClick={() => setSelectedMode("casper")}
+            className={`absolute bottom-0 right-8 w-32 h-32 hex-clip flex items-center justify-center transition-all cursor-pointer ${
+              selectedMode === "casper" 
+                ? "magi-panel animate-pulse-glow" 
+                : "bg-cyber-panel cyber-border hover:magi-panel"
+            }`}
+          >
             <div className="text-center relative z-10">
               <div className="text-xs text-cyber-cyan font-mono mb-1">MAGI</div>
               <div className="text-sm font-bold text-cyber-teal">CASPER-3</div>
-              <div className="text-xs text-cyber-cyan mt-1">承認</div>
+              <div className="text-xs text-cyber-cyan mt-1">🧬 HUMAN</div>
             </div>
-          </div>
+          </button>
           
           {/* Connection Lines */}
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 384 384">
@@ -115,9 +140,14 @@ export default function ProcessingCenter({
           
           {/* Central Status Display */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <div className="text-xs text-cyber-cyan font-mono mb-1">STATUS</div>
+            <div className="text-xs text-cyber-cyan font-mono mb-1">MODE</div>
             <div className="text-sm font-bold text-cyber-orange">
-              {isProcessing ? "PROCESSING" : "STANDBY"}
+              {isProcessing ? "PROCESSING" : selectedMode.toUpperCase()}
+            </div>
+            <div className="text-xs text-cyber-teal mt-1">
+              {selectedMode === "melchior" && "FACTUAL ANALYSIS"}
+              {selectedMode === "balthasar" && "STRATEGIC FOCUS"}
+              {selectedMode === "casper" && "HUMAN DYNAMICS"}
             </div>
           </div>
         </div>
@@ -137,7 +167,7 @@ export default function ProcessingCenter({
             className="w-full nerv-unlock text-black px-8 py-4 rounded-lg font-bold text-xl transition-all animate-pulse-glow"
           >
             <div className="flex items-center justify-center space-x-2">
-              <span>{isProcessing ? "PROCESSING..." : "SLIDE TO UNLOCK"}</span>
+              <span>{isProcessing ? "PROCESSING..." : `ANALYZE WITH ${selectedMode.toUpperCase()}`}</span>
               <span className="text-2xl">▶</span>
             </div>
           </Button>
@@ -148,13 +178,15 @@ export default function ProcessingCenter({
           <div className="mb-2">
             {isProcessing 
               ? "RESULT OF THE DELIBERATION" 
-              : "FINGERPRINT AUTHENTICATION"
+              : `MAGI ${selectedMode.toUpperCase()} SELECTED`
             }
           </div>
           <div className="text-xs">
             {isProcessing 
-              ? "MOTION: SELF-DESTRUCTION" 
-              : "SYSTEM STATUS: STANDBY"
+              ? "PROCESSING..." 
+              : selectedMode === "melchior" ? "FACTUAL ANALYSIS MODE" :
+                selectedMode === "balthasar" ? "STRATEGIC ANALYSIS MODE" :
+                "HUMAN DYNAMICS MODE"
             }
           </div>
         </div>
