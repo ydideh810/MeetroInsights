@@ -242,8 +242,8 @@ function SaveMeetingDialog({ analysis, transcript, topic, attendees, knownInfo, 
 
 export default function MemoryBank() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedTag, setSelectedTag] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all-categories");
+  const [selectedTag, setSelectedTag] = useState("all");
   const [viewingMeeting, setViewingMeeting] = useState<Meeting | null>(null);
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -342,7 +342,7 @@ export default function MemoryBank() {
               <SelectValue placeholder="Filter by category..." />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Categories</SelectItem>
+              <SelectItem value="all-categories">All Categories</SelectItem>
               <SelectItem value="standup">Daily Standup</SelectItem>
               <SelectItem value="planning">Planning</SelectItem>
               <SelectItem value="retrospective">Retrospective</SelectItem>
@@ -358,7 +358,7 @@ export default function MemoryBank() {
               <SelectValue placeholder="Filter by tag..." />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Tags</SelectItem>
+              <SelectItem value="all">All Tags</SelectItem>
               {tags.map((tag: Tag) => (
                 <SelectItem key={tag.id} value={tag.id.toString()}>
                   <div className="flex items-center gap-2">
