@@ -11,6 +11,10 @@ Preferred communication style: Simple, everyday language.
 ## Recent Changes
 
 ### January 14, 2025
+- **Email Authentication**: Added complete email sign-in/up functionality with password reset alongside Google authentication
+- **Enhanced Login UI**: Created tabbed authentication interface with sign-in and sign-up forms
+- **Password Management**: Implemented password visibility toggle and password reset functionality
+- **Form Validation**: Added comprehensive form validation with error handling and user feedback
 - **Firebase Authentication**: Implemented complete Firebase authentication system with Google sign-in
 - **User-Specific Data**: Added user authentication to all Memory Bank operations and database schema
 - **Database Schema Update**: Added userId fields to meetings and tags tables for user data isolation
