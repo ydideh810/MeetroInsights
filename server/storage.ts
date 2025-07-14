@@ -1,6 +1,6 @@
 import { meetings, tags, meetingTags, type Meeting, type Tag, type InsertMeeting, type InsertTag, type MeetingAnalysis } from "@shared/schema";
 import { db } from "./db";
-import { eq, desc, like, or } from "drizzle-orm";
+import { eq, desc, like, or, and } from "drizzle-orm";
 
 // User types for future implementation
 interface User {
@@ -36,18 +36,18 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
   
   // Memory Bank methods
-  saveMeeting(data: SaveMeetingData): Promise<Meeting>;
-  getMeetings(limit?: number, offset?: number): Promise<MeetingWithTags[]>;
-  getMeetingById(id: number): Promise<MeetingWithTags | undefined>;
-  searchMeetings(query: string): Promise<MeetingWithTags[]>;
-  getMeetingsByCategory(category: string): Promise<MeetingWithTags[]>;
-  getMeetingsByTag(tagId: number): Promise<MeetingWithTags[]>;
+  saveMeeting(data: SaveMeetingData, userId: string): Promise<Meeting>;
+  getMeetings(userId: string, limit?: number, offset?: number): Promise<MeetingWithTags[]>;
+  getMeetingById(id: number, userId: string): Promise<MeetingWithTags | undefined>;
+  searchMeetings(query: string, userId: string): Promise<MeetingWithTags[]>;
+  getMeetingsByCategory(category: string, userId: string): Promise<MeetingWithTags[]>;
+  getMeetingsByTag(tagId: number, userId: string): Promise<MeetingWithTags[]>;
   
-  getTags(): Promise<Tag[]>;
-  createTag(tag: InsertTag): Promise<Tag>;
-  deleteTag(id: number): Promise<void>;
+  getTags(userId: string): Promise<Tag[]>;
+  createTag(tag: InsertTag, userId: string): Promise<Tag>;
+  deleteTag(id: number, userId: string): Promise<void>;
   
-  deleteMeeting(id: number): Promise<void>;
+  deleteMeeting(id: number, userId: string): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -66,14 +66,17 @@ export class DatabaseStorage implements IStorage {
     throw new Error("User creation not implemented");
   }
 
-  async saveMeeting(data: SaveMeetingData): Promise<Meeting> {
+  async saveMeeting(data: SaveMeetingData, userId: string): Promise<Meeting> {
     // Create new tags if provided
     const createdTags: Tag[] = [];
     if (data.newTags && data.newTags.length > 0) {
       for (const newTag of data.newTags) {
         const [tag] = await db
           .insert(tags)
-          .values(newTag)
+          .values({
+            ...newTag,
+            userId
+          })
           .returning();
         createdTags.push(tag);
       }
@@ -83,6 +86,7 @@ export class DatabaseStorage implements IStorage {
     const [meeting] = await db
       .insert(meetings)
       .values({
+        userId,
         title: data.title,
         category: data.category,
         transcript: data.transcript,
@@ -114,10 +118,11 @@ export class DatabaseStorage implements IStorage {
     return meeting;
   }
 
-  async getMeetings(limit: number = 20, offset: number = 0): Promise<MeetingWithTags[]> {
+  async getMeetings(userId: string, limit: number = 20, offset: number = 0): Promise<MeetingWithTags[]> {
     const meetingsData = await db
       .select()
       .from(meetings)
+      .where(eq(meetings.userId, userId))
       .orderBy(desc(meetings.createdAt))
       .limit(limit)
       .offset(offset);
@@ -142,11 +147,11 @@ export class DatabaseStorage implements IStorage {
     return meetingsWithTags;
   }
 
-  async getMeetingById(id: number): Promise<MeetingWithTags | undefined> {
+  async getMeetingById(id: number, userId: string): Promise<MeetingWithTags | undefined> {
     const [meeting] = await db
       .select()
       .from(meetings)
-      .where(eq(meetings.id, id));
+      .where(and(eq(meetings.id, id), eq(meetings.userId, userId)));
 
     if (!meeting) return undefined;
 
@@ -164,16 +169,19 @@ export class DatabaseStorage implements IStorage {
     };
   }
 
-  async searchMeetings(query: string): Promise<MeetingWithTags[]> {
+  async searchMeetings(query: string, userId: string): Promise<MeetingWithTags[]> {
     const meetingsData = await db
       .select()
       .from(meetings)
       .where(
-        or(
-          like(meetings.title, `%${query}%`),
-          like(meetings.transcript, `%${query}%`),
-          like(meetings.topic, `%${query}%`),
-          like(meetings.category, `%${query}%`)
+        and(
+          eq(meetings.userId, userId),
+          or(
+            like(meetings.title, `%${query}%`),
+            like(meetings.transcript, `%${query}%`),
+            like(meetings.topic, `%${query}%`),
+            like(meetings.category, `%${query}%`)
+          )
         )
       )
       .orderBy(desc(meetings.createdAt));
@@ -198,11 +206,11 @@ export class DatabaseStorage implements IStorage {
     return meetingsWithTags;
   }
 
-  async getMeetingsByCategory(category: string): Promise<MeetingWithTags[]> {
+  async getMeetingsByCategory(category: string, userId: string): Promise<MeetingWithTags[]> {
     const meetingsData = await db
       .select()
       .from(meetings)
-      .where(eq(meetings.category, category))
+      .where(and(eq(meetings.category, category), eq(meetings.userId, userId)))
       .orderBy(desc(meetings.createdAt));
 
     const meetingsWithTags: MeetingWithTags[] = [];
@@ -225,14 +233,14 @@ export class DatabaseStorage implements IStorage {
     return meetingsWithTags;
   }
 
-  async getMeetingsByTag(tagId: number): Promise<MeetingWithTags[]> {
+  async getMeetingsByTag(tagId: number, userId: string): Promise<MeetingWithTags[]> {
     const meetingsData = await db
       .select({
         meeting: meetings,
       })
       .from(meetingTags)
       .innerJoin(meetings, eq(meetingTags.meetingId, meetings.id))
-      .where(eq(meetingTags.tagId, tagId))
+      .where(and(eq(meetingTags.tagId, tagId), eq(meetings.userId, userId)))
       .orderBy(desc(meetings.createdAt));
 
     const meetingsWithTags: MeetingWithTags[] = [];
@@ -256,26 +264,29 @@ export class DatabaseStorage implements IStorage {
     return meetingsWithTags;
   }
 
-  async getTags(): Promise<Tag[]> {
-    return await db.select().from(tags).orderBy(tags.name);
+  async getTags(userId: string): Promise<Tag[]> {
+    return await db.select().from(tags).where(eq(tags.userId, userId)).orderBy(tags.name);
   }
 
-  async createTag(tag: InsertTag): Promise<Tag> {
+  async createTag(tag: InsertTag, userId: string): Promise<Tag> {
     const [newTag] = await db
       .insert(tags)
-      .values(tag)
+      .values({
+        ...tag,
+        userId
+      })
       .returning();
     return newTag;
   }
 
-  async deleteTag(id: number): Promise<void> {
+  async deleteTag(id: number, userId: string): Promise<void> {
     await db.delete(meetingTags).where(eq(meetingTags.tagId, id));
-    await db.delete(tags).where(eq(tags.id, id));
+    await db.delete(tags).where(and(eq(tags.id, id), eq(tags.userId, userId)));
   }
 
-  async deleteMeeting(id: number): Promise<void> {
+  async deleteMeeting(id: number, userId: string): Promise<void> {
     await db.delete(meetingTags).where(eq(meetingTags.meetingId, id));
-    await db.delete(meetings).where(eq(meetings.id, id));
+    await db.delete(meetings).where(and(eq(meetings.id, id), eq(meetings.userId, userId)));
   }
 }
 

@@ -1,10 +1,36 @@
-import type { Express } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import multer from "multer";
 import { analyzeRequestSchema, saveMeetingSchema } from "@shared/schema";
 import { analyzeMeetingContent } from "./services/openai";
 import { parseFile } from "./services/fileParser";
 import { storage } from "./storage";
+import { verifyFirebaseToken } from "./firebase-admin";
+
+// Auth middleware
+interface AuthenticatedRequest extends Request {
+  user?: {
+    uid: string;
+    email?: string;
+  };
+}
+
+async function authMiddleware(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader?.startsWith('Bearer ')) {
+      return res.status(401).json({ error: 'No authentication token provided' });
+    }
+
+    const token = authHeader.substring(7);
+    const decodedToken = await verifyFirebaseToken(token);
+    req.user = decodedToken;
+    next();
+  } catch (error) {
+    console.error('Auth error:', error);
+    res.status(401).json({ error: 'Invalid authentication token' });
+  }
+}
 
 const upload = multer({ 
   storage: multer.memoryStorage(),
@@ -47,7 +73,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Meeting analysis endpoint
-  app.post("/api/analyze", async (req, res) => {
+  app.post("/api/analyze", authMiddleware, async (req: AuthenticatedRequest, res) => {
     try {
       const validatedData = analyzeRequestSchema.parse(req.body);
       
@@ -134,7 +160,7 @@ ${analysis.followUps.map((followUp: string) => `- ${followUp}`).join('\n')}
   });
 
   // Memory Bank API routes
-  app.post("/api/memory-bank/save", async (req, res) => {
+  app.post("/api/memory-bank/save", authMiddleware, async (req: AuthenticatedRequest, res) => {
     try {
       const validatedData = saveMeetingSchema.parse(req.body);
       const { analysis, transcript, topic, attendees, knownInfo, magiMode, ...saveData } = req.body;
@@ -147,7 +173,7 @@ ${analysis.followUps.map((followUp: string) => `- ${followUp}`).join('\n')}
         knownInfo,
         analysis,
         magiMode,
-      });
+      }, req.user!.uid);
       
       res.json({ success: true, meeting });
     } catch (error) {
@@ -158,12 +184,12 @@ ${analysis.followUps.map((followUp: string) => `- ${followUp}`).join('\n')}
     }
   });
 
-  app.get("/api/memory-bank/meetings", async (req, res) => {
+  app.get("/api/memory-bank/meetings", authMiddleware, async (req: AuthenticatedRequest, res) => {
     try {
       const limit = parseInt(req.query.limit as string) || 20;
       const offset = parseInt(req.query.offset as string) || 0;
       
-      const meetings = await storage.getMeetings(limit, offset);
+      const meetings = await storage.getMeetings(req.user!.uid, limit, offset);
       res.json({ success: true, meetings });
     } catch (error) {
       console.error("Get meetings error:", error);
@@ -173,10 +199,10 @@ ${analysis.followUps.map((followUp: string) => `- ${followUp}`).join('\n')}
     }
   });
 
-  app.get("/api/memory-bank/meetings/:id", async (req, res) => {
+  app.get("/api/memory-bank/meetings/:id", authMiddleware, async (req: AuthenticatedRequest, res) => {
     try {
       const id = parseInt(req.params.id);
-      const meeting = await storage.getMeetingById(id);
+      const meeting = await storage.getMeetingById(id, req.user!.uid);
       
       if (!meeting) {
         return res.status(404).json({ error: "Meeting not found" });
@@ -191,14 +217,14 @@ ${analysis.followUps.map((followUp: string) => `- ${followUp}`).join('\n')}
     }
   });
 
-  app.get("/api/memory-bank/search", async (req, res) => {
+  app.get("/api/memory-bank/search", authMiddleware, async (req: AuthenticatedRequest, res) => {
     try {
       const query = req.query.q as string;
       if (!query) {
         return res.status(400).json({ error: "Query parameter 'q' is required" });
       }
       
-      const meetings = await storage.searchMeetings(query);
+      const meetings = await storage.searchMeetings(query, req.user!.uid);
       res.json({ success: true, meetings });
     } catch (error) {
       console.error("Search meetings error:", error);
@@ -208,10 +234,10 @@ ${analysis.followUps.map((followUp: string) => `- ${followUp}`).join('\n')}
     }
   });
 
-  app.get("/api/memory-bank/category/:category", async (req, res) => {
+  app.get("/api/memory-bank/category/:category", authMiddleware, async (req: AuthenticatedRequest, res) => {
     try {
       const category = req.params.category;
-      const meetings = await storage.getMeetingsByCategory(category);
+      const meetings = await storage.getMeetingsByCategory(category, req.user!.uid);
       res.json({ success: true, meetings });
     } catch (error) {
       console.error("Get meetings by category error:", error);
@@ -221,10 +247,10 @@ ${analysis.followUps.map((followUp: string) => `- ${followUp}`).join('\n')}
     }
   });
 
-  app.get("/api/memory-bank/tag/:tagId", async (req, res) => {
+  app.get("/api/memory-bank/tag/:tagId", authMiddleware, async (req: AuthenticatedRequest, res) => {
     try {
       const tagId = parseInt(req.params.tagId);
-      const meetings = await storage.getMeetingsByTag(tagId);
+      const meetings = await storage.getMeetingsByTag(tagId, req.user!.uid);
       res.json({ success: true, meetings });
     } catch (error) {
       console.error("Get meetings by tag error:", error);
@@ -234,9 +260,9 @@ ${analysis.followUps.map((followUp: string) => `- ${followUp}`).join('\n')}
     }
   });
 
-  app.get("/api/memory-bank/tags", async (req, res) => {
+  app.get("/api/memory-bank/tags", authMiddleware, async (req: AuthenticatedRequest, res) => {
     try {
-      const tags = await storage.getTags();
+      const tags = await storage.getTags(req.user!.uid);
       res.json({ success: true, tags });
     } catch (error) {
       console.error("Get tags error:", error);
@@ -246,10 +272,10 @@ ${analysis.followUps.map((followUp: string) => `- ${followUp}`).join('\n')}
     }
   });
 
-  app.post("/api/memory-bank/tags", async (req, res) => {
+  app.post("/api/memory-bank/tags", authMiddleware, async (req: AuthenticatedRequest, res) => {
     try {
       const { name, color } = req.body;
-      const tag = await storage.createTag({ name, color });
+      const tag = await storage.createTag({ name, color }, req.user!.uid);
       res.json({ success: true, tag });
     } catch (error) {
       console.error("Create tag error:", error);
@@ -259,10 +285,10 @@ ${analysis.followUps.map((followUp: string) => `- ${followUp}`).join('\n')}
     }
   });
 
-  app.delete("/api/memory-bank/meetings/:id", async (req, res) => {
+  app.delete("/api/memory-bank/meetings/:id", authMiddleware, async (req: AuthenticatedRequest, res) => {
     try {
       const id = parseInt(req.params.id);
-      await storage.deleteMeeting(id);
+      await storage.deleteMeeting(id, req.user!.uid);
       res.json({ success: true });
     } catch (error) {
       console.error("Delete meeting error:", error);
@@ -272,10 +298,10 @@ ${analysis.followUps.map((followUp: string) => `- ${followUp}`).join('\n')}
     }
   });
 
-  app.delete("/api/memory-bank/tags/:id", async (req, res) => {
+  app.delete("/api/memory-bank/tags/:id", authMiddleware, async (req: AuthenticatedRequest, res) => {
     try {
       const id = parseInt(req.params.id);
-      await storage.deleteTag(id);
+      await storage.deleteTag(id, req.user!.uid);
       res.json({ success: true });
     } catch (error) {
       console.error("Delete tag error:", error);

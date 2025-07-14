@@ -11,6 +11,12 @@ Preferred communication style: Simple, everyday language.
 ## Recent Changes
 
 ### January 14, 2025
+- **Firebase Authentication**: Implemented complete Firebase authentication system with Google sign-in
+- **User-Specific Data**: Added user authentication to all Memory Bank operations and database schema
+- **Database Schema Update**: Added userId fields to meetings and tags tables for user data isolation
+- **Protected Routes**: Created authentication middleware and protected route component
+- **Authentication Context**: Built React context for managing user authentication state
+- **Token Management**: Implemented Firebase token handling for secure API requests
 - **Cyberpunk Memory Bank**: Implemented complete Memory Bank feature with PostgreSQL database integration
 - **Meeting Storage**: Added ability to save meeting analyses with titles, categories, and custom tags
 - **Tag System**: Created color-coded tagging system for organizing meeting insights
@@ -68,6 +74,9 @@ Preferred communication style: Simple, everyday language.
 - **ExportButton**: Individual export buttons for copy, download, and Notion integration
 - **FileUpload**: Drag-and-drop file upload component with validation
 - **MagiGuide**: Interactive guide explaining MAGI system metaphors and usage
+- **AuthButton**: Firebase authentication button with Google sign-in and user profile display
+- **ProtectedRoute**: Authentication guard component that shows login screen for unauthenticated users
+- **AuthContext**: React context for managing authentication state and user data
 
 ### Backend Services
 - **File Parser**: Handles .txt, .docx, .srt, and .pdf file processing
@@ -76,10 +85,10 @@ Preferred communication style: Simple, everyday language.
 - **Memory Bank API**: Complete REST API for meeting CRUD operations, search, and tag management
 
 ### Database Schema
-- **meetings**: Stores meeting transcripts, metadata, analysis results, titles, categories, and MAGI modes
-- **tags**: Custom color-coded tags for organizing meetings
+- **meetings**: Stores meeting transcripts, metadata, analysis results, titles, categories, MAGI modes, and user IDs
+- **tags**: Custom color-coded tags for organizing meetings, linked to specific users
 - **meeting_tags**: Junction table linking meetings to tags for many-to-many relationship
-- **users**: User management (prepared but not implemented)
+- **users**: User management (prepared but not implemented - using Firebase authentication)
 
 ## Data Flow
 
@@ -122,6 +131,10 @@ Preferred communication style: Simple, everyday language.
 - `DATABASE_URL`: PostgreSQL connection string
 - `OPENROUTER_API_KEY`: OpenRouter API authentication for AI model access
 - `NODE_ENV`: Environment mode (development/production)
+- Firebase configuration (client-side):
+  - `VITE_FIREBASE_API_KEY`: Firebase API key for authentication
+  - `VITE_FIREBASE_PROJECT_ID`: Firebase project ID
+  - `VITE_FIREBASE_APP_ID`: Firebase app ID
 
 ### Production Configuration
 - Express serves static files from `dist/public/`

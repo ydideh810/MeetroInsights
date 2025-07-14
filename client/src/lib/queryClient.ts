@@ -14,9 +14,17 @@ export async function apiRequest(
 ): Promise<Response> {
   const isFormData = data instanceof FormData;
   
+  const headers: Record<string, string> = (!data || isFormData) ? {} : { "Content-Type": "application/json" };
+  
+  // Add Firebase auth token if available
+  const user = (window as any).firebaseUser;
+  if (user?.accessToken) {
+    headers.Authorization = `Bearer ${user.accessToken}`;
+  }
+  
   const res = await fetch(url, {
     method,
-    headers: (!data || isFormData) ? {} : { "Content-Type": "application/json" },
+    headers,
     body: isFormData ? data : data ? JSON.stringify(data) : undefined,
     credentials: "include",
   });
@@ -31,7 +39,16 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
+    const headers: Record<string, string> = {};
+    
+    // Add Firebase auth token if available
+    const user = (window as any).firebaseUser;
+    if (user?.accessToken) {
+      headers.Authorization = `Bearer ${user.accessToken}`;
+    }
+    
     const res = await fetch(queryKey.join("/") as string, {
+      headers,
       credentials: "include",
     });
 

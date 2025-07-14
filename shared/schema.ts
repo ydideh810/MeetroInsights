@@ -5,6 +5,7 @@ import { z } from "zod";
 
 export const meetings = pgTable("meetings", {
   id: serial("id").primaryKey(),
+  userId: text("user_id").notNull(), // Firebase UID
   transcript: text("transcript").notNull(),
   topic: text("topic"),
   attendees: text("attendees"),
@@ -18,6 +19,7 @@ export const meetings = pgTable("meetings", {
 
 export const tags = pgTable("tags", {
   id: serial("id").primaryKey(),
+  userId: text("user_id").notNull(), // Firebase UID
   name: varchar("name", { length: 50 }).notNull(),
   color: varchar("color", { length: 7 }).notNull(), // hex color code
   createdAt: timestamp("created_at").notNull().defaultNow(),
