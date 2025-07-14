@@ -11,6 +11,13 @@ Preferred communication style: Simple, everyday language.
 ## Recent Changes
 
 ### January 14, 2025
+- **Credit System Implementation**: Added complete credit tracking system with 10 starting credits per user
+- **Payment Integration**: Connected Lemon Squeezy payment link for credit refills
+- **Credit Deduction**: Analysis now costs 1 credit per request with automatic deduction
+- **Low Credit Warnings**: Credit display shows warnings and buy button when credits are low
+- **Credit Error Handling**: Proper error handling for insufficient credits with payment redirection
+- **User Database**: Updated user schema with credit tracking and automatic user creation
+- **Credit Refunds**: Failed analysis attempts automatically refund credits to user
 - **Email Authentication**: Added complete email sign-in/up functionality with password reset alongside Google authentication
 - **Enhanced Login UI**: Created tabbed authentication interface with sign-in and sign-up forms
 - **Password Management**: Implemented password visibility toggle and password reset functionality

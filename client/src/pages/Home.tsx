@@ -6,6 +6,7 @@ import ExportButton from "@/components/ExportButton";
 import MagiGuide from "@/components/MagiGuide";
 import MemoryBank from "@/components/MemoryBank";
 import AuthButton from "@/components/AuthButton";
+import CreditDisplay from "@/components/CreditDisplay";
 import { MeetingAnalysis } from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import { Database } from "lucide-react";
@@ -50,6 +51,7 @@ export default function Home() {
               MEMORY BANK
             </Button>
             <MagiGuide />
+            <CreditDisplay />
             <AuthButton />
             <div className="text-right text-xs text-cyber-cyan font-mono">
               <div>DIRECT LINK: <span className="text-cyber-orange">OPENROUTER-01</span></div>

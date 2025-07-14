@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { MeetingAnalysis } from "@shared/schema";
 import MagiGuide from "./MagiGuide";
+import { ExternalLink } from "lucide-react";
 
 interface ProcessingCenterProps {
   transcript: string;
@@ -28,6 +29,7 @@ export default function ProcessingCenter({
   setAnalysis,
 }: ProcessingCenterProps) {
   const { toast } = useToast();
+  const queryClient = useQueryClient();
   const [selectedMode, setSelectedMode] = useState<MagiMode>("melchior");
 
   const analyzeMutation = useMutation({
@@ -49,13 +51,37 @@ export default function ProcessingCenter({
         description: "Meeting insights extracted successfully",
       });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       setIsProcessing(false);
-      toast({
-        title: "Analysis failed",
-        description: error instanceof Error ? error.message : "Failed to analyze meeting",
-        variant: "destructive",
-      });
+      
+      // Check if it's a credit-related error
+      if (error.status === 402 || error.needsPayment) {
+        toast({
+          title: "Insufficient Credits",
+          description: "You need more credits to continue analysis",
+          variant: "destructive",
+          action: (
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => window.open("https://niddamhub.lemonsqueezy.com/buy/be00a64f-fe92-44a6-a654-d6187a4e864a", "_blank")}
+              className="ml-2"
+            >
+              Buy Credits
+              <ExternalLink className="ml-1 h-3 w-3" />
+            </Button>
+          ),
+        });
+      } else {
+        toast({
+          title: "Analysis failed",
+          description: error instanceof Error ? error.message : "Failed to analyze meeting",
+          variant: "destructive",
+        });
+      }
+      
+      // Refresh user data to update credit display
+      queryClient.invalidateQueries({ queryKey: ["/api/user"] });
     },
   });
 

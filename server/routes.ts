@@ -24,6 +24,17 @@ async function authMiddleware(req: AuthenticatedRequest, res: Response, next: Ne
 
     const token = authHeader.substring(7);
     const decodedToken = await verifyFirebaseToken(token);
+    
+    // Get or create user in database
+    let user = await storage.getUserByFirebaseUid(decodedToken.uid);
+    if (!user) {
+      user = await storage.createUser({
+        firebaseUid: decodedToken.uid,
+        email: decodedToken.email || '',
+        displayName: null,
+      });
+    }
+    
     req.user = decodedToken;
     next();
   } catch (error) {
@@ -49,6 +60,30 @@ const upload = multer({
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  
+  // Get user info endpoint
+  app.get("/api/user", authMiddleware, async (req: AuthenticatedRequest, res) => {
+    try {
+      const user = await storage.getUserByFirebaseUid(req.user!.uid);
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      
+      res.json({ 
+        success: true, 
+        user: {
+          id: user.id,
+          email: user.email,
+          displayName: user.displayName,
+          credits: user.credits,
+          createdAt: user.createdAt,
+        }
+      });
+    } catch (error) {
+      console.error("User info error:", error);
+      res.status(500).json({ error: "Failed to retrieve user information" });
+    }
+  });
   
   // File upload endpoint
   app.post("/api/upload", upload.single('file'), async (req, res) => {
@@ -77,6 +112,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = analyzeRequestSchema.parse(req.body);
       
+      // Check if user has sufficient credits
+      const hasCredits = await storage.decrementUserCredits(req.user!.uid);
+      if (!hasCredits) {
+        return res.status(402).json({ 
+          error: "Insufficient credits. Please purchase more credits to continue.",
+          needsPayment: true,
+          paymentUrl: "https://niddamhub.lemonsqueezy.com/buy/be00a64f-fe92-44a6-a654-d6187a4e864a"
+        });
+      }
+      
       const analysis = await analyzeMeetingContent(
         validatedData.transcript,
         validatedData.topic,
@@ -91,6 +136,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error) {
       console.error("Analysis error:", error);
+      // If analysis fails, refund the credit
+      const user = await storage.getUserByFirebaseUid(req.user!.uid);
+      if (user) {
+        await storage.updateUserCredits(req.user!.uid, user.credits + 1);
+      }
       res.status(400).json({ 
         error: error instanceof Error ? error.message : "Failed to analyze meeting content" 
       });

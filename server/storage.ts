@@ -1,16 +1,6 @@
-import { meetings, tags, meetingTags, type Meeting, type Tag, type InsertMeeting, type InsertTag, type MeetingAnalysis } from "@shared/schema";
+import { meetings, tags, meetingTags, users, type Meeting, type Tag, type User, type InsertMeeting, type InsertTag, type InsertUser, type MeetingAnalysis } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, like, or, and } from "drizzle-orm";
-
-// User types for future implementation
-interface User {
-  id: number;
-  username: string;
-}
-
-interface InsertUser {
-  username: string;
-}
 
 // Memory Bank interfaces
 export interface MeetingWithTags extends Meeting {
@@ -31,9 +21,11 @@ export interface SaveMeetingData {
 }
 
 export interface IStorage {
-  getUser(id: number): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
+  // User management
+  getUserByFirebaseUid(firebaseUid: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  updateUserCredits(firebaseUid: string, credits: number): Promise<void>;
+  decrementUserCredits(firebaseUid: string): Promise<boolean>; // Returns true if successful, false if insufficient credits
   
   // Memory Bank methods
   saveMeeting(data: SaveMeetingData, userId: string): Promise<Meeting>;
@@ -51,19 +43,38 @@ export interface IStorage {
 }
 
 export class DatabaseStorage implements IStorage {
-  async getUser(id: number): Promise<User | undefined> {
-    // User implementation for future use
-    return undefined;
-  }
-
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    // User implementation for future use
-    return undefined;
+  async getUserByFirebaseUid(firebaseUid: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.firebaseUid, firebaseUid));
+    return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    // User implementation for future use
-    throw new Error("User creation not implemented");
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
+    return user;
+  }
+
+  async updateUserCredits(firebaseUid: string, credits: number): Promise<void> {
+    await db
+      .update(users)
+      .set({ credits, updatedAt: new Date() })
+      .where(eq(users.firebaseUid, firebaseUid));
+  }
+
+  async decrementUserCredits(firebaseUid: string): Promise<boolean> {
+    const user = await this.getUserByFirebaseUid(firebaseUid);
+    if (!user || user.credits <= 0) {
+      return false;
+    }
+
+    await db
+      .update(users)
+      .set({ credits: user.credits - 1, updatedAt: new Date() })
+      .where(eq(users.firebaseUid, firebaseUid));
+    
+    return true;
   }
 
   async saveMeeting(data: SaveMeetingData, userId: string): Promise<Meeting> {

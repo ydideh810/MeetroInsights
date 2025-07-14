@@ -31,6 +31,16 @@ export const meetingTags = pgTable("meeting_tags", {
   tagId: integer("tag_id").notNull(),
 });
 
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  firebaseUid: text("firebase_uid").notNull().unique(),
+  email: text("email").notNull(),
+  displayName: text("display_name"),
+  credits: integer("credits").notNull().default(10),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
 // Relations
 export const meetingsRelations = relations(meetings, ({ many }) => ({
   meetingTags: many(meetingTags),
@@ -51,6 +61,11 @@ export const meetingTagsRelations = relations(meetingTags, ({ one }) => ({
   }),
 }));
 
+export const usersRelations = relations(users, ({ many }) => ({
+  meetings: many(meetings),
+  tags: many(tags),
+}));
+
 export const insertMeetingSchema = createInsertSchema(meetings).pick({
   transcript: true,
   topic: true,
@@ -64,6 +79,12 @@ export const insertMeetingSchema = createInsertSchema(meetings).pick({
 export const insertTagSchema = createInsertSchema(tags).pick({
   name: true,
   color: true,
+});
+
+export const insertUserSchema = createInsertSchema(users).pick({
+  firebaseUid: true,
+  email: true,
+  displayName: true,
 });
 
 export const saveMeetingSchema = z.object({
@@ -81,6 +102,8 @@ export type InsertMeeting = z.infer<typeof insertMeetingSchema>;
 export type Meeting = typeof meetings.$inferSelect;
 export type Tag = typeof tags.$inferSelect;
 export type InsertTag = z.infer<typeof insertTagSchema>;
+export type User = typeof users.$inferSelect;
+export type InsertUser = z.infer<typeof insertUserSchema>;
 export type SaveMeetingRequest = z.infer<typeof saveMeetingSchema>;
 
 export interface MeetingAnalysis {
