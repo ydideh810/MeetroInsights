@@ -72,7 +72,7 @@ export default function AuthButton() {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-cyber-dark-panel border-cyber-orange w-56">
           <DropdownMenuItem
-            onClick={() => window.open('https://meetro.lemonsqueezy.com/buy/e6a9b7c7-2f01-4c8e-9b28-1a7e5c3d6f4e', '_blank')}
+            onClick={() => window.open('https://niddamhub.lemonsqueezy.com/buy/be00a64f-fe92-44a6-a654-d6187a4e864a', '_blank')}
             className="text-cyber-cyan hover:bg-cyber-orange hover:text-black cursor-pointer"
           >
             <CreditCard className="w-4 h-4 mr-2" />
