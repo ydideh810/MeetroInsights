@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search, Plus, Database, Tag, Calendar, User, Trash2, Eye } from "lucide-react";
 import { MeetingAnalysis } from "@shared/schema";
+import LoadingScreen from "@/components/ui/loading-screen";
 
 interface Meeting {
   id: number;
@@ -378,10 +379,11 @@ export default function MemoryBank() {
       {/* Meetings List */}
       <div className="space-y-4 max-h-96 overflow-y-auto">
         {isLoading ? (
-          <div className="text-center py-8 text-cyber-cyan">
-            <Database className="w-12 h-12 mx-auto mb-4 animate-pulse" />
-            ACCESSING MEMORY BANK...
-          </div>
+          <LoadingScreen 
+            variant="neural" 
+            message="ACCESSING MEMORY BANK"
+            className="relative"
+          />
         ) : displayMeetings.length === 0 ? (
           <div className="text-center py-8 text-cyber-cyan">
             <Database className="w-12 h-12 mx-auto mb-4 opacity-50" />

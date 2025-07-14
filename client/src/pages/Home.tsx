@@ -7,9 +7,10 @@ import MagiGuide from "@/components/MagiGuide";
 import MemoryBank from "@/components/MemoryBank";
 import AuthButton from "@/components/AuthButton";
 import CreditDisplay from "@/components/CreditDisplay";
+import LoadingDemo from "@/components/LoadingDemo";
 import { MeetingAnalysis } from "@shared/schema";
 import { Button } from "@/components/ui/button";
-import { Database } from "lucide-react";
+import { Database, Monitor } from "lucide-react";
 
 export default function Home() {
   const [transcript, setTranscript] = useState("");
@@ -20,6 +21,7 @@ export default function Home() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [currentMagiMode, setCurrentMagiMode] = useState<string>("");
   const [showMemoryBank, setShowMemoryBank] = useState(false);
+  const [showLoadingDemo, setShowLoadingDemo] = useState(false);
 
   return (
     <div className="bg-cyber-bg text-cyber-orange font-mono min-h-screen">
@@ -49,6 +51,15 @@ export default function Home() {
             >
               <Database className="w-4 h-4 mr-2" />
               MEMORY BANK
+            </Button>
+            <Button
+              onClick={() => setShowLoadingDemo(!showLoadingDemo)}
+              className={`bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black transition-colors ${
+                showLoadingDemo ? 'bg-cyber-orange text-black' : ''
+              }`}
+            >
+              <Monitor className="w-4 h-4 mr-2" />
+              LOADING DEMO
             </Button>
             <MagiGuide />
             <CreditDisplay />
@@ -107,6 +118,23 @@ export default function Home() {
         )}
       </main>
 
+      {/* Loading Demo Overlay */}
+      {showLoadingDemo && (
+        <div className="fixed inset-0 bg-cyber-bg/95 backdrop-blur-sm z-50 p-6 overflow-y-auto">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-cyber-orange cyber-glow">LOADING SYSTEMS</h2>
+              <Button
+                onClick={() => setShowLoadingDemo(false)}
+                className="bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black"
+              >
+                ✕ CLOSE
+              </Button>
+            </div>
+            <LoadingDemo />
+          </div>
+        </div>
+      )}
 
     </div>
   );

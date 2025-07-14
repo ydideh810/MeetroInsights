@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import FileUpload from "@/components/ui/file-upload";
+import LoadingScreen from "@/components/ui/loading-screen";
 import { MeetingAnalysis } from "@shared/schema";
 
 interface UploadPanelProps {
@@ -87,8 +88,21 @@ export default function UploadPanel({
   });
 
   const handleFileUpload = (file: File) => {
+    setIsProcessing(true);
+    setAnalysis(null);
     uploadMutation.mutate(file);
   };
+
+  // Show loading screen during file upload
+  if (uploadMutation.isPending) {
+    return (
+      <LoadingScreen 
+        variant="data" 
+        message="PARSING FILE DATA"
+        className="relative"
+      />
+    );
+  }
 
   const handleEmergencyRecovery = () => {
     setIsProcessing(true);

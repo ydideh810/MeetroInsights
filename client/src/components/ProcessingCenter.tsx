@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { MeetingAnalysis } from "@shared/schema";
 import MagiGuide from "./MagiGuide";
+import LoadingScreen from "@/components/ui/loading-screen";
 import { ExternalLink } from "lucide-react";
 
 interface ProcessingCenterProps {
@@ -98,6 +99,16 @@ export default function ProcessingCenter({
     setIsProcessing(true);
     analyzeMutation.mutate(selectedMode);
   };
+
+  if (isProcessing) {
+    return (
+      <LoadingScreen 
+        variant="magi" 
+        message={`ACTIVATING ${selectedMode.toUpperCase()} SYSTEM`}
+        className="relative"
+      />
+    );
+  }
 
   return (
     <div className="flex flex-col items-center justify-center space-y-6">
