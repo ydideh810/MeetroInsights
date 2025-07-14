@@ -38,17 +38,18 @@ export default function CreditDisplay() {
       >
         {credits} Credits
       </Badge>
-      {isLowCredits && (
-        <Button
-          size="sm"
-          variant="outline"
-          onClick={handleBuyCredits}
-          className="text-xs text-orange-400 border-orange-400/20 hover:bg-orange-400/10"
-        >
-          Buy More
-          <ExternalLink className="ml-1 h-3 w-3" />
-        </Button>
-      )}
+      <Button
+        size="sm"
+        variant="outline"
+        onClick={handleBuyCredits}
+        className={`text-xs ${isLowCredits ? 
+          "text-orange-400 border-orange-400/20 hover:bg-orange-400/10" :
+          "text-cyan-400 border-cyan-400/20 hover:bg-cyan-400/10"
+        }`}
+      >
+        {isLowCredits ? "Buy More" : "Add Credits"}
+        <ExternalLink className="ml-1 h-3 w-3" />
+      </Button>
     </div>
   );
 }
