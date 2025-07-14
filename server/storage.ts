@@ -1,4 +1,4 @@
-import { meetings, tags, meetingTags, users, type Meeting, type Tag, type User, type InsertMeeting, type InsertTag, type InsertUser, type MeetingAnalysis } from "@shared/schema";
+import { meetings, tags, meetingTags, users, licenseKeys, type Meeting, type Tag, type User, type InsertMeeting, type InsertTag, type InsertUser, type MeetingAnalysis, type LicenseKey } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, like, or, and } from "drizzle-orm";
 
@@ -26,6 +26,9 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
   updateUserCredits(firebaseUid: string, credits: number): Promise<void>;
   decrementUserCredits(firebaseUid: string): Promise<boolean>; // Returns true if successful, false if insufficient credits
+  
+  // License key management
+  redeemLicenseKey(key: string, firebaseUid: string): Promise<{ success: boolean; message: string; credits?: number }>;
   
   // Memory Bank methods
   saveMeeting(data: SaveMeetingData, userId: string): Promise<Meeting>;
@@ -75,6 +78,54 @@ export class DatabaseStorage implements IStorage {
       .where(eq(users.firebaseUid, firebaseUid));
     
     return true;
+  }
+
+  async redeemLicenseKey(key: string, firebaseUid: string): Promise<{ success: boolean; message: string; credits?: number }> {
+    try {
+      // Check if license key exists and is not redeemed
+      const [licenseKey] = await db
+        .select()
+        .from(licenseKeys)
+        .where(eq(licenseKeys.key, key.toUpperCase()));
+
+      if (!licenseKey) {
+        return { success: false, message: "Invalid license key" };
+      }
+
+      if (licenseKey.isRedeemed) {
+        return { success: false, message: "License key has already been redeemed" };
+      }
+
+      // Get user to update credits
+      const user = await this.getUserByFirebaseUid(firebaseUid);
+      if (!user) {
+        return { success: false, message: "User not found" };
+      }
+
+      // Mark license key as redeemed and update user credits
+      await db.transaction(async (tx) => {
+        await tx.update(licenseKeys)
+          .set({ 
+            isRedeemed: true, 
+            redeemedBy: firebaseUid,
+            redeemedAt: new Date()
+          })
+          .where(eq(licenseKeys.key, key.toUpperCase()));
+
+        await tx.update(users)
+          .set({ credits: user.credits + licenseKey.credits, updatedAt: new Date() })
+          .where(eq(users.firebaseUid, firebaseUid));
+      });
+
+      return { 
+        success: true, 
+        message: `Successfully redeemed ${licenseKey.credits} credits!`, 
+        credits: licenseKey.credits 
+      };
+    } catch (error) {
+      console.error('Error redeeming license key:', error);
+      return { success: false, message: "An error occurred while redeeming the license key" };
+    }
   }
 
   async saveMeeting(data: SaveMeetingData, userId: string): Promise<Meeting> {

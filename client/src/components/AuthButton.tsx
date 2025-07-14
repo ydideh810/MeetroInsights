@@ -5,7 +5,8 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
-import { LogIn, LogOut, User, CreditCard, Settings, ExternalLink } from "lucide-react";
+import { LogIn, LogOut, User, CreditCard, Settings, ExternalLink, Gift } from "lucide-react";
+import LicenseKeyRedemption from "./LicenseKeyRedemption";
 
 export default function AuthButton() {
   const { user, loading } = useAuth();
@@ -79,6 +80,9 @@ export default function AuthButton() {
             Refill Credits
             <ExternalLink className="w-3 h-3 ml-auto" />
           </DropdownMenuItem>
+          <div className="px-2 py-1">
+            <LicenseKeyRedemption />
+          </div>
           <DropdownMenuItem
             disabled
             className="text-cyber-cyan opacity-50 cursor-not-allowed"

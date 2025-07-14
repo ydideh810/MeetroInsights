@@ -41,6 +41,16 @@ export const users = pgTable("users", {
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
+export const licenseKeys = pgTable("license_keys", {
+  id: serial("id").primaryKey(),
+  key: text("key").notNull().unique(),
+  credits: integer("credits").notNull().default(10),
+  isRedeemed: boolean("is_redeemed").notNull().default(false),
+  redeemedBy: text("redeemed_by"),
+  redeemedAt: timestamp("redeemed_at"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 // Relations
 export const meetingsRelations = relations(meetings, ({ many }) => ({
   meetingTags: many(meetingTags),
@@ -64,6 +74,13 @@ export const meetingTagsRelations = relations(meetingTags, ({ one }) => ({
 export const usersRelations = relations(users, ({ many }) => ({
   meetings: many(meetings),
   tags: many(tags),
+}));
+
+export const licenseKeysRelations = relations(licenseKeys, ({ one }) => ({
+  redeemedByUser: one(users, {
+    fields: [licenseKeys.redeemedBy],
+    references: [users.firebaseUid],
+  }),
 }));
 
 export const insertMeetingSchema = createInsertSchema(meetings).pick({
@@ -98,6 +115,10 @@ export const saveMeetingSchema = z.object({
   })).optional(),
 });
 
+export const redeemLicenseKeySchema = z.object({
+  key: z.string().min(1, "License key is required").regex(/^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i, "Invalid license key format"),
+});
+
 export type InsertMeeting = z.infer<typeof insertMeetingSchema>;
 export type Meeting = typeof meetings.$inferSelect;
 export type Tag = typeof tags.$inferSelect;
@@ -105,6 +126,8 @@ export type InsertTag = z.infer<typeof insertTagSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type SaveMeetingRequest = z.infer<typeof saveMeetingSchema>;
+export type LicenseKey = typeof licenseKeys.$inferSelect;
+export type RedeemLicenseKeyRequest = z.infer<typeof redeemLicenseKeySchema>;
 
 export interface MeetingHighlight {
   timestamp?: string;

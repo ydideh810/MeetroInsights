@@ -11,6 +11,14 @@ Preferred communication style: Simple, everyday language.
 ## Recent Changes
 
 ### January 14, 2025
+- **License Key Redemption System**: Implemented complete license key validation and redemption system
+  - PostgreSQL database table for storing license keys with redemption status
+  - API endpoint for validating and redeeming license keys
+  - React component with form validation and error handling
+  - Account dropdown integration for easy access to redemption
+  - UUID format validation (e.g., 213473B2-CB4E-484F-914D-376C0510445B)
+  - Automatic credit addition (10 credits per key) with transaction safety
+  - Prevention of duplicate redemptions with clear error messages
 - **AI-Powered Meeting Moment Highlight Reel**: Implemented complete highlight reel system for identifying key meeting moments
   - Six highlight types: Decision, Breakthrough, Conflict, Insight, Emotional, Turning Point
   - Intensity scoring (1-10) for each moment based on impact and significance
@@ -117,7 +125,8 @@ Preferred communication style: Simple, everyday language.
 - **meetings**: Stores meeting transcripts, metadata, analysis results, titles, categories, MAGI modes, and user IDs
 - **tags**: Custom color-coded tags for organizing meetings, linked to specific users
 - **meeting_tags**: Junction table linking meetings to tags for many-to-many relationship
-- **users**: User management (prepared but not implemented - using Firebase authentication)
+- **users**: User management with Firebase authentication and credit tracking
+- **license_keys**: License key management with redemption tracking, credits, and user associations
 
 ## Data Flow
 

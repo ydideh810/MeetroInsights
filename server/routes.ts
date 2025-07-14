@@ -1,7 +1,7 @@
 import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import multer from "multer";
-import { analyzeRequestSchema, saveMeetingSchema } from "@shared/schema";
+import { analyzeRequestSchema, saveMeetingSchema, redeemLicenseKeySchema } from "@shared/schema";
 import { analyzeMeetingContent } from "./services/openai";
 import { parseFile } from "./services/fileParser";
 import { storage } from "./storage";
@@ -358,6 +358,38 @@ ${analysis.followUps.map((followUp: string) => `- ${followUp}`).join('\n')}
       res.status(500).json({ 
         error: error instanceof Error ? error.message : "Failed to delete tag" 
       });
+    }
+  });
+
+  // Redeem license key
+  app.post("/api/redeem-license-key", authMiddleware, async (req: AuthenticatedRequest, res) => {
+    try {
+      const validationResult = redeemLicenseKeySchema.safeParse(req.body);
+      if (!validationResult.success) {
+        return res.status(400).json({ 
+          error: "Invalid input", 
+          details: validationResult.error.issues 
+        });
+      }
+
+      const { key } = validationResult.data;
+      const result = await storage.redeemLicenseKey(key, req.user!.uid);
+      
+      if (result.success) {
+        res.json({ 
+          success: true, 
+          message: result.message,
+          credits: result.credits 
+        });
+      } else {
+        res.status(400).json({ 
+          success: false, 
+          error: result.message 
+        });
+      }
+    } catch (error) {
+      console.error("Error redeeming license key:", error);
+      res.status(500).json({ error: "Failed to redeem license key" });
     }
   });
 
