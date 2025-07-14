@@ -11,6 +11,14 @@ Preferred communication style: Simple, everyday language.
 ## Recent Changes
 
 ### January 14, 2025
+- **Personalized AI Mentor Guidance**: Implemented complete AI-powered mentor system for personalized navigation assistance
+  - Contextual tips based on user behavior, credit levels, and system usage patterns
+  - Six tip categories: welcome, transcript guidance, credit warnings, post-analysis guidance, Memory Bank intro, and advanced features
+  - Intelligent dismissal system with one-time and persistent tips stored per user
+  - API endpoints for mentor session tracking and user progress management
+  - Integration with existing authentication and user data systems
+  - Cyberpunk-styled floating guidance cards with actionable buttons
+  - Automatic tip generation based on analysis count, Memory Bank usage, and credit levels
 - **License Key Redemption System**: Implemented complete license key validation and redemption system
   - PostgreSQL database table for storing license keys with redemption status
   - API endpoint for validating and redeeming license keys

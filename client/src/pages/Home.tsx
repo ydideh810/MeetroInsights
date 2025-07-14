@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useQuery } from "@tanstack/react-query";
 import UploadPanel from "@/components/UploadPanel";
 import ProcessingCenter from "@/components/ProcessingCenter";
 import OutputPanel from "@/components/OutputPanel";
@@ -8,11 +10,13 @@ import MemoryBank from "@/components/MemoryBank";
 import AuthButton from "@/components/AuthButton";
 import CreditDisplay from "@/components/CreditDisplay";
 import LoadingDemo from "@/components/LoadingDemo";
+import ContextualGuidance from "@/components/ContextualGuidance";
 import { MeetingAnalysis } from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import { Database, Monitor } from "lucide-react";
 
 export default function Home() {
+  const { user } = useAuth();
   const [transcript, setTranscript] = useState("");
   const [topic, setTopic] = useState("");
   const [attendees, setAttendees] = useState("");
@@ -22,6 +26,19 @@ export default function Home() {
   const [currentMagiMode, setCurrentMagiMode] = useState<string>("");
   const [showMemoryBank, setShowMemoryBank] = useState(false);
   const [showLoadingDemo, setShowLoadingDemo] = useState(false);
+  const [analysisCount, setAnalysisCount] = useState(0);
+
+  // Get user data for contextual guidance
+  const { data: userData } = useQuery({
+    queryKey: ['/api/user'],
+    enabled: !!user,
+  });
+
+  // Get user meetings to check Memory Bank usage
+  const { data: meetingsData } = useQuery({
+    queryKey: ['/api/memory-bank/meetings'],
+    enabled: !!user,
+  });
 
   return (
     <div className="bg-cyber-bg text-cyber-orange font-mono min-h-screen">
@@ -101,6 +118,9 @@ export default function Home() {
           setAnalysis={(analysis, mode) => {
             setAnalysis(analysis);
             setCurrentMagiMode(mode || "melchior");
+            if (analysis) {
+              setAnalysisCount(prev => prev + 1);
+            }
           }}
         />
         
@@ -135,6 +155,16 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      {/* Contextual AI Guidance */}
+      <ContextualGuidance
+        transcript={transcript}
+        hasAnalysis={!!analysis}
+        isProcessing={isProcessing}
+        userCredits={userData?.user?.credits || 0}
+        hasUsedMemoryBank={!!meetingsData?.meetings?.length}
+        analysisCount={analysisCount}
+      />
 
     </div>
   );

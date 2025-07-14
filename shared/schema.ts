@@ -37,6 +37,19 @@ export const users = pgTable("users", {
   email: text("email").notNull(),
   displayName: text("display_name"),
   credits: integer("credits").notNull().default(10),
+  mentorProgress: jsonb("mentor_progress").default({}), // Track mentor guidance progress
+  preferences: jsonb("preferences").default({}), // User preferences for guidance
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+export const mentorSessions = pgTable("mentor_sessions", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id").notNull(), // Firebase UID
+  sessionType: varchar("session_type", { length: 50 }).notNull(), // onboarding, feature_intro, troubleshooting, etc.
+  currentStep: integer("current_step").notNull().default(0),
+  isCompleted: boolean("is_completed").notNull().default(false),
+  contextData: jsonb("context_data").default({}), // Additional context for the session
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
@@ -74,6 +87,14 @@ export const meetingTagsRelations = relations(meetingTags, ({ one }) => ({
 export const usersRelations = relations(users, ({ many }) => ({
   meetings: many(meetings),
   tags: many(tags),
+  mentorSessions: many(mentorSessions),
+}));
+
+export const mentorSessionsRelations = relations(mentorSessions, ({ one }) => ({
+  user: one(users, {
+    fields: [mentorSessions.userId],
+    references: [users.firebaseUid],
+  }),
 }));
 
 export const licenseKeysRelations = relations(licenseKeys, ({ one }) => ({
@@ -102,6 +123,16 @@ export const insertUserSchema = createInsertSchema(users).pick({
   firebaseUid: true,
   email: true,
   displayName: true,
+  mentorProgress: true,
+  preferences: true,
+});
+
+export const insertMentorSessionSchema = createInsertSchema(mentorSessions).pick({
+  userId: true,
+  sessionType: true,
+  currentStep: true,
+  isCompleted: true,
+  contextData: true,
 });
 
 export const saveMeetingSchema = z.object({
@@ -128,6 +159,8 @@ export type InsertUser = z.infer<typeof insertUserSchema>;
 export type SaveMeetingRequest = z.infer<typeof saveMeetingSchema>;
 export type LicenseKey = typeof licenseKeys.$inferSelect;
 export type RedeemLicenseKeyRequest = z.infer<typeof redeemLicenseKeySchema>;
+export type MentorSession = typeof mentorSessions.$inferSelect;
+export type InsertMentorSession = z.infer<typeof insertMentorSessionSchema>;
 
 export interface MeetingHighlight {
   timestamp?: string;

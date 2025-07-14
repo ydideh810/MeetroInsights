@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { MeetingAnalysis } from "@shared/schema";
 import MagiGuide from "./MagiGuide";
+import AIMentor from "./AIMentor";
 import LoadingScreen from "@/components/ui/loading-screen";
 import { ExternalLink } from "lucide-react";
 
@@ -118,8 +119,9 @@ export default function ProcessingCenter({
           <div className="text-sm text-cyber-cyan mb-2 font-tektur tracking-wider">MAGI SYSTEM</div>
           <div className="text-3xl font-bold cyber-glow animate-pulse font-doto">TOKYO-3</div>
           <div className="text-sm text-cyber-orange font-tektur">NERV</div>
-          <div className="mt-4">
+          <div className="mt-4 flex gap-2 justify-center">
             <MagiGuide />
+            <AIMentor />
           </div>
         </div>
         

@@ -393,6 +393,77 @@ ${analysis.followUps.map((followUp: string) => `- ${followUp}`).join('\n')}
     }
   });
 
+  // Mentor System API endpoints
+  app.get("/api/mentor/sessions", authMiddleware, async (req: AuthenticatedRequest, res) => {
+    try {
+      const sessions = await storage.getMentorSessions(req.user!.uid);
+      res.json({ success: true, sessions });
+    } catch (error) {
+      console.error("Error fetching mentor sessions:", error);
+      res.status(500).json({ error: "Failed to fetch mentor sessions" });
+    }
+  });
+
+  app.post("/api/mentor/start-session", authMiddleware, async (req: AuthenticatedRequest, res) => {
+    try {
+      const { sessionType } = req.body;
+      
+      if (!sessionType) {
+        return res.status(400).json({ error: "Session type is required" });
+      }
+
+      const newSession = await storage.createMentorSession({
+        userId: req.user!.uid,
+        sessionType,
+        currentStep: 0,
+        isCompleted: false,
+        contextData: {}
+      });
+
+      res.json({ success: true, session: newSession });
+    } catch (error) {
+      console.error("Error starting mentor session:", error);
+      res.status(500).json({ error: "Failed to start mentor session" });
+    }
+  });
+
+  app.post("/api/mentor/update-progress", authMiddleware, async (req: AuthenticatedRequest, res) => {
+    try {
+      const { sessionId, step, completed } = req.body;
+      
+      if (!sessionId || step === undefined) {
+        return res.status(400).json({ error: "Session ID and step are required" });
+      }
+
+      const updates: Partial<any> = { 
+        currentStep: step,
+        updatedAt: new Date()
+      };
+
+      if (completed !== undefined) {
+        updates.isCompleted = completed;
+      }
+
+      const updatedSession = await storage.updateMentorSession(sessionId, updates);
+      res.json({ success: true, session: updatedSession });
+    } catch (error) {
+      console.error("Error updating mentor progress:", error);
+      res.status(500).json({ error: "Failed to update mentor progress" });
+    }
+  });
+
+  app.post("/api/mentor/update-user-progress", authMiddleware, async (req: AuthenticatedRequest, res) => {
+    try {
+      const { progress } = req.body;
+      
+      await storage.updateUserMentorProgress(req.user!.uid, progress);
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error updating user mentor progress:", error);
+      res.status(500).json({ error: "Failed to update user mentor progress" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

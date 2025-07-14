@@ -1,4 +1,4 @@
-import { meetings, tags, meetingTags, users, licenseKeys, type Meeting, type Tag, type User, type InsertMeeting, type InsertTag, type InsertUser, type MeetingAnalysis, type LicenseKey } from "@shared/schema";
+import { meetings, tags, meetingTags, users, licenseKeys, mentorSessions, type Meeting, type Tag, type User, type InsertMeeting, type InsertTag, type InsertUser, type MeetingAnalysis, type LicenseKey, type MentorSession, type InsertMentorSession } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, like, or, and } from "drizzle-orm";
 
@@ -29,6 +29,12 @@ export interface IStorage {
   
   // License key management
   redeemLicenseKey(key: string, firebaseUid: string): Promise<{ success: boolean; message: string; credits?: number }>;
+  
+  // Mentor system methods
+  getMentorSessions(userId: string): Promise<MentorSession[]>;
+  createMentorSession(session: InsertMentorSession): Promise<MentorSession>;
+  updateMentorSession(sessionId: number, updates: Partial<MentorSession>): Promise<MentorSession>;
+  updateUserMentorProgress(firebaseUid: string, progress: any): Promise<void>;
   
   // Memory Bank methods
   saveMeeting(data: SaveMeetingData, userId: string): Promise<Meeting>;
@@ -126,6 +132,42 @@ export class DatabaseStorage implements IStorage {
       console.error('Error redeeming license key:', error);
       return { success: false, message: "An error occurred while redeeming the license key" };
     }
+  }
+
+  async getMentorSessions(userId: string): Promise<MentorSession[]> {
+    const sessions = await db
+      .select()
+      .from(mentorSessions)
+      .where(eq(mentorSessions.userId, userId))
+      .orderBy(desc(mentorSessions.createdAt));
+    
+    return sessions;
+  }
+
+  async createMentorSession(session: InsertMentorSession): Promise<MentorSession> {
+    const [newSession] = await db
+      .insert(mentorSessions)
+      .values(session)
+      .returning();
+    
+    return newSession;
+  }
+
+  async updateMentorSession(sessionId: number, updates: Partial<MentorSession>): Promise<MentorSession> {
+    const [updatedSession] = await db
+      .update(mentorSessions)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(mentorSessions.id, sessionId))
+      .returning();
+    
+    return updatedSession;
+  }
+
+  async updateUserMentorProgress(firebaseUid: string, progress: any): Promise<void> {
+    await db
+      .update(users)
+      .set({ mentorProgress: progress, updatedAt: new Date() })
+      .where(eq(users.firebaseUid, firebaseUid));
   }
 
   async saveMeeting(data: SaveMeetingData, userId: string): Promise<Meeting> {
