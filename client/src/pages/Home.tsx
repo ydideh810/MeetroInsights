@@ -39,6 +39,9 @@ export default function Home() {
               <div>DIRECT LINK: <span className="text-cyber-orange">OPENROUTER-01</span></div>
               <div>ACCESS: <span className="text-cyber-orange animate-pulse">SUPERUSER</span></div>
               <div>STATUS: <span className="text-cyber-teal">ONLINE</span></div>
+              <div className="mt-1 text-[10px] text-cyber-teal opacity-75">
+                SYS: ONLINE | MEM: 45% | CPU: 23%
+              </div>
             </div>
           </div>
         </div>
@@ -72,14 +75,7 @@ export default function Home() {
         <OutputPanel analysis={analysis} />
       </main>
 
-      {/* Terminal Status Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-cyber-bg border-t border-cyber-orange p-2 text-xs text-cyber-cyan">
-        <div className="container mx-auto flex justify-between">
-          <span>SYSTEM: ONLINE</span>
-          <span>MEMORY: 45% | CPU: 23%</span>
-          <span>LAST UPDATE: {new Date().toLocaleString()}</span>
-        </div>
-      </div>
+
     </div>
   );
 }

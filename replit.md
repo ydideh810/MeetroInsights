@@ -11,10 +11,12 @@ Preferred communication style: Simple, everyday language.
 ## Recent Changes
 
 ### January 14, 2025
-- **PDF File Support**: Added PDF file upload and parsing capability using pdf-parse library
+- **PDF File Support**: Added PDF file upload and parsing capability using pdfjs-dist library
 - **Enhanced File Processing**: Extended file parser to handle PDF documents alongside existing .txt, .docx, .srt formats
 - **Synchronized MAGI Animation**: Implemented unified animation system for all three MAGI buttons with staggered timing
 - **Improved Button Stability**: Fixed glitching issues with MAGI button hover effects and transitions
+- **Complete Footer Removal**: Removed terminal status bar footer and integrated system status into navbar
+- **Navbar Enhancement**: Added system status indicators (SYS, MEM, CPU) to top navigation bar
 
 ### January 13, 2025
 - **Export UI Redesign**: Moved export options (copy, download, Notion) from footer to top navigation bar
