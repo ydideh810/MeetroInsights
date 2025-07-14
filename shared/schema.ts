@@ -106,6 +106,15 @@ export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type SaveMeetingRequest = z.infer<typeof saveMeetingSchema>;
 
+export interface MeetingHighlight {
+  timestamp?: string;
+  moment: string;
+  type: 'decision' | 'breakthrough' | 'conflict' | 'insight' | 'emotional' | 'turning_point';
+  intensity: number; // 1-10 scale
+  participants?: string[];
+  context: string;
+}
+
 export interface MeetingAnalysis {
   summary: string;
   keyDecisions: string[];
@@ -115,6 +124,7 @@ export interface MeetingAnalysis {
   }>;
   unansweredQuestions: string[];
   followUps: string[];
+  highlights: MeetingHighlight[];
 }
 
 export const analyzeRequestSchema = z.object({

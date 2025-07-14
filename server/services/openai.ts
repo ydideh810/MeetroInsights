@@ -62,8 +62,28 @@ Always structure your output using clear sections in JSON format:
   "keyDecisions": ["Concrete decision 1", "Concrete decision 2", ...],
   "actionItems": [{"task": "Specific technical task with clear deliverables", "assignee": "Person name or null"}, ...],
   "unansweredQuestions": ["Technical question 1", "Logistical question 2", ...],
-  "followUps": ["Next technical step 1", "Required documentation 2", ...]
+  "followUps": ["Next technical step 1", "Required documentation 2", ...],
+  "highlights": [
+    {
+      "timestamp": "Optional timestamp or timeframe",
+      "moment": "Brief description of the key moment",
+      "type": "decision|breakthrough|conflict|insight|emotional|turning_point",
+      "intensity": 7,
+      "participants": ["Person1", "Person2"],
+      "context": "Detailed explanation of what happened and why it's significant"
+    }
+  ]
 }
+
+For highlights, identify the most significant moments from the meeting:
+- DECISION: Key technical choices made or implementation decisions
+- BREAKTHROUGH: Technical discoveries or problem solutions
+- CONFLICT: Disagreements about approach or technical concerns
+- INSIGHT: Important technical realizations or "aha" moments
+- EMOTIONAL: Moments of strong technical excitement or frustration
+- TURNING_POINT: Moments that changed the technical direction
+
+Rate intensity 1-10 based on technical impact. Include 3-8 highlights maximum.
 
 Extract only factual, technical information. Perfect for engineering syncs, sprint planning, and product reviews.`;
     } else if (mode === "balthasar") {
@@ -89,8 +109,28 @@ Always structure your output using clear sections in JSON format:
   "keyDecisions": ["Strategic decision 1 with impact assessment", "Priority change 2 with rationale", ...],
   "actionItems": [{"task": "High-priority strategic task with clear outcomes", "assignee": "Owner name or null"}, ...],
   "unansweredQuestions": ["Strategic question 1", "Resource allocation question 2", ...],
-  "followUps": ["Strategic next step 1", "Leadership alignment 2", "Risk mitigation 3", ...]
+  "followUps": ["Strategic next step 1", "Leadership alignment 2", "Risk mitigation 3", ...],
+  "highlights": [
+    {
+      "timestamp": "Optional timestamp or timeframe",
+      "moment": "Brief description of the strategic moment",
+      "type": "decision|breakthrough|conflict|insight|emotional|turning_point",
+      "intensity": 8,
+      "participants": ["Leader1", "Stakeholder2"],
+      "context": "Strategic context and impact explanation"
+    }
+  ]
 }
+
+For highlights, identify the most significant strategic moments:
+- DECISION: Key strategic choices with business impact
+- BREAKTHROUGH: Major strategic insights or solutions
+- CONFLICT: Strategic disagreements or competing priorities
+- INSIGHT: Important strategic realizations or market insights
+- EMOTIONAL: Moments of strategic excitement or concern
+- TURNING_POINT: Moments that changed strategic direction
+
+Rate intensity 1-10 based on strategic impact and business value. Include 3-8 highlights maximum.
 
 Prioritize items by importance and strategic value. Perfect for leadership meetings, project updates, and retrospectives.`;
     } else if (mode === "casper") {
@@ -116,8 +156,28 @@ Always structure your output using clear sections in JSON format:
   "keyDecisions": ["Decision 1 with emotional context", "Agreement reached despite tension", ...],
   "actionItems": [{"task": "People-focused task or relationship building", "assignee": "Person name or null"}, ...],
   "unansweredQuestions": ["Interpersonal concern 1", "Team dynamics question 2", "Emotional undercurrents 3", ...],
-  "followUps": ["Check-in needed 1", "Relationship repair 2", "Clarification required 3", ...]
+  "followUps": ["Check-in needed 1", "Relationship repair 2", "Clarification required 3", ...],
+  "highlights": [
+    {
+      "timestamp": "Optional timestamp or timeframe",
+      "moment": "Brief description of the emotional moment",
+      "type": "decision|breakthrough|conflict|insight|emotional|turning_point",
+      "intensity": 6,
+      "participants": ["Person1", "Person2"],
+      "context": "Emotional context and interpersonal dynamics explanation"
+    }
+  ]
 }
+
+For highlights, identify the most significant human moments:
+- DECISION: Decisions made through consensus or emotional agreement
+- BREAKTHROUGH: Moments of shared understanding or connection
+- CONFLICT: Interpersonal tensions or disagreements
+- INSIGHT: Important realizations about team dynamics or relationships
+- EMOTIONAL: Moments of strong emotion (joy, frustration, celebration)
+- TURNING_POINT: Moments that changed the emotional tone or relationships
+
+Rate intensity 1-10 based on emotional impact and interpersonal significance. Include 3-8 highlights maximum.
 
 Focus on human dynamics, emotional subtext, and interpersonal elements. Perfect for client meetings, conflict resolution, and 1:1 check-ins.`;
     }
