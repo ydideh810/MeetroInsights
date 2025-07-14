@@ -4,8 +4,8 @@ import { signInWithGoogle, logOut } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { LogIn, LogOut, User } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
+import { LogIn, LogOut, User, CreditCard, Settings, ExternalLink } from "lucide-react";
 
 export default function AuthButton() {
   const { user, loading } = useAuth();
@@ -70,7 +70,24 @@ export default function AuthButton() {
             {user.displayName || user.email}
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-cyber-dark-panel border-cyber-orange">
+        <DropdownMenuContent className="bg-cyber-dark-panel border-cyber-orange w-56">
+          <DropdownMenuItem
+            onClick={() => window.open('https://meetro.lemonsqueezy.com/buy/e6a9b7c7-2f01-4c8e-9b28-1a7e5c3d6f4e', '_blank')}
+            className="text-cyber-cyan hover:bg-cyber-orange hover:text-black cursor-pointer"
+          >
+            <CreditCard className="w-4 h-4 mr-2" />
+            Refill Credits
+            <ExternalLink className="w-3 h-3 ml-auto" />
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            disabled
+            className="text-cyber-cyan opacity-50 cursor-not-allowed"
+          >
+            <Settings className="w-4 h-4 mr-2" />
+            Settings
+            <span className="ml-auto text-xs">Soon</span>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator className="bg-cyber-border" />
           <DropdownMenuItem
             onClick={handleSignOut}
             className="text-cyber-cyan hover:bg-cyber-orange hover:text-black cursor-pointer"
