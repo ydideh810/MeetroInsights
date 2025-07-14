@@ -1,16 +1,44 @@
 import { MeetingAnalysis } from "@shared/schema";
+import { SaveMeetingDialog } from "./MemoryBank";
 
 interface OutputPanelProps {
   analysis: MeetingAnalysis | null;
+  transcript?: string;
+  topic?: string;
+  attendees?: string;
+  knownInfo?: string;
+  magiMode?: string;
 }
 
-export default function OutputPanel({ analysis }: OutputPanelProps) {
+export default function OutputPanel({ 
+  analysis, 
+  transcript = "", 
+  topic = "", 
+  attendees = "", 
+  knownInfo = "", 
+  magiMode = "" 
+}: OutputPanelProps) {
   return (
     <div className="space-y-4">
       <div className="magi-panel rounded-lg p-6">
         <div className="relative z-10">
           <h2 className="text-xl font-bold mb-4 cyber-glow tracking-wide font-doto">RECOVERY OUTPUT</h2>
           <div className="text-xs text-cyber-cyan mb-4 font-tektur">MAGI CASPER-3 • ONLINE</div>
+        
+          {/* Save to Memory Bank Button */}
+          {analysis && (
+            <div className="flex justify-center mb-6">
+              <SaveMeetingDialog
+                analysis={analysis}
+                transcript={transcript}
+                topic={topic}
+                attendees={attendees}
+                knownInfo={knownInfo}
+                magiMode={magiMode}
+                onSave={() => {}}
+              />
+            </div>
+          )}
         
           {/* Summary Section */}
         <div className="mb-6">

@@ -1,5 +1,6 @@
-import { pgTable, text, serial, integer, boolean, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, jsonb, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
+import { relations } from "drizzle-orm";
 import { z } from "zod";
 
 export const meetings = pgTable("meetings", {
@@ -9,18 +10,76 @@ export const meetings = pgTable("meetings", {
   attendees: text("attendees"),
   knownInfo: text("known_info"),
   analysis: jsonb("analysis"),
-  createdAt: text("created_at").notNull(),
+  title: varchar("title", { length: 255 }).notNull(),
+  category: varchar("category", { length: 100 }),
+  magiMode: varchar("magi_mode", { length: 20 }),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 });
+
+export const tags = pgTable("tags", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 50 }).notNull(),
+  color: varchar("color", { length: 7 }).notNull(), // hex color code
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const meetingTags = pgTable("meeting_tags", {
+  id: serial("id").primaryKey(),
+  meetingId: integer("meeting_id").notNull(),
+  tagId: integer("tag_id").notNull(),
+});
+
+// Relations
+export const meetingsRelations = relations(meetings, ({ many }) => ({
+  meetingTags: many(meetingTags),
+}));
+
+export const tagsRelations = relations(tags, ({ many }) => ({
+  meetingTags: many(meetingTags),
+}));
+
+export const meetingTagsRelations = relations(meetingTags, ({ one }) => ({
+  meeting: one(meetings, {
+    fields: [meetingTags.meetingId],
+    references: [meetings.id],
+  }),
+  tag: one(tags, {
+    fields: [meetingTags.tagId],
+    references: [tags.id],
+  }),
+}));
 
 export const insertMeetingSchema = createInsertSchema(meetings).pick({
   transcript: true,
   topic: true,
   attendees: true,
   knownInfo: true,
+  title: true,
+  category: true,
+  magiMode: true,
+});
+
+export const insertTagSchema = createInsertSchema(tags).pick({
+  name: true,
+  color: true,
+});
+
+export const saveMeetingSchema = z.object({
+  meetingId: z.number().optional(),
+  title: z.string().min(1, "Title is required"),
+  category: z.string().optional(),
+  tagIds: z.array(z.number()).optional(),
+  newTags: z.array(z.object({
+    name: z.string().min(1),
+    color: z.string().regex(/^#[0-9A-F]{6}$/i),
+  })).optional(),
 });
 
 export type InsertMeeting = z.infer<typeof insertMeetingSchema>;
 export type Meeting = typeof meetings.$inferSelect;
+export type Tag = typeof tags.$inferSelect;
+export type InsertTag = z.infer<typeof insertTagSchema>;
+export type SaveMeetingRequest = z.infer<typeof saveMeetingSchema>;
 
 export interface MeetingAnalysis {
   summary: string;

@@ -4,7 +4,10 @@ import ProcessingCenter from "@/components/ProcessingCenter";
 import OutputPanel from "@/components/OutputPanel";
 import ExportButton from "@/components/ExportButton";
 import MagiGuide from "@/components/MagiGuide";
+import MemoryBank from "@/components/MemoryBank";
 import { MeetingAnalysis } from "@shared/schema";
+import { Button } from "@/components/ui/button";
+import { Database } from "lucide-react";
 
 export default function Home() {
   const [transcript, setTranscript] = useState("");
@@ -13,6 +16,8 @@ export default function Home() {
   const [knownInfo, setKnownInfo] = useState("");
   const [analysis, setAnalysis] = useState<MeetingAnalysis | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [currentMagiMode, setCurrentMagiMode] = useState<string>("");
+  const [showMemoryBank, setShowMemoryBank] = useState(false);
 
   return (
     <div className="bg-cyber-bg text-cyber-orange font-mono min-h-screen">
@@ -34,6 +39,15 @@ export default function Home() {
               <ExportButton type="download" analysis={analysis} />
               <ExportButton type="notion" analysis={analysis} />
             </div>
+            <Button
+              onClick={() => setShowMemoryBank(!showMemoryBank)}
+              className={`bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black transition-colors ${
+                showMemoryBank ? 'bg-cyber-orange text-black' : ''
+              }`}
+            >
+              <Database className="w-4 h-4 mr-2" />
+              MEMORY BANK
+            </Button>
             <MagiGuide />
             <div className="text-right text-xs text-cyber-cyan font-mono">
               <div>DIRECT LINK: <span className="text-cyber-orange">OPENROUTER-01</span></div>
@@ -69,10 +83,24 @@ export default function Home() {
           knownInfo={knownInfo}
           isProcessing={isProcessing}
           setIsProcessing={setIsProcessing}
-          setAnalysis={setAnalysis}
+          setAnalysis={(analysis, mode) => {
+            setAnalysis(analysis);
+            setCurrentMagiMode(mode || "melchior");
+          }}
         />
         
-        <OutputPanel analysis={analysis} />
+        {showMemoryBank ? (
+          <MemoryBank />
+        ) : (
+          <OutputPanel 
+            analysis={analysis} 
+            transcript={transcript}
+            topic={topic}
+            attendees={attendees}
+            knownInfo={knownInfo}
+            magiMode={currentMagiMode}
+          />
+        )}
       </main>
 
 

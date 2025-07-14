@@ -243,7 +243,133 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
-    animation: scan-line 3s linear infinite;
+  }
+  
+  /* Memory Bank Styles */
+  .cyber-red {
+    color: #ff0000;
+  }
+  
+  .border-cyber-red {
+    border-color: #ff0000;
+  }
+  
+  .hover\\:bg-cyber-red:hover {
+    background-color: #ff0000;
+  }
+  
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  
+  .memory-bank-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  
+  .memory-bank-card {
+    background: var(--cyber-panel);
+    border: 1px solid var(--cyber-orange);
+    border-radius: 8px;
+    padding: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .memory-bank-card:hover {
+    border-color: var(--cyber-cyan);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+  
+  .memory-bank-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+  }
+  
+  .memory-bank-card:hover::before {
+    left: 100%;
+  }
+  
+  .memory-bank-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid;
+    margin: 0.125rem;
+    transition: all 0.2s ease;
+  }
+  
+  .memory-bank-tag:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+  }
+  
+  .memory-bank-search {
+    position: relative;
+    background: var(--cyber-panel);
+    border: 2px solid var(--cyber-orange);
+    border-radius: 8px;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+  }
+  
+  .memory-bank-search:focus-within {
+    border-color: var(--cyber-cyan);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+  }
+  
+  .memory-bank-filter {
+    background: var(--cyber-panel);
+    border: 2px solid var(--cyber-orange);
+    border-radius: 6px;
+    padding: 0.5rem;
+    color: var(--cyber-cyan);
+    transition: all 0.3s ease;
+  }
+  
+  .memory-bank-filter:hover {
+    border-color: var(--cyber-cyan);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  }
+  
+  .memory-bank-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    text-align: center;
+    color: var(--cyber-cyan);
+    opacity: 0.7;
+  }
+  
+  .memory-bank-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    text-align: center;
+    color: var(--cyber-cyan);
+  }
+  
+  .memory-bank-loading .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
   
   .pulse-glow {

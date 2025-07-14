@@ -11,6 +11,12 @@ Preferred communication style: Simple, everyday language.
 ## Recent Changes
 
 ### January 14, 2025
+- **Cyberpunk Memory Bank**: Implemented complete Memory Bank feature with PostgreSQL database integration
+- **Meeting Storage**: Added ability to save meeting analyses with titles, categories, and custom tags
+- **Tag System**: Created color-coded tagging system for organizing meeting insights
+- **Search & Filter**: Added search functionality and category/tag filtering for stored meetings
+- **Database Integration**: Switched from in-memory storage to PostgreSQL with Drizzle ORM
+- **Complete API Layer**: Built comprehensive REST API endpoints for Memory Bank operations
 - **PDF File Support**: Added PDF file upload and parsing capability using pdfjs-dist library
 - **Enhanced File Processing**: Extended file parser to handle PDF documents alongside existing .txt, .docx, .srt formats
 - **Synchronized MAGI Animation**: Implemented unified animation system for all three MAGI buttons with staggered timing
@@ -53,21 +59,26 @@ Preferred communication style: Simple, everyday language.
 ## Key Components
 
 ### Frontend Components
-- **Home Page**: Main interface with three-column layout (upload, processing, output)
+- **Home Page**: Main interface with three-column layout (upload, processing, output/memory bank)
 - **UploadPanel**: File upload and form inputs for meeting context
 - **ProcessingCenter**: Analysis controls and status display with interactive MAGI selection
-- **OutputPanel**: Structured display of meeting insights
+- **OutputPanel**: Structured display of meeting insights with save-to-memory functionality
+- **MemoryBank**: Complete meeting archive interface with search, filter, and management features
+- **SaveMeetingDialog**: Modal dialog for saving meetings with title, category, and tag selection
 - **ExportButton**: Individual export buttons for copy, download, and Notion integration
 - **FileUpload**: Drag-and-drop file upload component with validation
 - **MagiGuide**: Interactive guide explaining MAGI system metaphors and usage
 
 ### Backend Services
-- **File Parser**: Handles .txt, .docx, and .srt file processing
-- **OpenAI Service**: Interfaces with GPT-4 API for meeting analysis
-- **Storage**: In-memory storage implementation (prepared for database integration)
+- **File Parser**: Handles .txt, .docx, .srt, and .pdf file processing
+- **OpenAI Service**: Interfaces with GPT-4 API for meeting analysis via OpenRouter
+- **Database Storage**: PostgreSQL implementation with Drizzle ORM for persistent data
+- **Memory Bank API**: Complete REST API for meeting CRUD operations, search, and tag management
 
 ### Database Schema
-- **meetings**: Stores meeting transcripts, metadata, and analysis results
+- **meetings**: Stores meeting transcripts, metadata, analysis results, titles, categories, and MAGI modes
+- **tags**: Custom color-coded tags for organizing meetings
+- **meeting_tags**: Junction table linking meetings to tags for many-to-many relationship
 - **users**: User management (prepared but not implemented)
 
 ## Data Flow

@@ -13,7 +13,7 @@ interface ProcessingCenterProps {
   knownInfo: string;
   isProcessing: boolean;
   setIsProcessing: (value: boolean) => void;
-  setAnalysis: (value: MeetingAnalysis | null) => void;
+  setAnalysis: (value: MeetingAnalysis | null, mode?: string) => void;
 }
 
 type MagiMode = "melchior" | "balthasar" | "casper";
@@ -41,8 +41,8 @@ export default function ProcessingCenter({
       });
       return response.json();
     },
-    onSuccess: (data) => {
-      setAnalysis(data.analysis);
+    onSuccess: (data, variables) => {
+      setAnalysis(data.analysis, variables);
       setIsProcessing(false);
       toast({
         title: "Analysis complete",
