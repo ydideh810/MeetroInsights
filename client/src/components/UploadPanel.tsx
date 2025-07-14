@@ -88,7 +88,6 @@ export default function UploadPanel({
   });
 
   const handleFileUpload = (file: File) => {
-    setIsProcessing(true);
     setAnalysis(null);
     uploadMutation.mutate(file);
   };
@@ -105,7 +104,6 @@ export default function UploadPanel({
   }
 
   const handleEmergencyRecovery = () => {
-    setIsProcessing(true);
     emergencyRecoveryMutation.mutate();
   };
 
