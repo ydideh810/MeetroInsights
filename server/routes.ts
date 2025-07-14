@@ -9,14 +9,14 @@ const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
   fileFilter: (req, file, cb) => {
-    const allowedTypes = ['text/plain', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/x-subrip'];
-    const allowedExtensions = ['.txt', '.docx', '.srt'];
+    const allowedTypes = ['text/plain', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/x-subrip', 'application/pdf'];
+    const allowedExtensions = ['.txt', '.docx', '.srt', '.pdf'];
     const hasValidExtension = allowedExtensions.some(ext => file.originalname.toLowerCase().endsWith(ext));
     
     if (hasValidExtension) {
       cb(null, true);
     } else {
-      cb(new Error('Only .txt, .docx, and .srt files are allowed'));
+      cb(new Error('Only .txt, .docx, .srt, and .pdf files are allowed'));
     }
   }
 });
