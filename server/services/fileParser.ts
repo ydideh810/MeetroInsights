@@ -1,4 +1,5 @@
 import { Buffer } from 'buffer';
+import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.mjs';
 
 export async function parseTextFile(buffer: Buffer): Promise<string> {
   return buffer.toString('utf-8');
@@ -37,6 +38,27 @@ export async function parseSrtFile(buffer: Buffer): Promise<string> {
   }
 }
 
+export async function parsePdfFile(buffer: Buffer): Promise<string> {
+  try {
+    const pdfData = new Uint8Array(buffer);
+    const pdf = await pdfjs.getDocument({ data: pdfData }).promise;
+    
+    let fullText = '';
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const textContent = await page.getTextContent();
+      const pageText = textContent.items
+        .map((item: any) => item.str)
+        .join(' ');
+      fullText += pageText + '\n';
+    }
+    
+    return fullText.trim();
+  } catch (error) {
+    throw new Error("Failed to parse PDF file. Please ensure it's a valid PDF document.");
+  }
+}
+
 export function parseFile(buffer: Buffer, filename: string): Promise<string> {
   const extension = filename.toLowerCase().split('.').pop();
   
@@ -47,7 +69,9 @@ export function parseFile(buffer: Buffer, filename: string): Promise<string> {
       return parseDocxFile(buffer);
     case 'srt':
       return parseSrtFile(buffer);
+    case 'pdf':
+      return parsePdfFile(buffer);
     default:
-      throw new Error(`Unsupported file format: ${extension}. Please use .txt, .docx, or .srt files.`);
+      throw new Error(`Unsupported file format: ${extension}. Please use .txt, .docx, .srt, or .pdf files.`);
   }
 }

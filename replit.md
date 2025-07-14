@@ -10,6 +10,12 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### January 14, 2025
+- **PDF File Support**: Added PDF file upload and parsing capability using pdf-parse library
+- **Enhanced File Processing**: Extended file parser to handle PDF documents alongside existing .txt, .docx, .srt formats
+- **Synchronized MAGI Animation**: Implemented unified animation system for all three MAGI buttons with staggered timing
+- **Improved Button Stability**: Fixed glitching issues with MAGI button hover effects and transitions
+
 ### January 13, 2025
 - **Export UI Redesign**: Moved export options (copy, download, Notion) from footer to top navigation bar
 - **Component Refactoring**: Replaced ExportBar component with individual ExportButton components
@@ -78,6 +84,7 @@ Preferred communication style: Simple, everyday language.
 - **drizzle-orm**: Database ORM with TypeScript support
 - **openrouter**: OpenRouter API for AI model access (using DeepSeek R1)
 - **multer**: File upload handling
+- **pdf-parse**: PDF document text extraction
 - **express**: Web framework for Node.js
 
 ### UI Dependencies
@@ -107,7 +114,7 @@ Preferred communication style: Simple, everyday language.
 - Express serves static files from `dist/public/`
 - PostgreSQL database with connection pooling
 - File upload limits: 10MB maximum size
-- Supported file types: .txt, .docx, .srt
+- Supported file types: .txt, .docx, .srt, .pdf
 
 ### Development Setup
 - Hot module replacement via Vite
@@ -133,7 +140,7 @@ Preferred communication style: Simple, everyday language.
 - **Error Handling**: Comprehensive error management for API failures
 
 ### File Processing
-- **Multiple Format Support**: .txt, .docx, and .srt files for maximum compatibility
+- **Multiple Format Support**: .txt, .docx, .srt, and .pdf files for maximum compatibility
 - **In-Memory Processing**: Files processed in memory for security and performance
 - **Size Limits**: 10MB maximum to prevent resource exhaustion
 

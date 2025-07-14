@@ -11,12 +11,12 @@ export default function FileUpload({ onFileUpload, isUploading }: FileUploadProp
   const [isDragging, setIsDragging] = useState(false);
 
   const handleFileSelect = (file: File) => {
-    const allowedTypes = ['text/plain', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-    const allowedExtensions = ['.txt', '.docx', '.srt'];
+    const allowedTypes = ['text/plain', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'];
+    const allowedExtensions = ['.txt', '.docx', '.srt', '.pdf'];
     const hasValidExtension = allowedExtensions.some(ext => file.name.toLowerCase().endsWith(ext));
     
     if (!hasValidExtension) {
-      alert('Please upload a .txt, .docx, or .srt file');
+      alert('Please upload a .txt, .docx, .srt, or .pdf file');
       return;
     }
     
@@ -70,7 +70,7 @@ export default function FileUpload({ onFileUpload, isUploading }: FileUploadProp
         <div className="text-sm text-cyber-cyan mb-2">
           {isUploading ? "UPLOADING..." : "DRAG & DROP FILES"}
         </div>
-        <div className="text-xs text-gray-400">Support: .txt, .docx, .srt</div>
+        <div className="text-xs text-gray-400">Support: .txt, .docx, .srt, .pdf</div>
         <Button
           type="button"
           disabled={isUploading}
@@ -83,7 +83,7 @@ export default function FileUpload({ onFileUpload, isUploading }: FileUploadProp
       <input
         ref={fileInputRef}
         type="file"
-        accept=".txt,.docx,.srt"
+        accept=".txt,.docx,.srt,.pdf"
         onChange={handleFileInputChange}
         className="hidden"
       />
