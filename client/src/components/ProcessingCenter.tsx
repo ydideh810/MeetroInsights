@@ -116,9 +116,9 @@ export default function ProcessingCenter({
       {/* MAGI System Display */}
       <div className="relative">
         <div className="text-center mb-8">
-          <div className="text-sm text-cyber-cyan mb-2 font-tektur tracking-wider">MAGI SYSTEM</div>
+          <div className="text-sm text-cyber-cyan mb-2 font-tourney tracking-wider">MAGI SYSTEM</div>
           <div className="text-3xl font-bold cyber-glow animate-pulse font-doto">TOKYO-3</div>
-          <div className="text-sm text-cyber-orange font-tektur">ZENTRA</div>
+          <div className="text-sm text-cyber-orange font-tourney">ZENTRA</div>
           <div className="mt-4 flex gap-2 justify-center">
             <MagiGuide />
             <AIMentor />
@@ -137,9 +137,9 @@ export default function ProcessingCenter({
             }`}
           >
             <div className="text-center relative z-10">
-              <div className="text-xs text-cyber-cyan font-tektur mb-1">MAGI</div>
+              <div className="text-xs text-cyber-cyan font-tourney mb-1">MAGI</div>
               <div className={`text-sm font-bold font-tourney ${selectedMode === "vantix" ? "text-cyber-orange" : "text-cyber-teal"}`}>VANTIX-2</div>
-              <div className="text-xs text-cyber-orange mt-1 font-tektur">💡 STRATEGIST</div>
+              <div className="text-xs text-cyber-orange mt-1 font-tourney">💡 STRATEGIST</div>
             </div>
           </button>
           
@@ -153,9 +153,9 @@ export default function ProcessingCenter({
             }`}
           >
             <div className="text-center relative z-10">
-              <div className="text-xs text-cyber-cyan font-tektur mb-1">MAGI</div>
+              <div className="text-xs text-cyber-cyan font-tourney mb-1">MAGI</div>
               <div className={`text-sm font-bold font-tourney ${selectedMode === "synthrax" ? "text-cyber-orange" : "text-cyber-teal"}`}>SYNTHRAX-1</div>
-              <div className="text-xs text-cyber-red mt-1 font-tektur">📊 ANALYST</div>
+              <div className="text-xs text-cyber-red mt-1 font-tourney">📊 ANALYST</div>
             </div>
           </button>
           
@@ -169,9 +169,9 @@ export default function ProcessingCenter({
             }`}
           >
             <div className="text-center relative z-10">
-              <div className="text-xs text-cyber-cyan font-tektur mb-1">MAGI</div>
+              <div className="text-xs text-cyber-cyan font-tourney mb-1">MAGI</div>
               <div className={`text-sm font-bold font-tourney ${selectedMode === "lymnia" ? "text-cyber-orange" : "text-cyber-teal"}`}>LYMNIA-3</div>
-              <div className="text-xs text-cyber-cyan mt-1 font-tektur">🧬 HUMAN</div>
+              <div className="text-xs text-cyber-cyan mt-1 font-tourney">🧬 HUMAN</div>
             </div>
           </button>
           
@@ -199,11 +199,11 @@ export default function ProcessingCenter({
           
           {/* Central Status Display */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-5">
-            <div className="text-xs text-cyber-cyan font-tektur mb-1">MODE</div>
+            <div className="text-xs text-cyber-cyan font-tourney mb-1">MODE</div>
             <div className="text-sm font-bold text-cyber-orange font-doto">
               {isProcessing ? "PROCESSING" : selectedMode.toUpperCase()}
             </div>
-            <div className="text-xs text-cyber-teal mt-1 font-tektur">
+            <div className="text-xs text-cyber-teal mt-1 font-tourney">
               {selectedMode === "synthrax" && "FACTUAL ANALYSIS"}
               {selectedMode === "vantix" && "STRATEGIC FOCUS"}
               {selectedMode === "lymnia" && "HUMAN DYNAMICS"}
@@ -216,8 +216,8 @@ export default function ProcessingCenter({
       <div className="w-full max-w-md">
         <div className="auth-panel p-6 mb-4">
           <div className="text-center mb-4">
-            <div className="text-sm text-cyber-cyan font-tektur mb-2">ZENTRA ONLY</div>
-            <div className="text-xs text-cyber-orange font-tektur">認証が必要です</div>
+            <div className="text-sm text-cyber-cyan font-tourney mb-2">ZENTRA ONLY</div>
+            <div className="text-xs text-cyber-orange font-tourney">認証が必要です</div>
           </div>
           
           <Button
@@ -233,7 +233,7 @@ export default function ProcessingCenter({
         </div>
         
         {/* Status Display */}
-        <div className="text-center text-sm text-cyber-cyan font-tektur">
+        <div className="text-center text-sm text-cyber-cyan font-tourney">
           <div className="mb-2">
             {isProcessing 
               ? "RESULT OF THE DELIBERATION" 

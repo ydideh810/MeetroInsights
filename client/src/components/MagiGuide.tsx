@@ -71,7 +71,7 @@ export default function MagiGuide() {
           variant="outline" 
           className="bg-cyber-panel border-cyber-border text-cyber-cyan hover:bg-cyber-dark-panel hover:border-cyber-orange transition-colors"
         >
-          <span className="text-sm font-tektur">📖 MAGI GUIDE</span>
+          <span className="text-sm font-tourney">📖 MAGI GUIDE</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-cyber-bg border-cyber-border">
@@ -79,7 +79,7 @@ export default function MagiGuide() {
           <DialogTitle className="text-2xl font-bold text-cyber-orange font-doto cyber-glow">
             MAGI SYSTEM GUIDE
           </DialogTitle>
-          <DialogDescription className="text-sm text-cyber-cyan font-tektur">
+          <DialogDescription className="text-sm text-cyber-cyan font-tourney">
             TOKYO-3 • ZENTRA • MEETING ANALYSIS PROTOCOLS
           </DialogDescription>
         </DialogHeader>
@@ -114,7 +114,7 @@ export default function MagiGuide() {
                       <CardTitle className={`${mode.color} font-tourney`}>
                         {mode.name}
                       </CardTitle>
-                      <CardDescription className="text-cyber-cyan font-tektur">
+                      <CardDescription className="text-cyber-cyan font-tourney">
                         {mode.subtitle}
                       </CardDescription>
                     </div>
@@ -128,19 +128,19 @@ export default function MagiGuide() {
                   </div>
                   
                   <div>
-                    <h4 className="font-bold text-cyber-orange mb-2 font-tektur">APPROACH:</h4>
+                    <h4 className="font-bold text-cyber-orange mb-2 font-tourney">APPROACH:</h4>
                     <p className="text-cyber-teal text-sm">{mode.approach}</p>
                   </div>
                   
                   <div>
-                    <h4 className="font-bold text-cyber-orange mb-2 font-tektur">BEST FOR:</h4>
+                    <h4 className="font-bold text-cyber-orange mb-2 font-tourney">BEST FOR:</h4>
                     <Badge variant="outline" className="text-cyber-cyan border-cyber-border">
                       {mode.bestFor}
                     </Badge>
                   </div>
                   
                   <div>
-                    <h4 className="font-bold text-cyber-orange mb-2 font-tektur">OUTPUT FOCUS:</h4>
+                    <h4 className="font-bold text-cyber-orange mb-2 font-tourney">OUTPUT FOCUS:</h4>
                     <ul className="text-cyber-teal text-sm space-y-1">
                       {mode.output.map((item, i) => (
                         <li key={i} className="flex items-start">
@@ -162,16 +162,16 @@ export default function MagiGuide() {
             </CardHeader>
             <CardContent className="text-cyber-teal text-sm space-y-3">
               <div>
-                <h4 className="font-bold text-cyber-cyan mb-2 font-tektur">CHOOSING THE RIGHT MODE:</h4>
+                <h4 className="font-bold text-cyber-cyan mb-2 font-tourney">CHOOSING THE RIGHT MODE:</h4>
                 <ul className="space-y-1 ml-4">
-                  <li>• Use <span className="text-cyber-red">MELCHIOR</span> for technical meetings where facts matter most</li>
-                  <li>• Use <span className="text-cyber-orange">BALTHASAR</span> for strategic sessions requiring prioritization</li>
-                  <li>• Use <span className="text-cyber-cyan">CASPER</span> for people-focused meetings with emotional context</li>
+                  <li>• Use <span className="text-cyber-red">SYNTHRAX</span> for technical meetings where facts matter most</li>
+                  <li>• Use <span className="text-cyber-orange">VANTIX</span> for strategic sessions requiring prioritization</li>
+                  <li>• Use <span className="text-cyber-cyan">LYMNIA</span> for people-focused meetings with emotional context</li>
                 </ul>
               </div>
               
               <div>
-                <h4 className="font-bold text-cyber-cyan mb-2 font-tektur">COMBINING INSIGHTS:</h4>
+                <h4 className="font-bold text-cyber-cyan mb-2 font-tourney">COMBINING INSIGHTS:</h4>
                 <p>
                   For complex meetings, try running the same transcript through multiple MAGI modes 
                   to get different perspectives on the same content.
@@ -179,7 +179,7 @@ export default function MagiGuide() {
               </div>
               
               <div>
-                <h4 className="font-bold text-cyber-cyan mb-2 font-tektur">EMERGENCY RECOVERY:</h4>
+                <h4 className="font-bold text-cyber-cyan mb-2 font-tourney">EMERGENCY RECOVERY:</h4>
                 <p>
                   When you have limited information, the system can generate plausible reconstructions 
                   based on meeting topics and attendees.
@@ -192,7 +192,7 @@ export default function MagiGuide() {
           <div className="flex justify-end">
             <Button 
               onClick={() => setIsOpen(false)}
-              className="bg-cyber-orange text-black hover:bg-cyber-red font-tektur"
+              className="bg-cyber-orange text-black hover:bg-cyber-red font-tourney"
             >
               CLOSE GUIDE
             </Button>

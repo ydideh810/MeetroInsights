@@ -283,8 +283,8 @@ export default function AIMentor() {
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-tektur">Overall Progress</span>
-                    <span className="text-sm font-tektur">{Math.round(calculateProgress())}%</span>
+                    <span className="text-sm font-tourney">Overall Progress</span>
+                    <span className="text-sm font-tourney">{Math.round(calculateProgress())}%</span>
                   </div>
                   <Progress value={calculateProgress()} className="h-2" />
                   

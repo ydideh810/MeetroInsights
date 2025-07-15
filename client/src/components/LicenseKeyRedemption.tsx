@@ -80,21 +80,21 @@ export default function LicenseKeyRedemption({ onSuccess }: LicenseKeyRedemption
         
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="key" className="text-cyber-cyan font-tektur">
+            <Label htmlFor="key" className="text-cyber-cyan font-tourney">
               License Key
             </Label>
             <Input
               id="key"
               placeholder="213473B2-CB4E-484F-914D-376C0510445B"
-              className="bg-cyber-bg border-cyber-border text-cyber-cyan placeholder:text-cyber-cyan/50 focus:border-cyber-orange font-tektur"
+              className="bg-cyber-bg border-cyber-border text-cyber-cyan placeholder:text-cyber-cyan/50 focus:border-cyber-orange font-tourney"
               {...register("key")}
             />
             {errors.key && (
-              <p className="text-red-400 text-sm font-tektur">{errors.key.message}</p>
+              <p className="text-red-400 text-sm font-tourney">{errors.key.message}</p>
             )}
           </div>
 
-          <div className="text-xs text-cyber-cyan/70 font-tektur">
+          <div className="text-xs text-cyber-cyan/70 font-tourney">
             • Each license key provides 10 additional credits
             • Keys can only be redeemed once
             • Keys are case-insensitive

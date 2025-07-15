@@ -13,10 +13,9 @@ export default {
       fontFamily: {
         'tourney': ['Tourney', 'sans-serif'],
         'doto': ['Doto', 'sans-serif'],
-        'tektur': ['Tektur', 'monospace'],
-        'cyber': ['Tourney', 'Tektur', 'monospace'],
+        'cyber': ['Tourney', 'monospace'],
         'cyber-display': ['Doto', 'Tourney', 'sans-serif'],
-        'cyber-mono': ['Tektur', 'monospace'],
+        'cyber-mono': ['Tourney', 'monospace'],
       },
       colors: {
         background: "var(--background)",

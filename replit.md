@@ -10,6 +10,13 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### January 15, 2025
+- **Font Consolidation**: Reduced font mix to only use "doto" and "tourney" fonts throughout the application
+  - Removed "tektur" font dependency from Google Fonts import
+  - Updated all UI components to use only doto (display) and tourney (headings/monospace)
+  - Maintained cyberpunk aesthetic with simplified typography system
+  - Updated Tailwind config to remove tektur font references
+
 ### January 14, 2025
 - **Complete System Rebranding**: Updated all MAGI names and system branding throughout the application
   - Changed MAGI names: Melchior → Synthrax, Balthasar → Vantix, Casper → Lymnia
@@ -95,7 +102,7 @@ Preferred communication style: Simple, everyday language.
 - **Build Tool**: Vite for fast development and optimized builds
 - **UI Framework**: Radix UI components with shadcn/ui styling system
 - **Styling**: Tailwind CSS with custom cyberpunk theme (dark background, orange/cyan accent colors)
-- **Typography**: Doto font for display text, Tourney for headings, Tektur for monospace
+- **Typography**: Doto font for display text, Tourney for headings and monospace elements
 - **State Management**: React Query (TanStack Query) for server state management
 - **Routing**: Wouter for lightweight client-side routing
 - **Form Handling**: React Hook Form with Zod validation

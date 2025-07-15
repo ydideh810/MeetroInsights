@@ -26,7 +26,7 @@ export default function OutputPanel({
       <div className="magi-panel rounded-lg p-6">
         <div className="relative z-10">
           <h2 className="text-xl font-bold mb-4 cyber-glow tracking-wide font-doto">RECOVERY OUTPUT</h2>
-          <div className="text-xs text-cyber-cyan mb-4 font-tektur">MAGI CASPER-3 • ONLINE</div>
+          <div className="text-xs text-cyber-cyan mb-4 font-tourney">MAGI LYMNIA-3 • ONLINE</div>
         
           {/* Save to Memory Bank Button */}
           {analysis && (
