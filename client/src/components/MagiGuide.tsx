@@ -9,7 +9,7 @@ export default function MagiGuide() {
 
   const magiModes = [
     {
-      name: "MELCHIOR-1",
+      name: "SYNTHRAX-1",
       subtitle: "The Analyst",
       icon: "🧠",
       color: "text-cyber-red",
@@ -24,10 +24,10 @@ export default function MagiGuide() {
         "Structures information in logical bullet points",
         "Identifies technical details and requirements"
       ],
-      metaphor: "Named after one of the biblical Magi, Melchior embodies pure logical reasoning - the scientist's approach to understanding meetings through data and facts."
+      metaphor: "Named after synthetic reasoning algorithms, Synthrax embodies pure logical reasoning - the scientist's approach to understanding meetings through data and facts."
     },
     {
-      name: "BALTHASAR-2",
+      name: "VANTIX-2",
       subtitle: "The Strategist",
       icon: "💡",
       color: "text-cyber-orange",
@@ -42,10 +42,10 @@ export default function MagiGuide() {
         "Prioritizes action items by importance",
         "Suggests tactical follow-up steps"
       ],
-      metaphor: "Named after the biblical Magi who brought gold, Balthasar represents strategic value - the executive's perspective on turning meetings into actionable business outcomes."
+      metaphor: "Named after strategic vantage points, Vantix represents strategic value - the executive's perspective on turning meetings into actionable business outcomes."
     },
     {
-      name: "CASPER-3",
+      name: "LYMNIA-3",
       subtitle: "The Human Layer",
       icon: "🧬",
       color: "text-cyber-cyan",
@@ -60,7 +60,7 @@ export default function MagiGuide() {
         "Captures meaningful quotes and atmosphere",
         "Highlights unresolved questions and relationship issues"
       ],
-      metaphor: "Named after the biblical Magi who brought myrrh (used for healing), Casper focuses on the human element - understanding the emotional and relational aspects that pure logic might miss."
+      metaphor: "Named after lymphatic systems that heal and connect, Lymnia focuses on the human element - understanding the emotional and relational aspects that pure logic might miss."
     }
   ];
 
@@ -80,7 +80,7 @@ export default function MagiGuide() {
             MAGI SYSTEM GUIDE
           </DialogTitle>
           <DialogDescription className="text-sm text-cyber-cyan font-tektur">
-            TOKYO-3 • NERV • MEETING ANALYSIS PROTOCOLS
+            TOKYO-3 • ZENTRA • MEETING ANALYSIS PROTOCOLS
           </DialogDescription>
         </DialogHeader>
         
@@ -97,7 +97,7 @@ export default function MagiGuide() {
                 of human decision-making.
               </p>
               <p>
-                In MEETRO, each MAGI mode analyzes your meeting transcripts through a unique lens, providing 
+                In KAIRO, each MAGI mode analyzes your meeting transcripts through a unique lens, providing 
                 complementary insights that together form a complete picture of what happened.
               </p>
             </CardContent>

@@ -46,10 +46,10 @@ export default function Home() {
       <header className="border-b-2 border-cyber-orange bg-cyber-panel p-4 tokyo-3-grid">
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-6">
-            <div className="text-4xl font-bold cyber-glow animate-flicker tracking-wider">MEETRO</div>
+            <div className="text-4xl font-bold cyber-glow animate-flicker tracking-wider">KAIRO</div>
             <div className="text-sm text-cyber-cyan">
               <div>MAGI RECOVERY SYSTEM</div>
-              <div className="text-xs text-cyber-teal">TOKYO-3 NERV</div>
+              <div className="text-xs text-cyber-teal">TOKYO-3 ZENTRA</div>
             </div>
           </div>
           <div className="flex items-center space-x-6">
@@ -117,7 +117,7 @@ export default function Home() {
           setIsProcessing={setIsProcessing}
           setAnalysis={(analysis, mode) => {
             setAnalysis(analysis);
-            setCurrentMagiMode(mode || "melchior");
+            setCurrentMagiMode(mode || "synthrax");
             if (analysis) {
               setAnalysisCount(prev => prev + 1);
             }

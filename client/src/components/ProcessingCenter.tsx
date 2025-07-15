@@ -19,7 +19,7 @@ interface ProcessingCenterProps {
   setAnalysis: (value: MeetingAnalysis | null, mode?: string) => void;
 }
 
-type MagiMode = "melchior" | "balthasar" | "casper";
+type MagiMode = "synthrax" | "vantix" | "lymnia";
 
 export default function ProcessingCenter({
   transcript,
@@ -32,7 +32,7 @@ export default function ProcessingCenter({
 }: ProcessingCenterProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const [selectedMode, setSelectedMode] = useState<MagiMode>("melchior");
+  const [selectedMode, setSelectedMode] = useState<MagiMode>("synthrax");
 
   const analyzeMutation = useMutation({
     mutationFn: async (mode: MagiMode) => {
@@ -118,7 +118,7 @@ export default function ProcessingCenter({
         <div className="text-center mb-8">
           <div className="text-sm text-cyber-cyan mb-2 font-tektur tracking-wider">MAGI SYSTEM</div>
           <div className="text-3xl font-bold cyber-glow animate-pulse font-doto">TOKYO-3</div>
-          <div className="text-sm text-cyber-orange font-tektur">NERV</div>
+          <div className="text-sm text-cyber-orange font-tektur">ZENTRA</div>
           <div className="mt-4 flex gap-2 justify-center">
             <MagiGuide />
             <AIMentor />
@@ -127,50 +127,50 @@ export default function ProcessingCenter({
         
         {/* Hexagonal MAGI Layout */}
         <div className="relative w-96 h-96 mx-auto">
-          {/* Top Hexagon - Balthasar */}
+          {/* Top Hexagon - Vantix */}
           <button
-            onClick={() => setSelectedMode("balthasar")}
+            onClick={() => setSelectedMode("vantix")}
             className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button magi-sync-animation magi-delay-2 ${
-              selectedMode === "balthasar" 
+              selectedMode === "vantix" 
                 ? "magi-panel animate-pulse-glow scale-110" 
                 : "bg-cyber-panel cyber-border hover:magi-panel"
             }`}
           >
             <div className="text-center relative z-10">
               <div className="text-xs text-cyber-cyan font-tektur mb-1">MAGI</div>
-              <div className={`text-sm font-bold font-tourney ${selectedMode === "balthasar" ? "text-cyber-orange" : "text-cyber-teal"}`}>BALTHASAR-2</div>
+              <div className={`text-sm font-bold font-tourney ${selectedMode === "vantix" ? "text-cyber-orange" : "text-cyber-teal"}`}>VANTIX-2</div>
               <div className="text-xs text-cyber-orange mt-1 font-tektur">💡 STRATEGIST</div>
             </div>
           </button>
           
-          {/* Bottom Left Hexagon - Melchior */}
+          {/* Bottom Left Hexagon - Synthrax */}
           <button
-            onClick={() => setSelectedMode("melchior")}
+            onClick={() => setSelectedMode("synthrax")}
             className={`absolute bottom-0 left-8 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button magi-sync-animation magi-delay-1 ${
-              selectedMode === "melchior" 
+              selectedMode === "synthrax" 
                 ? "magi-panel animate-pulse-glow scale-110" 
                 : "bg-cyber-panel cyber-border hover:magi-panel"
             }`}
           >
             <div className="text-center relative z-10">
               <div className="text-xs text-cyber-cyan font-tektur mb-1">MAGI</div>
-              <div className={`text-sm font-bold font-tourney ${selectedMode === "melchior" ? "text-cyber-orange" : "text-cyber-teal"}`}>MELCHIOR-1</div>
+              <div className={`text-sm font-bold font-tourney ${selectedMode === "synthrax" ? "text-cyber-orange" : "text-cyber-teal"}`}>SYNTHRAX-1</div>
               <div className="text-xs text-cyber-red mt-1 font-tektur">📊 ANALYST</div>
             </div>
           </button>
           
-          {/* Bottom Right Hexagon - Casper */}
+          {/* Bottom Right Hexagon - Lymnia */}
           <button
-            onClick={() => setSelectedMode("casper")}
+            onClick={() => setSelectedMode("lymnia")}
             className={`absolute bottom-0 right-8 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button magi-sync-animation magi-delay-3 ${
-              selectedMode === "casper" 
+              selectedMode === "lymnia" 
                 ? "magi-panel animate-pulse-glow scale-110" 
                 : "bg-cyber-panel cyber-border hover:magi-panel"
             }`}
           >
             <div className="text-center relative z-10">
               <div className="text-xs text-cyber-cyan font-tektur mb-1">MAGI</div>
-              <div className={`text-sm font-bold font-tourney ${selectedMode === "casper" ? "text-cyber-orange" : "text-cyber-teal"}`}>CASPER-3</div>
+              <div className={`text-sm font-bold font-tourney ${selectedMode === "lymnia" ? "text-cyber-orange" : "text-cyber-teal"}`}>LYMNIA-3</div>
               <div className="text-xs text-cyber-cyan mt-1 font-tektur">🧬 HUMAN</div>
             </div>
           </button>
@@ -204,9 +204,9 @@ export default function ProcessingCenter({
               {isProcessing ? "PROCESSING" : selectedMode.toUpperCase()}
             </div>
             <div className="text-xs text-cyber-teal mt-1 font-tektur">
-              {selectedMode === "melchior" && "FACTUAL ANALYSIS"}
-              {selectedMode === "balthasar" && "STRATEGIC FOCUS"}
-              {selectedMode === "casper" && "HUMAN DYNAMICS"}
+              {selectedMode === "synthrax" && "FACTUAL ANALYSIS"}
+              {selectedMode === "vantix" && "STRATEGIC FOCUS"}
+              {selectedMode === "lymnia" && "HUMAN DYNAMICS"}
             </div>
           </div>
         </div>
@@ -216,7 +216,7 @@ export default function ProcessingCenter({
       <div className="w-full max-w-md">
         <div className="auth-panel p-6 mb-4">
           <div className="text-center mb-4">
-            <div className="text-sm text-cyber-cyan font-tektur mb-2">NERV ONLY</div>
+            <div className="text-sm text-cyber-cyan font-tektur mb-2">ZENTRA ONLY</div>
             <div className="text-xs text-cyber-orange font-tektur">認証が必要です</div>
           </div>
           
@@ -243,8 +243,8 @@ export default function ProcessingCenter({
           <div className="text-xs">
             {isProcessing 
               ? "PROCESSING..." 
-              : selectedMode === "melchior" ? "FACTUAL ANALYSIS MODE" :
-                selectedMode === "balthasar" ? "STRATEGIC ANALYSIS MODE" :
+              : selectedMode === "synthrax" ? "FACTUAL ANALYSIS MODE" :
+                selectedMode === "vantix" ? "STRATEGIC ANALYSIS MODE" :
                 "HUMAN DYNAMICS MODE"
             }
           </div>

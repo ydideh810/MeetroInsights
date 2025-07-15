@@ -69,7 +69,7 @@ export default function ContextualGuidance({
     if (analysisCount === 0 && !dismissedTips.has('welcome')) {
       tips.push({
         id: 'welcome',
-        title: 'Welcome to MEETRO!',
+        title: 'Welcome to KAIRO!',
         description: 'Start by uploading a meeting transcript or pasting text, then choose a MAGI analysis mode to extract key insights.',
         actions: [{
           label: 'Get Started',
@@ -174,12 +174,12 @@ export default function ContextualGuidance({
       tips.push({
         id: 'advanced_features',
         title: 'Explore Advanced Features',
-        description: 'You\'re becoming a MEETRO pro! Try different MAGI modes on the same transcript to compare perspectives.',
+        description: 'You\'re becoming a KAIRO pro! Try different MAGI modes on the same transcript to compare perspectives.',
         actions: [{
           label: 'Learn About MAGI Modes',
           onClick: () => toast({
             title: "MAGI Modes",
-            description: "Each mode provides different analytical perspectives - technical, strategic, and human-focused."
+            description: "Each mode provides different analytical perspectives - Synthrax (technical), Vantix (strategic), and Lymnia (human-focused)."
           }),
           variant: 'outline'
         }],

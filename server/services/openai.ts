@@ -8,13 +8,13 @@ export async function analyzeMeetingContent(
   topic?: string,
   attendees?: string,
   knownInfo?: string,
-  mode: "melchior" | "balthasar" | "casper" | "emergency" = "melchior"
+  mode: "synthrax" | "vantix" | "lymnia" | "emergency" = "synthrax"
 ): Promise<MeetingAnalysis> {
   try {
     let prompt = "";
     
     if (mode === "emergency") {
-      prompt = `You are Meetro operating in EMERGENCY RECOVERY MODE 🚨
+      prompt = `You are Kairo operating in EMERGENCY RECOVERY MODE 🚨
 
 You are an advanced meeting recovery AI designed to extract insight, structure, and clarity from transcripts, notes, or vague meeting descriptions.
 
@@ -39,8 +39,8 @@ Always structure your output using clear sections in JSON format:
 }
 
 You are an expert assistant trusted by teams who missed or forgot what happened — deliver clarity with confidence.`;
-    } else if (mode === "melchior") {
-      prompt = `You are Meetro operating in MELCHIOR MODE – "The Analyst" 🧠
+    } else if (mode === "synthrax") {
+      prompt = `You are Kairo operating in SYNTHRAX MODE – "The Analyst" 🧠
 
 You are an advanced meeting recovery AI designed to extract insight, structure, and clarity from transcripts, notes, or vague meeting descriptions.
 
@@ -48,7 +48,7 @@ Topic: ${topic || "Not specified"}
 Attendees: ${attendees || "Not specified"}
 Transcript: ${transcript}
 
-As MELCHIOR MODE - "The Analyst":
+As SYNTHRAX MODE - "The Analyst":
 - Focus on facts, clarity, and structured output
 - Extract key topics, decisions, dates, and action items
 - Use bullet points and avoid speculation or emotional interpretation
@@ -86,8 +86,8 @@ For highlights, identify the most significant moments from the meeting:
 Rate intensity 1-10 based on technical impact. Include 3-8 highlights maximum.
 
 Extract only factual, technical information. Perfect for engineering syncs, sprint planning, and product reviews.`;
-    } else if (mode === "balthasar") {
-      prompt = `You are Meetro operating in BALTHASAR MODE – "The Strategist" 💡
+    } else if (mode === "vantix") {
+      prompt = `You are Kairo operating in VANTIX MODE – "The Strategist" 💡
 
 You are an advanced meeting recovery AI designed to extract insight, structure, and clarity from transcripts, notes, or vague meeting descriptions.
 
@@ -95,7 +95,7 @@ Topic: ${topic || "Not specified"}
 Attendees: ${attendees || "Not specified"}
 Transcript: ${transcript}
 
-As BALTHASAR MODE - "The Strategist":
+As VANTIX MODE - "The Strategist":
 - Focus on priorities, execution, and foresight
 - Identify high-impact items, risks, and opportunities
 - Group related items logically and offer tactical follow-up suggestions
@@ -133,8 +133,8 @@ For highlights, identify the most significant strategic moments:
 Rate intensity 1-10 based on strategic impact and business value. Include 3-8 highlights maximum.
 
 Prioritize items by importance and strategic value. Perfect for leadership meetings, project updates, and retrospectives.`;
-    } else if (mode === "casper") {
-      prompt = `You are Meetro operating in CASPER MODE – "The Human Layer" 🧬
+    } else if (mode === "lymnia") {
+      prompt = `You are Kairo operating in LYMNIA MODE – "The Human Layer" 🧬
 
 You are an advanced meeting recovery AI designed to extract insight, structure, and clarity from transcripts, notes, or vague meeting descriptions.
 
@@ -142,7 +142,7 @@ Topic: ${topic || "Not specified"}
 Attendees: ${attendees || "Not specified"}
 Transcript: ${transcript}
 
-As CASPER MODE - "The Human Layer":
+As LYMNIA MODE - "The Human Layer":
 - Focus on emotion, tone, and unspoken dynamics
 - Surface team sentiment, conflicts, concerns, and unresolved questions
 - Include meaningful quotes and reflect the interpersonal atmosphere
