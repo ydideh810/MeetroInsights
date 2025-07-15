@@ -213,7 +213,7 @@ ${analysis.followUps.map((followUp: string) => `- ${followUp}`).join('\n')}
   app.post("/api/memory-bank/save", authMiddleware, async (req: AuthenticatedRequest, res) => {
     try {
       const validatedData = saveMeetingSchema.parse(req.body);
-      const { analysis, transcript, topic, attendees, knownInfo, magiMode, ...saveData } = req.body;
+      const { analysis, transcript, topic, attendees, knownInfo, shinraiMode, ...saveData } = req.body;
       
       const meeting = await storage.saveMeeting({
         ...saveData,
@@ -222,7 +222,7 @@ ${analysis.followUps.map((followUp: string) => `- ${followUp}`).join('\n')}
         attendees,
         knownInfo,
         analysis,
-        magiMode,
+        shinraiMode,
       }, req.user!.uid);
       
       res.json({ success: true, meeting });

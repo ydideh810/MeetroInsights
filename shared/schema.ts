@@ -13,7 +13,7 @@ export const meetings = pgTable("meetings", {
   analysis: jsonb("analysis"),
   title: varchar("title", { length: 255 }).notNull(),
   category: varchar("category", { length: 100 }),
-  magiMode: varchar("magi_mode", { length: 20 }),
+  shinraiMode: varchar("shinrai_mode", { length: 20 }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
@@ -111,7 +111,7 @@ export const insertMeetingSchema = createInsertSchema(meetings).pick({
   knownInfo: true,
   title: true,
   category: true,
-  magiMode: true,
+  shinraiMode: true,
 });
 
 export const insertTagSchema = createInsertSchema(tags).pick({

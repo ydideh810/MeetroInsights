@@ -70,7 +70,7 @@ export default function ContextualGuidance({
       tips.push({
         id: 'welcome',
         title: 'Welcome to KAIRO!',
-        description: 'Start by uploading a meeting transcript or pasting text, then choose a MAGI analysis mode to extract key insights.',
+        description: 'Start by uploading a meeting transcript or pasting text, then choose a SHINRAI analysis mode to extract key insights.',
         actions: [{
           label: 'Get Started',
           onClick: () => document.querySelector('input[type="file"]')?.click(),
@@ -174,11 +174,11 @@ export default function ContextualGuidance({
       tips.push({
         id: 'advanced_features',
         title: 'Explore Advanced Features',
-        description: 'You\'re becoming a KAIRO pro! Try different MAGI modes on the same transcript to compare perspectives.',
+        description: 'You\'re becoming a KAIRO pro! Try different SHINRAI modes on the same transcript to compare perspectives.',
         actions: [{
-          label: 'Learn About MAGI Modes',
+          label: 'Learn About SHINRAI Modes',
           onClick: () => toast({
-            title: "MAGI Modes",
+            title: "SHINRAI Modes",
             description: "Each mode provides different analytical perspectives - Synthrax (technical), Vantix (strategic), and Lymnia (human-focused)."
           }),
           variant: 'outline'

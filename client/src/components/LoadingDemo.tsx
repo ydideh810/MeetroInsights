@@ -9,9 +9,9 @@ export default function LoadingDemo() {
   const demos = [
     {
       id: "magi",
-      title: "MAGI System",
-      description: "Hexagonal MAGI core synchronization with rotating elements",
-      message: "SYNCHRONIZING MAGI CORES",
+      title: "SHINRAI System",
+      description: "Hexagonal SHINRAI core synchronization with rotating elements",
+      message: "SYNCHRONIZING SHINRAI CORES",
       variant: "magi" as const,
     },
     {

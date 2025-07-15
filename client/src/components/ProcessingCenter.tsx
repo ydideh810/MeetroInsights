@@ -4,7 +4,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { MeetingAnalysis } from "@shared/schema";
-import MagiGuide from "./MagiGuide";
+import ShinraiGuide from "./ShinraiGuide";
 import AIMentor from "./AIMentor";
 import LoadingScreen from "@/components/ui/loading-screen";
 import { ExternalLink } from "lucide-react";
@@ -19,7 +19,7 @@ interface ProcessingCenterProps {
   setAnalysis: (value: MeetingAnalysis | null, mode?: string) => void;
 }
 
-type MagiMode = "synthrax" | "vantix" | "lymnia";
+type ShinraiMode = "synthrax" | "vantix" | "lymnia";
 
 export default function ProcessingCenter({
   transcript,
@@ -32,10 +32,10 @@ export default function ProcessingCenter({
 }: ProcessingCenterProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const [selectedMode, setSelectedMode] = useState<MagiMode>("synthrax");
+  const [selectedMode, setSelectedMode] = useState<ShinraiMode>("synthrax");
 
   const analyzeMutation = useMutation({
-    mutationFn: async (mode: MagiMode) => {
+    mutationFn: async (mode: ShinraiMode) => {
       const response = await apiRequest('POST', '/api/analyze', {
         transcript,
         topic,
@@ -113,19 +113,19 @@ export default function ProcessingCenter({
 
   return (
     <div className="flex flex-col items-center justify-center space-y-6">
-      {/* MAGI System Display */}
+      {/* SHINRAI System Display */}
       <div className="relative">
         <div className="text-center mb-8">
-          <div className="text-sm text-cyber-cyan mb-2 font-tourney tracking-wider">MAGI SYSTEM</div>
+          <div className="text-sm text-cyber-cyan mb-2 font-tourney tracking-wider">SHINRAI SYSTEM</div>
           <div className="text-3xl font-bold cyber-glow animate-pulse font-doto">TOKYO-3</div>
           <div className="text-sm text-cyber-orange font-tourney">ZENTRA</div>
           <div className="mt-4 flex gap-2 justify-center">
-            <MagiGuide />
+            <ShinraiGuide />
             <AIMentor />
           </div>
         </div>
         
-        {/* Hexagonal MAGI Layout */}
+        {/* Hexagonal SHINRAI Layout */}
         <div className="relative w-96 h-96 mx-auto">
           {/* Top Hexagon - Vantix */}
           <button
@@ -137,7 +137,7 @@ export default function ProcessingCenter({
             }`}
           >
             <div className="text-center relative z-10">
-              <div className="text-xs text-cyber-cyan font-tourney mb-1">MAGI</div>
+              <div className="text-xs text-cyber-cyan font-tourney mb-1">SHINRAI</div>
               <div className={`text-sm font-bold font-tourney ${selectedMode === "vantix" ? "text-cyber-orange" : "text-cyber-teal"}`}>VANTIX-2</div>
               <div className="text-xs text-cyber-orange mt-1 font-tourney">💡 STRATEGIST</div>
             </div>
@@ -153,7 +153,7 @@ export default function ProcessingCenter({
             }`}
           >
             <div className="text-center relative z-10">
-              <div className="text-xs text-cyber-cyan font-tourney mb-1">MAGI</div>
+              <div className="text-xs text-cyber-cyan font-tourney mb-1">SHINRAI</div>
               <div className={`text-sm font-bold font-tourney ${selectedMode === "synthrax" ? "text-cyber-orange" : "text-cyber-teal"}`}>SYNTHRAX-1</div>
               <div className="text-xs text-cyber-red mt-1 font-tourney">📊 ANALYST</div>
             </div>
@@ -169,7 +169,7 @@ export default function ProcessingCenter({
             }`}
           >
             <div className="text-center relative z-10">
-              <div className="text-xs text-cyber-cyan font-tourney mb-1">MAGI</div>
+              <div className="text-xs text-cyber-cyan font-tourney mb-1">SHINRAI</div>
               <div className={`text-sm font-bold font-tourney ${selectedMode === "lymnia" ? "text-cyber-orange" : "text-cyber-teal"}`}>LYMNIA-3</div>
               <div className="text-xs text-cyber-cyan mt-1 font-tourney">🧬 HUMAN</div>
             </div>
@@ -237,7 +237,7 @@ export default function ProcessingCenter({
           <div className="mb-2">
             {isProcessing 
               ? "RESULT OF THE DELIBERATION" 
-              : `MAGI ${selectedMode.toUpperCase()} SELECTED`
+              : `SHINRAI ${selectedMode.toUpperCase()} SELECTED`
             }
           </div>
           <div className="text-xs">
@@ -250,7 +250,7 @@ export default function ProcessingCenter({
           </div>
           {!isProcessing && (
             <div className="text-xs text-cyber-orange mt-2 animate-pulse">
-              Click other MAGI units to switch analysis modes
+              Click other SHINRAI units to switch analysis modes
             </div>
           )}
         </div>

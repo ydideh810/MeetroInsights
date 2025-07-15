@@ -21,7 +21,7 @@ interface Meeting {
   attendees?: string;
   knownInfo?: string;
   analysis: MeetingAnalysis;
-  magiMode?: string;
+  shinraiMode?: string;
   createdAt: string;
   tags: Tag[];
 }
@@ -39,11 +39,11 @@ interface SaveMeetingDialogProps {
   topic: string;
   attendees: string;
   knownInfo: string;
-  magiMode?: string;
+  shinraiMode?: string;
   onSave: () => void;
 }
 
-function SaveMeetingDialog({ analysis, transcript, topic, attendees, knownInfo, magiMode, onSave }: SaveMeetingDialogProps) {
+function SaveMeetingDialog({ analysis, transcript, topic, attendees, knownInfo, shinraiMode, onSave }: SaveMeetingDialogProps) {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [selectedTags, setSelectedTags] = useState<number[]>([]);
@@ -118,7 +118,7 @@ function SaveMeetingDialog({ analysis, transcript, topic, attendees, knownInfo, 
       attendees,
       knownInfo,
       analysis,
-      magiMode,
+      shinraiMode,
       tagIds: selectedTags,
       newTags,
     });
@@ -406,9 +406,9 @@ export default function MemoryBank() {
                           {meeting.category}
                         </Badge>
                       )}
-                      {meeting.magiMode && (
+                      {meeting.shinraiMode && (
                         <Badge variant="outline" className="text-cyber-orange border-cyber-orange">
-                          {meeting.magiMode.toUpperCase()}
+                          {meeting.shinraiMode.toUpperCase()}
                         </Badge>
                       )}
                     </div>
@@ -467,9 +467,9 @@ export default function MemoryBank() {
                   {viewingMeeting.category}
                 </Badge>
               )}
-              {viewingMeeting?.magiMode && (
+              {viewingMeeting?.shinraiMode && (
                 <Badge variant="outline" className="text-cyber-orange border-cyber-orange">
-                  {viewingMeeting.magiMode.toUpperCase()}
+                  {viewingMeeting.shinraiMode.toUpperCase()}
                 </Badge>
               )}
             </div>

@@ -112,7 +112,7 @@ export default function UploadPanel({
       <div className="magi-panel rounded-lg p-6">
         <div className="relative z-10">
           <h2 className="text-xl font-bold mb-4 cyber-glow tracking-wide font-doto">INPUT MODULE</h2>
-          <div className="text-xs text-cyber-cyan mb-4 font-tourney">MAGI SYNTHRAX-1 • ONLINE</div>
+          <div className="text-xs text-cyber-cyan mb-4 font-tourney">SHINRAI SYNTHRAX-1 • ONLINE</div>
         
           {/* File Upload Area */}
         <FileUpload

@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 
-export default function MagiGuide() {
+export default function ShinraiGuide() {
   const [isOpen, setIsOpen] = useState(false);
 
   const magiModes = [
@@ -71,13 +71,13 @@ export default function MagiGuide() {
           variant="outline" 
           className="bg-cyber-panel border-cyber-border text-cyber-cyan hover:bg-cyber-dark-panel hover:border-cyber-orange transition-colors"
         >
-          <span className="text-sm font-tourney">📖 MAGI GUIDE</span>
+          <span className="text-sm font-tourney">📖 SHINRAI GUIDE</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-cyber-bg border-cyber-border">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-cyber-orange font-doto cyber-glow">
-            MAGI SYSTEM GUIDE
+            SHINRAI SYSTEM GUIDE
           </DialogTitle>
           <DialogDescription className="text-sm text-cyber-cyan font-tourney">
             TOKYO-3 • ZENTRA • MEETING ANALYSIS PROTOCOLS
@@ -92,18 +92,18 @@ export default function MagiGuide() {
             </CardHeader>
             <CardContent className="text-cyber-teal text-sm space-y-3">
               <p>
-                The MAGI system is inspired by Evangelion's three-part supercomputer that makes critical decisions 
-                by analyzing situations from different perspectives. Each MAGI unit represents a different aspect 
+                The SHINRAI system is inspired by Evangelion's three-part supercomputer that makes critical decisions 
+                by analyzing situations from different perspectives. Each SHINRAI unit represents a different aspect 
                 of human decision-making.
               </p>
               <p>
-                In KAIRO, each MAGI mode analyzes your meeting transcripts through a unique lens, providing 
+                In KAIRO, each SHINRAI mode analyzes your meeting transcripts through a unique lens, providing 
                 complementary insights that together form a complete picture of what happened.
               </p>
             </CardContent>
           </Card>
 
-          {/* MAGI Modes */}
+          {/* SHINRAI Modes */}
           <div className="grid gap-4">
             {magiModes.map((mode, index) => (
               <Card key={index} className={`bg-cyber-panel border-2 ${mode.borderColor}`}>
@@ -173,7 +173,7 @@ export default function MagiGuide() {
               <div>
                 <h4 className="font-bold text-cyber-cyan mb-2 font-tourney">COMBINING INSIGHTS:</h4>
                 <p>
-                  For complex meetings, try running the same transcript through multiple MAGI modes 
+                  For complex meetings, try running the same transcript through multiple SHINRAI modes 
                   to get different perspectives on the same content.
                 </p>
               </div>

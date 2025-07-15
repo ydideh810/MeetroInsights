@@ -16,6 +16,14 @@ Preferred communication style: Simple, everyday language.
   - Updated all UI components to use only doto (display) and tourney (headings/monospace)
   - Maintained cyberpunk aesthetic with simplified typography system
   - Updated Tailwind config to remove tektur font references
+- **Complete MAGI → SHINRAI Rebranding**: Updated all MAGI system references to SHINRAI throughout the application
+  - Changed all frontend components from "MAGI" to "SHINRAI" system branding
+  - Updated ProcessingCenter, AIMentor, ContextualGuidance, UploadPanel, OutputPanel, and MemoryBank
+  - Renamed MagiGuide.tsx to ShinraiGuide.tsx with updated imports and references
+  - Updated prop naming from "magiMode" to "shinraiMode" across all components
+  - Updated database schema: renamed "magi_mode" column to "shinrai_mode"
+  - Updated backend storage and routes to use new property names
+  - Maintained all existing functionality while updating terminology
 
 ### January 14, 2025
 - **Complete System Rebranding**: Updated all MAGI names and system branding throughout the application

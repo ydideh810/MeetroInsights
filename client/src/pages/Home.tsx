@@ -5,7 +5,7 @@ import UploadPanel from "@/components/UploadPanel";
 import ProcessingCenter from "@/components/ProcessingCenter";
 import OutputPanel from "@/components/OutputPanel";
 import ExportButton from "@/components/ExportButton";
-import MagiGuide from "@/components/MagiGuide";
+import ShinraiGuide from "@/components/ShinraiGuide";
 import MemoryBank from "@/components/MemoryBank";
 import AuthButton from "@/components/AuthButton";
 import CreditDisplay from "@/components/CreditDisplay";
@@ -23,7 +23,7 @@ export default function Home() {
   const [knownInfo, setKnownInfo] = useState("");
   const [analysis, setAnalysis] = useState<MeetingAnalysis | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [currentMagiMode, setCurrentMagiMode] = useState<string>("");
+  const [currentShinraiMode, setCurrentShinraiMode] = useState<string>("");
   const [showMemoryBank, setShowMemoryBank] = useState(false);
   const [showLoadingDemo, setShowLoadingDemo] = useState(false);
   const [analysisCount, setAnalysisCount] = useState(0);
@@ -48,7 +48,7 @@ export default function Home() {
           <div className="flex items-center space-x-6">
             <div className="text-4xl font-bold cyber-glow animate-flicker tracking-wider font-doto">KAIRO</div>
             <div className="text-sm text-cyber-cyan">
-              <div>MAGI RECOVERY SYSTEM</div>
+              <div>SHINRAI RECOVERY SYSTEM</div>
               <div className="text-xs text-cyber-teal">TOKYO-3 ZENTRA</div>
             </div>
           </div>
@@ -78,7 +78,7 @@ export default function Home() {
               <Monitor className="w-4 h-4 mr-2" />
               LOADING DEMO
             </Button>
-            <MagiGuide />
+            <ShinraiGuide />
             <CreditDisplay />
             <AuthButton />
             <div className="text-right text-xs text-cyber-cyan font-mono">
@@ -117,7 +117,7 @@ export default function Home() {
           setIsProcessing={setIsProcessing}
           setAnalysis={(analysis, mode) => {
             setAnalysis(analysis);
-            setCurrentMagiMode(mode || "synthrax");
+            setCurrentShinraiMode(mode || "synthrax");
             if (analysis) {
               setAnalysisCount(prev => prev + 1);
             }
@@ -133,7 +133,7 @@ export default function Home() {
             topic={topic}
             attendees={attendees}
             knownInfo={knownInfo}
-            magiMode={currentMagiMode}
+            shinraiMode={currentShinraiMode}
           />
         )}
       </main>

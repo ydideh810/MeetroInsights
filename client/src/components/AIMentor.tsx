@@ -89,14 +89,14 @@ export default function AIMentor() {
     {
       id: 'welcome',
       title: 'Welcome to MEETRO',
-      description: 'Learn the basics of the MAGI system and get started with your first meeting analysis',
+      description: 'Learn the basics of the SHINRAI system and get started with your first meeting analysis',
       icon: <Sparkles className="w-5 h-5" />,
       category: 'onboarding',
       priority: 'high',
       isCompleted: false,
       steps: [
         'Upload your first meeting transcript or paste text',
-        'Choose a MAGI analysis mode (Melchior, Balthasar, or Casper)',
+        'Choose a SHINRAI analysis mode (Synthrax, Vantix, or Lymnia)',
         'Review the generated insights and action items',
         'Save your analysis to Memory Bank for future reference'
       ],
@@ -104,8 +104,8 @@ export default function AIMentor() {
     },
     {
       id: 'magi_modes',
-      title: 'Master the MAGI Modes',
-      description: 'Understand when to use each MAGI mode for optimal meeting analysis',
+      title: 'Master the SHINRAI Modes',
+      description: 'Understand when to use each SHINRAI mode for optimal meeting analysis',
       icon: <Bot className="w-5 h-5" />,
       category: 'features',
       priority: 'high',
@@ -173,7 +173,7 @@ export default function AIMentor() {
     {
       id: 'first_upload_tip',
       title: 'Great! You\'ve uploaded your first file',
-      description: 'Now choose a MAGI mode to analyze your meeting. Try Melchior for technical meetings or Balthasar for strategic discussions.',
+      description: 'Now choose a SHINRAI mode to analyze your meeting. Try Synthrax for technical meetings or Vantix for strategic discussions.',
       trigger: 'first_upload',
       autoShow: true,
       oneTime: true,
@@ -277,7 +277,7 @@ export default function AIMentor() {
               <CardHeader>
                 <CardTitle className="text-cyber-orange">Your MEETRO Journey</CardTitle>
                 <CardDescription className="text-cyber-cyan/70">
-                  Track your progress mastering the MAGI system
+                  Track your progress mastering the SHINRAI system
                 </CardDescription>
               </CardHeader>
               <CardContent>

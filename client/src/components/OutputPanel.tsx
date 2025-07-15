@@ -10,7 +10,7 @@ interface OutputPanelProps {
   topic?: string;
   attendees?: string;
   knownInfo?: string;
-  magiMode?: string;
+  shinraiMode?: string;
 }
 
 export default function OutputPanel({ 
@@ -19,14 +19,14 @@ export default function OutputPanel({
   topic = "", 
   attendees = "", 
   knownInfo = "", 
-  magiMode = "" 
+  shinraiMode = "" 
 }: OutputPanelProps) {
   return (
     <div className="space-y-4">
       <div className="magi-panel rounded-lg p-6">
         <div className="relative z-10">
           <h2 className="text-xl font-bold mb-4 cyber-glow tracking-wide font-doto">RECOVERY OUTPUT</h2>
-          <div className="text-xs text-cyber-cyan mb-4 font-tourney">MAGI LYMNIA-3 • ONLINE</div>
+          <div className="text-xs text-cyber-cyan mb-4 font-tourney">SHINRAI LYMNIA-3 • ONLINE</div>
         
           {/* Save to Memory Bank Button */}
           {analysis && (
@@ -37,7 +37,7 @@ export default function OutputPanel({
                 topic={topic}
                 attendees={attendees}
                 knownInfo={knownInfo}
-                magiMode={magiMode}
+                shinraiMode={shinraiMode}
                 onSave={() => {}}
               />
             </div>

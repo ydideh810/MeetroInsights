@@ -10,7 +10,7 @@ interface LoadingScreenProps {
 
 export default function LoadingScreen({ 
   variant = "magi", 
-  message = "INITIALIZING MAGI SYSTEM...",
+  message = "INITIALIZING SHINRAI SYSTEM...",
   progress,
   className 
 }: LoadingScreenProps) {
@@ -50,14 +50,14 @@ export default function LoadingScreen({
     }
   }, [variant, message]);
 
-  const renderMAGILoader = () => (
+  const renderSHINRAILoader = () => (
     <div className="relative w-96 h-96 mx-auto">
       {/* Rotating hexagon */}
       <div className="absolute inset-0 animate-spin-slow">
         <div className="w-32 h-32 mx-auto mt-32 hex-clip bg-gradient-to-br from-cyber-orange to-cyber-red opacity-20 animate-pulse"></div>
       </div>
       
-      {/* MAGI cores */}
+      {/* SHINRAI cores */}
       <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-16 h-16 hex-clip bg-cyber-orange animate-pulse-glow"></div>
       <div className="absolute bottom-8 left-16 w-16 h-16 hex-clip bg-cyber-cyan animate-pulse-glow animation-delay-1000"></div>
       <div className="absolute bottom-8 right-16 w-16 h-16 hex-clip bg-cyber-red animate-pulse-glow animation-delay-2000"></div>
@@ -184,7 +184,7 @@ export default function LoadingScreen({
   const renderLoader = () => {
     switch (variant) {
       case "magi":
-        return renderMAGILoader();
+        return renderSHINRAILoader();
       case "neural":
         return renderNeuralLoader();
       case "data":
@@ -192,7 +192,7 @@ export default function LoadingScreen({
       case "quantum":
         return renderQuantumLoader();
       default:
-        return renderMAGILoader();
+        return renderSHINRAILoader();
     }
   };
 
@@ -220,7 +220,7 @@ export default function LoadingScreen({
         )}
         
         <div className="text-cyber-cyan text-sm mt-2 font-mono">
-          {variant === "magi" && "SYNCHRONIZING MAGI CORES..."}
+          {variant === "magi" && "SYNCHRONIZING SHINRAI CORES..."}
           {variant === "neural" && "ESTABLISHING NEURAL PATHWAYS..."}
           {variant === "data" && "PROCESSING DATA STREAMS..."}
           {variant === "quantum" && "QUANTUM FIELD STABILIZATION..."}

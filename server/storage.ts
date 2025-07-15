@@ -15,7 +15,7 @@ export interface SaveMeetingData {
   attendees?: string;
   knownInfo?: string;
   analysis: MeetingAnalysis;
-  magiMode?: string;
+  shinraiMode?: string;
   tagIds?: number[];
   newTags?: Array<{ name: string; color: string; }>;
 }
@@ -198,7 +198,7 @@ export class DatabaseStorage implements IStorage {
         attendees: data.attendees,
         knownInfo: data.knownInfo,
         analysis: data.analysis,
-        magiMode: data.magiMode,
+        shinraiMode: data.shinraiMode,
       })
       .returning();
 

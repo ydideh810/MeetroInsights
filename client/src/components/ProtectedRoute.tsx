@@ -157,7 +157,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="text-center text-sm text-cyber-cyan mb-4">
-              <p>This is a restricted MAGI system.</p>
+              <p>This is a restricted SHINRAI system.</p>
               <p>Authentication required to access meeting recovery protocols.</p>
             </div>
 
