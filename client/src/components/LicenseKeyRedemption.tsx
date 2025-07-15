@@ -31,10 +31,11 @@ export default function LicenseKeyRedemption({ onSuccess }: LicenseKeyRedemption
 
   const redeemMutation = useMutation({
     mutationFn: async (data: RedeemLicenseKeyRequest) => {
-      return await apiRequest("/api/redeem-license-key", {
+      const response = await apiRequest("/api/redeem-license-key", {
         method: "POST",
         body: JSON.stringify(data),
       });
+      return response;
     },
     onSuccess: (data) => {
       toast({
@@ -50,9 +51,10 @@ export default function LicenseKeyRedemption({ onSuccess }: LicenseKeyRedemption
       onSuccess?.();
     },
     onError: (error: any) => {
+      console.error("License key redemption error:", error);
       toast({
         title: "Redemption Failed",
-        description: error.error || "Failed to redeem license key",
+        description: error.error || error.message || "Failed to redeem license key. Please check your key and try again.",
         variant: "destructive",
       });
     },

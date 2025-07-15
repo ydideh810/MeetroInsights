@@ -364,16 +364,26 @@ ${analysis.followUps.map((followUp: string) => `- ${followUp}`).join('\n')}
   // Redeem license key
   app.post("/api/redeem-license-key", authMiddleware, async (req: AuthenticatedRequest, res) => {
     try {
+      console.log("License key redemption attempt:", {
+        user: req.user?.uid,
+        body: req.body,
+        timestamp: new Date().toISOString()
+      });
+
       const validationResult = redeemLicenseKeySchema.safeParse(req.body);
       if (!validationResult.success) {
+        console.error("Validation failed:", validationResult.error.issues);
         return res.status(400).json({ 
-          error: "Invalid input", 
+          error: "Invalid license key format. Please check your key and try again.",
           details: validationResult.error.issues 
         });
       }
 
       const { key } = validationResult.data;
+      console.log("Attempting to redeem key:", key);
+      
       const result = await storage.redeemLicenseKey(key, req.user!.uid);
+      console.log("Redemption result:", result);
       
       if (result.success) {
         res.json({ 
@@ -389,7 +399,7 @@ ${analysis.followUps.map((followUp: string) => `- ${followUp}`).join('\n')}
       }
     } catch (error) {
       console.error("Error redeeming license key:", error);
-      res.status(500).json({ error: "Failed to redeem license key" });
+      res.status(500).json({ error: "Failed to redeem license key. Please try again." });
     }
   });
 
