@@ -145,7 +145,7 @@ export default function AIMentor() {
       steps: [
         'Each analysis costs 1 credit',
         'Monitor your credit balance in the top bar',
-        'Purchase more credits through Lemon Squeezy',
+        'Purchase more credits through Payhip',
         'Redeem license keys for additional credits'
       ],
       relatedFeatures: ['credits', 'payment', 'license_keys']

@@ -13,7 +13,7 @@ export default function CreditDisplay() {
   });
 
   const handleBuyCredits = () => {
-    window.open("https://niddamhub.lemonsqueezy.com/buy/be00a64f-fe92-44a6-a654-d6187a4e864a", "_blank");
+    window.open("https://payhip.com/b/dAc53", "_blank");
   };
 
   if (isLoading || !userInfo?.user) {

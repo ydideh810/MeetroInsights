@@ -11,6 +11,11 @@ Preferred communication style: Simple, everyday language.
 ## Recent Changes
 
 ### January 15, 2025
+- **Payment and License Key System Updates**: Updated payment integration and license key format
+  - Changed payment link from Lemon Squeezy to Payhip (https://payhip.com/b/dAc53)
+  - Updated license key format from UUID to A7THT-4FJYV-2UYKD-ESA6Y structure
+  - Updated license key validation regex to match new 5-5-5-5 alphanumeric format
+  - Updated all UI components and documentation to reflect new license key format
 - **Complete Color Scheme Update**: Changed orange to red (#FF0000) and cyan to bright blue (#3366FF) across all CSS and components
   - Updated all CSS variables and color references in index.css
   - Changed background gradients, animations, and visual effects to use new color palette
@@ -74,7 +79,7 @@ Preferred communication style: Simple, everyday language.
 - **Loading Demo Interface**: Created interactive showcase for all loading screen variants
 - **Animation Framework**: Built robust animation system with CSS keyframes and synchronized effects
 - **Credit System Implementation**: Added complete credit tracking system with 10 starting credits per user
-- **Payment Integration**: Connected Lemon Squeezy payment link for credit refills
+- **Payment Integration**: Connected Payhip payment link for credit refills
 - **Credit Deduction**: Analysis now costs 1 credit per request with automatic deduction
 - **Low Credit Warnings**: Credit display shows warnings and buy button when credits are low
 - **Credit Error Handling**: Proper error handling for insufficient credits with payment redirection

@@ -147,7 +147,7 @@ export const saveMeetingSchema = z.object({
 });
 
 export const redeemLicenseKeySchema = z.object({
-  key: z.string().min(1, "License key is required").regex(/^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i, "Invalid license key format"),
+  key: z.string().min(1, "License key is required").regex(/^[A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{5}$/i, "Invalid license key format"),
 });
 
 export type InsertMeeting = z.infer<typeof insertMeetingSchema>;

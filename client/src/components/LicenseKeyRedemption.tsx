@@ -84,7 +84,7 @@ export default function LicenseKeyRedemption({ onSuccess }: LicenseKeyRedemption
             </Label>
             <Input
               id="key"
-              placeholder="213473B2-CB4E-484F-914D-376C0510445B"
+              placeholder="A7THT-4FJYV-2UYKD-ESA6Y"
               className="bg-cyber-bg border-cyber-border text-cyber-cyan placeholder:text-cyber-cyan/50 focus:border-cyber-orange font-tourney"
               {...register("key")}
             />
