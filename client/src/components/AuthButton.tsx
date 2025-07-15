@@ -18,7 +18,7 @@ export default function AuthButton() {
     try {
       await signInWithGoogle();
       toast({
-        title: "Welcome to MEETRO",
+        title: "Welcome to NEURAKEI",
         description: "Authentication successful",
       });
     } catch (error) {

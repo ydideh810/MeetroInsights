@@ -1,8 +1,8 @@
-# KAIRO - Meeting Recovery System
+# NEURAKEI - Meeting Recovery System
 
 ## Overview
 
-KAIRO is a cyberpunk-themed meeting recovery system that helps users extract actionable insights from meeting transcripts. The application allows users to upload meeting files (text, DOCX, or SRT), analyze them using OpenAI's GPT-4 API, and generate structured meeting summaries with key decisions, action items, and follow-ups.
+NEURAKEI is a cyberpunk-themed meeting recovery system that helps users extract actionable insights from meeting transcripts. The application allows users to upload meeting files (text, DOCX, or SRT), analyze them using OpenAI's GPT-4 API, and generate structured meeting summaries with key decisions, action items, and follow-ups.
 
 ## User Preferences
 
@@ -11,6 +11,15 @@ Preferred communication style: Simple, everyday language.
 ## Recent Changes
 
 ### January 15, 2025
+- **Complete KAIRO → NEURAKEI Rebranding**: Updated all system references from KAIRO to NEURAKEI throughout the application
+  - Updated main logo and branding in header from KAIRO to NEURAKEI
+  - Changed all AI service prompts to use NEURAKEI identity
+  - Updated all welcome messages and authentication flows to use NEURAKEI
+  - Updated mentor system references and guidance text to use NEURAKEI
+  - Updated OpenAI service headers and referer URLs to use NEURAKEI
+  - Updated localStorage keys to use neurakei prefix
+  - Updated all user-facing text and documentation to use NEURAKEI branding
+  - Maintained cyberpunk aesthetic and functionality while updating terminology
 - **Payment and License Key System Updates**: Updated payment integration and license key format
   - Changed payment link from Lemon Squeezy to Payhip (https://payhip.com/b/dAc53)
   - Updated license key format from UUID to A7THT-4FJYV-2UYKD-ESA6Y structure
@@ -40,7 +49,7 @@ Preferred communication style: Simple, everyday language.
 - **Complete System Rebranding**: Updated all MAGI names and system branding throughout the application
   - Changed MAGI names: Melchior → Synthrax, Balthasar → Vantix, Casper → Lymnia
   - Updated organization name: NERV → ZENTRA
-  - Updated system name: MEETRO → KAIRO
+  - Updated system name: MEETRO → NEURAKEI
   - Updated all UI components, guides, prompts, and documentation
   - Maintained cyberpunk aesthetic with new naming convention
   - Updated AI service prompts to use new system identity

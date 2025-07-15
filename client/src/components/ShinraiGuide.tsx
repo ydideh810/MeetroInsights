@@ -97,7 +97,7 @@ export default function ShinraiGuide() {
                 of human decision-making.
               </p>
               <p>
-                In KAIRO, each SHINRAI mode analyzes your meeting transcripts through a unique lens, providing 
+                In NEURAKEI, each SHINRAI mode analyzes your meeting transcripts through a unique lens, providing 
                 complementary insights that together form a complete picture of what happened.
               </p>
             </CardContent>

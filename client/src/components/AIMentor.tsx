@@ -66,7 +66,7 @@ export default function AIMentor() {
       queryClient.invalidateQueries({ queryKey: ['/api/mentor/sessions'] });
       toast({
         title: "Mentor Session Started",
-        description: "Let's get you up to speed with MEETRO!",
+        description: "Let's get you up to speed with NEURAKEI!",
       });
     },
   });
@@ -88,7 +88,7 @@ export default function AIMentor() {
   const mentorTips: MentorTip[] = [
     {
       id: 'welcome',
-      title: 'Welcome to MEETRO',
+      title: 'Welcome to NEURAKEI',
       description: 'Learn the basics of the SHINRAI system and get started with your first meeting analysis',
       icon: <Sparkles className="w-5 h-5" />,
       category: 'onboarding',
@@ -196,7 +196,7 @@ export default function AIMentor() {
     },
     {
       id: 'unused_features_tip',
-      title: 'Maximize your MEETRO experience',
+      title: 'Maximize your NEURAKEI experience',
       description: 'You haven\'t used the Memory Bank yet! Save your analyses to build a searchable knowledge base of your meeting insights.',
       trigger: 'unused_features',
       autoShow: false,
@@ -275,7 +275,7 @@ export default function AIMentor() {
           <TabsContent value="dashboard" className="space-y-4">
             <Card className="bg-cyber-panel border-cyber-border">
               <CardHeader>
-                <CardTitle className="text-cyber-orange">Your MEETRO Journey</CardTitle>
+                <CardTitle className="text-cyber-orange">Your NEURAKEI Journey</CardTitle>
                 <CardDescription className="text-cyber-cyan/70">
                   Track your progress mastering the SHINRAI system
                 </CardDescription>

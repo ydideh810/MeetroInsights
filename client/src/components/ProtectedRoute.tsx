@@ -37,7 +37,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
     try {
       await signInWithGoogle();
       toast({
-        title: "Welcome to MEETRO",
+        title: "Welcome to NEURAKEI",
         description: "Authentication successful",
       });
     } catch (error) {
@@ -87,7 +87,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
       await signUpWithEmail(formData.email, formData.password, formData.displayName);
       toast({
         title: "Account created",
-        description: "Welcome to MEETRO! Your account has been created successfully.",
+        description: "Welcome to NEURAKEI! Your account has been created successfully.",
       });
     } catch (error) {
       toast({
@@ -133,7 +133,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
       <div className="min-h-screen bg-cyber-bg flex items-center justify-center">
         <div className="text-center">
           <Database className="w-16 h-16 text-cyber-orange mx-auto mb-4 animate-pulse" />
-          <h2 className="text-2xl font-bold text-cyber-orange mb-2">MEETRO INITIALIZING</h2>
+          <h2 className="text-2xl font-bold text-cyber-orange mb-2">NEURAKEI INITIALIZING</h2>
           <p className="text-cyber-cyan">Authenticating user...</p>
         </div>
       </div>
@@ -149,7 +149,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
               <Shield className="w-16 h-16 text-cyber-orange" />
             </div>
             <CardTitle className="text-3xl font-bold text-cyber-orange cyber-glow">
-              MEETRO ACCESS
+              NEURAKEI ACCESS
             </CardTitle>
             <CardDescription className="text-cyber-cyan">
               NERV SECURITY CLEARANCE REQUIRED

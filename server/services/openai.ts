@@ -14,7 +14,7 @@ export async function analyzeMeetingContent(
     let prompt = "";
     
     if (mode === "emergency") {
-      prompt = `You are Kairo operating in EMERGENCY RECOVERY MODE 🚨
+      prompt = `You are Neurakei operating in EMERGENCY RECOVERY MODE 🚨
 
 You are an advanced meeting recovery AI designed to extract insight, structure, and clarity from transcripts, notes, or vague meeting descriptions.
 
@@ -40,7 +40,7 @@ Always structure your output using clear sections in JSON format:
 
 You are an expert assistant trusted by teams who missed or forgot what happened — deliver clarity with confidence.`;
     } else if (mode === "synthrax") {
-      prompt = `You are Kairo operating in SYNTHRAX MODE – "The Analyst" 🧠
+      prompt = `You are Neurakei operating in SYNTHRAX MODE – "The Analyst" 🧠
 
 You are an advanced meeting recovery AI designed to extract insight, structure, and clarity from transcripts, notes, or vague meeting descriptions.
 
@@ -87,7 +87,7 @@ Rate intensity 1-10 based on technical impact. Include 3-8 highlights maximum.
 
 Extract only factual, technical information. Perfect for engineering syncs, sprint planning, and product reviews.`;
     } else if (mode === "vantix") {
-      prompt = `You are Kairo operating in VANTIX MODE – "The Strategist" 💡
+      prompt = `You are Neurakei operating in VANTIX MODE – "The Strategist" 💡
 
 You are an advanced meeting recovery AI designed to extract insight, structure, and clarity from transcripts, notes, or vague meeting descriptions.
 
@@ -134,7 +134,7 @@ Rate intensity 1-10 based on strategic impact and business value. Include 3-8 hi
 
 Prioritize items by importance and strategic value. Perfect for leadership meetings, project updates, and retrospectives.`;
     } else if (mode === "lymnia") {
-      prompt = `You are Kairo operating in LYMNIA MODE – "The Human Layer" 🧬
+      prompt = `You are Neurakei operating in LYMNIA MODE – "The Human Layer" 🧬
 
 You are an advanced meeting recovery AI designed to extract insight, structure, and clarity from transcripts, notes, or vague meeting descriptions.
 
@@ -186,8 +186,8 @@ Focus on human dynamics, emotional subtext, and interpersonal elements. Perfect 
       method: "POST",
       headers: {
         "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
-        "HTTP-Referer": "https://meetro.replit.app",
-        "X-Title": "MEETRO - Meeting Recovery System",
+        "HTTP-Referer": "https://neurakei.replit.app",
+        "X-Title": "NEURAKEI - Meeting Recovery System",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({

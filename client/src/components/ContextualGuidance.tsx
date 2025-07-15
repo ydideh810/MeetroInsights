@@ -46,7 +46,7 @@ export default function ContextualGuidance({
 
   // Get dismissed tips from localStorage
   useEffect(() => {
-    const stored = localStorage.getItem(`meetro-dismissed-tips-${user?.uid}`);
+    const stored = localStorage.getItem(`neurakei-dismissed-tips-${user?.uid}`);
     if (stored) {
       setDismissedTips(new Set(JSON.parse(stored)));
     }
@@ -57,7 +57,7 @@ export default function ContextualGuidance({
     const newDismissed = new Set(dismissedTips);
     newDismissed.add(tipId);
     setDismissedTips(newDismissed);
-    localStorage.setItem(`meetro-dismissed-tips-${user?.uid}`, JSON.stringify([...newDismissed]));
+    localStorage.setItem(`neurakei-dismissed-tips-${user?.uid}`, JSON.stringify([...newDismissed]));
     setCurrentTip(null);
   };
 
@@ -69,7 +69,7 @@ export default function ContextualGuidance({
     if (analysisCount === 0 && !dismissedTips.has('welcome')) {
       tips.push({
         id: 'welcome',
-        title: 'Welcome to KAIRO!',
+        title: 'Welcome to NEURAKEI!',
         description: 'Start by uploading a meeting transcript or pasting text, then choose a SHINRAI analysis mode to extract key insights.',
         actions: [{
           label: 'Get Started',
@@ -174,7 +174,7 @@ export default function ContextualGuidance({
       tips.push({
         id: 'advanced_features',
         title: 'Explore Advanced Features',
-        description: 'You\'re becoming a KAIRO pro! Try different SHINRAI modes on the same transcript to compare perspectives.',
+        description: 'You\'re becoming a NEURAKEI pro! Try different SHINRAI modes on the same transcript to compare perspectives.',
         actions: [{
           label: 'Learn About SHINRAI Modes',
           onClick: () => toast({
