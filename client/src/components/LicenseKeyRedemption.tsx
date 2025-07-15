@@ -31,11 +31,8 @@ export default function LicenseKeyRedemption({ onSuccess }: LicenseKeyRedemption
 
   const redeemMutation = useMutation({
     mutationFn: async (data: RedeemLicenseKeyRequest) => {
-      const response = await apiRequest("/api/redeem-license-key", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-      return response;
+      const response = await apiRequest("POST", "/api/redeem-license-key", data);
+      return response.json();
     },
     onSuccess: (data) => {
       toast({
