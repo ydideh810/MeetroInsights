@@ -81,7 +81,7 @@ export default function ContentModeToggle({ currentMode, onModeChange }: Content
                 px-6 py-3 mx-1 rounded-md transition-all duration-300 flex items-center gap-2
                 micro-hover scale-click button-glow cyber-ripple
                 ${currentMode === mode.id 
-                  ? `${mode.color} text-black font-bold shadow-lg cyber-glow pulse-glow` 
+                  ? `${mode.color} text-white font-bold shadow-lg cyber-glow pulse-glow` 
                   : `text-cyber-cyan hover:${mode.textColor} hover:bg-cyber-dark-panel`
                 }
               `}
