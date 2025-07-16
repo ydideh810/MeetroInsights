@@ -20,6 +20,15 @@ Preferred communication style: Simple, everyday language.
   - Simplified header layout by removing the "LOADING DEMO" button
   - Removed associated state management and overlay components
   - Maintained core functionality while streamlining the interface
+- **User Account Menu Fix**: Improved dropdown menu readability with solid dark background
+  - Added proper background contrast (hsl(0, 0%, 8%)) to dropdown menu
+  - Enhanced visual separation with borders and shadows
+  - Maintained cyberpunk styling while ensuring good readability
+- **Deployment Documentation**: Created comprehensive README.md with deployment instructions
+  - Added step-by-step guides for Vercel, Netlify, Railway, and Render platforms
+  - Included environment variable setup and configuration details
+  - Provided troubleshooting section and performance optimization tips
+  - Covered Firebase, database, and security configuration requirements
 - **Responsive Micro-Interactions Implementation**: Added comprehensive cyberpunk-themed micro-interactions across all UI components
   - Created 15+ CSS animation classes: micro-hover, pulse-glow, slide-in, scale-click, button-glow, card-float, input-focus, cyber-ripple, data-stream, rotate-hover, border-scan, stagger-fade, matrix-text
   - Enhanced ContentModeToggle with smooth hover effects, pulse animations, and scanning borders
