@@ -118,7 +118,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(402).json({ 
           error: "Insufficient credits. Please purchase more credits to continue.",
           needsPayment: true,
-          paymentUrl: "https://niddamhub.lemonsqueezy.com/buy/be00a64f-fe92-44a6-a654-d6187a4e864a"
+          paymentUrl: "https://payhip.com/b/dAc53"
         });
       }
       
@@ -127,7 +127,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         validatedData.topic,
         validatedData.attendees,
         validatedData.knownInfo,
-        validatedData.mode as "melchior" | "balthasar" | "casper" | "emergency"
+        validatedData.mode as "synthrax" | "vantix" | "lymnia" | "emergency",
+        validatedData.contentMode as "meetings" | "socials" | "notes"
       );
       
       res.json({ 

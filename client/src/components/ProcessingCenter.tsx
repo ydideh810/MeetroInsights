@@ -7,6 +7,7 @@ import { MeetingAnalysis } from "@shared/schema";
 import ShinraiGuide from "./ShinraiGuide";
 import AIMentor from "./AIMentor";
 import LoadingScreen from "@/components/ui/loading-screen";
+import { ContentMode } from "./ContentModeToggle";
 import { ExternalLink } from "lucide-react";
 
 interface ProcessingCenterProps {
@@ -17,6 +18,7 @@ interface ProcessingCenterProps {
   isProcessing: boolean;
   setIsProcessing: (value: boolean) => void;
   setAnalysis: (value: MeetingAnalysis | null, mode?: string) => void;
+  contentMode: ContentMode;
 }
 
 type ShinraiMode = "synthrax" | "vantix" | "lymnia";
@@ -29,6 +31,7 @@ export default function ProcessingCenter({
   isProcessing,
   setIsProcessing,
   setAnalysis,
+  contentMode,
 }: ProcessingCenterProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -42,6 +45,7 @@ export default function ProcessingCenter({
         attendees,
         knownInfo,
         mode,
+        contentMode,
       });
       return response.json();
     },
@@ -66,7 +70,7 @@ export default function ProcessingCenter({
             <Button 
               variant="outline" 
               size="sm"
-              onClick={() => window.open("https://niddamhub.lemonsqueezy.com/buy/be00a64f-fe92-44a6-a654-d6187a4e864a", "_blank")}
+              onClick={() => window.open("https://payhip.com/b/dAc53", "_blank")}
               className="ml-2"
             >
               Buy Credits
@@ -116,9 +120,14 @@ export default function ProcessingCenter({
       {/* SHINRAI System Display */}
       <div className="relative">
         <div className="text-center mb-8">
-          <div className="text-sm text-cyber-cyan mb-2 font-tourney tracking-wider">SHINRAI SYSTEM</div>
+          <div className="text-sm text-cyber-cyan mb-2 font-tourney tracking-wider">TRI-CORE COGNITIVE SYSTEM</div>
           <div className="text-3xl font-bold cyber-glow animate-pulse font-doto">TOKYO-3</div>
           <div className="text-sm text-cyber-orange font-tourney">ZENTRA</div>
+          <div className="mt-2 text-xs text-cyber-cyan/70 font-tourney">
+            {contentMode === "meetings" && "MEETING RECOVERY PROTOCOL"}
+            {contentMode === "socials" && "SOCIAL THREAD ANALYSIS"}
+            {contentMode === "notes" && "COGNITIVE REORGANIZATION"}
+          </div>
           <div className="mt-4 flex gap-2 justify-center">
             <ShinraiGuide />
             <AIMentor />

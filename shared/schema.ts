@@ -188,7 +188,8 @@ export const analyzeRequestSchema = z.object({
   topic: z.string().optional(),
   attendees: z.string().optional(),
   knownInfo: z.string().optional(),
-  mode: z.enum(["melchior", "balthasar", "casper", "emergency"]).default("melchior"),
+  mode: z.enum(["synthrax", "vantix", "lymnia", "emergency"]).default("synthrax"),
+  contentMode: z.enum(["meetings", "socials", "notes"]).default("meetings"),
 });
 
 export type AnalyzeRequest = z.infer<typeof analyzeRequestSchema>;

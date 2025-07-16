@@ -11,6 +11,7 @@ import AuthButton from "@/components/AuthButton";
 import CreditDisplay from "@/components/CreditDisplay";
 import LoadingDemo from "@/components/LoadingDemo";
 import ContextualGuidance from "@/components/ContextualGuidance";
+import { ContentMode } from "@/components/ContentModeToggle";
 import { MeetingAnalysis } from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import { Database, Monitor } from "lucide-react";
@@ -27,6 +28,7 @@ export default function Home() {
   const [showMemoryBank, setShowMemoryBank] = useState(false);
   const [showLoadingDemo, setShowLoadingDemo] = useState(false);
   const [analysisCount, setAnalysisCount] = useState(0);
+  const [contentMode, setContentMode] = useState<ContentMode>("meetings");
 
   // Get user data for contextual guidance
   const { data: userData } = useQuery({
@@ -106,6 +108,8 @@ export default function Home() {
           setKnownInfo={setKnownInfo}
           setIsProcessing={setIsProcessing}
           setAnalysis={setAnalysis}
+          contentMode={contentMode}
+          setContentMode={setContentMode}
         />
         
         <ProcessingCenter
@@ -122,6 +126,7 @@ export default function Home() {
               setAnalysisCount(prev => prev + 1);
             }
           }}
+          contentMode={contentMode}
         />
         
         {showMemoryBank ? (

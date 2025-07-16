@@ -8,30 +8,73 @@ export async function analyzeMeetingContent(
   topic?: string,
   attendees?: string,
   knownInfo?: string,
-  mode: "synthrax" | "vantix" | "lymnia" | "emergency" = "synthrax"
+  mode: "synthrax" | "vantix" | "lymnia" | "emergency" = "synthrax",
+  contentMode: "meetings" | "socials" | "notes" = "meetings"
 ): Promise<MeetingAnalysis> {
   try {
     let prompt = "";
     
+    // Get content-specific context
+    const getContentContext = () => {
+      switch (contentMode) {
+        case "meetings":
+          return {
+            dataType: "meeting transcript",
+            contextFields: `Meeting Topic: ${topic || "Not specified"}
+Attendees: ${attendees || "Not specified"}
+Additional Context: ${knownInfo || "None"}`,
+            processText: "meeting analysis",
+            examples: "discussions, decisions, action items, follow-ups"
+          };
+        case "socials":
+          return {
+            dataType: "chat logs/social thread",
+            contextFields: `Thread Topic: ${topic || "Not specified"}
+Participants: ${attendees || "Not specified"}
+Platform Context: ${knownInfo || "None"}`,
+            processText: "social conversation analysis",
+            examples: "discussions, reactions, sentiment, key themes"
+          };
+        case "notes":
+          return {
+            dataType: "brainstorm notes/idea dump",
+            contextFields: `Session Title: ${topic || "Not specified"}
+Contributors: ${attendees || "Not specified"}
+Source Context: ${knownInfo || "None"}`,
+            processText: "cognitive reorganization",
+            examples: "ideas, themes, priorities, next steps"
+          };
+        default:
+          return {
+            dataType: "content",
+            contextFields: `Topic: ${topic || "Not specified"}
+Participants: ${attendees || "Not specified"}
+Context: ${knownInfo || "None"}`,
+            processText: "content analysis",
+            examples: "key points, themes, insights"
+          };
+      }
+    };
+
+    const context = getContentContext();
+
     if (mode === "emergency") {
       prompt = `You are Neurakei operating in EMERGENCY RECOVERY MODE 🚨
 
-You are an advanced meeting recovery AI designed to extract insight, structure, and clarity from transcripts, notes, or vague meeting descriptions.
+You are an advanced TRI-CORE cognitive assistant designed to extract insight, structure, and clarity from ${context.dataType}.
 
-Topic: ${topic || "Unknown"}
-Attendees: ${attendees || "Unknown"}
-Known Information: ${knownInfo || "None"}
-Transcript/Content: ${transcript}
+${context.contextFields}
+Content: ${transcript}
 
 In EMERGENCY RECOVERY MODE:
-- Generate a reasonable reconstruction of what likely occurred based on common meeting dynamics
+- Generate a reasonable reconstruction of what likely occurred based on common ${context.processText} patterns
 - Be concise, specific, and insightful
 - Only generate content that would be plausible, respectful, and relevant to the context
-- Focus on creating realistic, actionable insights
+- Focus on creating realistic, actionable insights for ${context.examples}
 
 Always structure your output using clear sections in JSON format:
 {
-  "summary": "Brief overview of what likely happened in the meeting based on available information",
+  "summary": "Brief overview of what likely happened based on available information",
   "keyDecisions": ["Plausible decision 1", "Likely decision 2", ...],
   "actionItems": [{"task": "Realistic task description", "assignee": "Person name or null"}, ...],
   "unansweredQuestions": ["Question 1", "Question 2", ...],
@@ -40,29 +83,42 @@ Always structure your output using clear sections in JSON format:
 
 You are an expert assistant trusted by teams who missed or forgot what happened — deliver clarity with confidence.`;
     } else if (mode === "synthrax") {
-      prompt = `You are Neurakei operating in SYNTHRAX MODE – "The Analyst" 🧠
-
-You are an advanced meeting recovery AI designed to extract insight, structure, and clarity from transcripts, notes, or vague meeting descriptions.
-
-Topic: ${topic || "Not specified"}
-Attendees: ${attendees || "Not specified"}
-Transcript: ${transcript}
-
-As SYNTHRAX MODE - "The Analyst":
+      const synthraxPrompts = {
+        meetings: `As SYNTHRAX MODE - "The Analyst" for meeting analysis:
 - Focus on facts, clarity, and structured output
 - Extract key topics, decisions, dates, and action items
 - Use bullet points and avoid speculation or emotional interpretation
-- Be concise, specific, and insightful
+- Organize chronological flow and identify concrete outcomes`,
+        socials: `As SYNTHRAX MODE - "The Analyst" for social thread analysis:
+- Focus on organizing chaotic conversations into clear themes
+- Extract key points, reactions, and emerging consensus
+- Structure scattered discussions into logical categories
+- Identify concrete outcomes and next steps from the conversation`,
+        notes: `As SYNTHRAX MODE - "The Analyst" for note organization:
+- Focus on structuring scattered ideas into clear themes
+- Extract key concepts, group related ideas, and identify patterns
+- Create logical hierarchies and categorize information
+- Transform raw thoughts into structured, actionable insights`
+      };
 
-If the user provides limited input, generate a reasonable reconstruction of what likely occurred based on common meeting dynamics. Only generate content that would be plausible, respectful, and relevant to the context.
+      prompt = `You are Neurakei operating in SYNTHRAX MODE – "The Analyst" 🧠
+
+You are an advanced TRI-CORE cognitive assistant designed to extract insight, structure, and clarity from ${context.dataType}.
+
+${context.contextFields}
+Content: ${transcript}
+
+${synthraxPrompts[contentMode]}
+
+If the user provides limited input, generate a reasonable reconstruction of what likely occurred based on common ${context.processText} patterns. Only generate content that would be plausible, respectful, and relevant to the context.
 
 Always structure your output using clear sections in JSON format:
 {
   "summary": "Factual, structured summary focusing on main topics and concrete outcomes",
   "keyDecisions": ["Concrete decision 1", "Concrete decision 2", ...],
-  "actionItems": [{"task": "Specific technical task with clear deliverables", "assignee": "Person name or null"}, ...],
+  "actionItems": [{"task": "Specific task with clear deliverables", "assignee": "Person name or null"}, ...],
   "unansweredQuestions": ["Technical question 1", "Logistical question 2", ...],
-  "followUps": ["Next technical step 1", "Required documentation 2", ...],
+  "followUps": ["Next step 1", "Required documentation 2", ...],
   "highlights": [
     {
       "timestamp": "Optional timestamp or timeframe",
@@ -87,27 +143,40 @@ Rate intensity 1-10 based on technical impact. Include 3-8 highlights maximum.
 
 Extract only factual, technical information. Perfect for engineering syncs, sprint planning, and product reviews.`;
     } else if (mode === "vantix") {
-      prompt = `You are Neurakei operating in VANTIX MODE – "The Strategist" 💡
-
-You are an advanced meeting recovery AI designed to extract insight, structure, and clarity from transcripts, notes, or vague meeting descriptions.
-
-Topic: ${topic || "Not specified"}
-Attendees: ${attendees || "Not specified"}
-Transcript: ${transcript}
-
-As VANTIX MODE - "The Strategist":
+      const vantixPrompts = {
+        meetings: `As VANTIX MODE - "The Strategist" for meeting analysis:
 - Focus on priorities, execution, and foresight
 - Identify high-impact items, risks, and opportunities
 - Group related items logically and offer tactical follow-up suggestions
-- Be concise, specific, and insightful
+- Assess strategic implications and prioritize decisions`,
+        socials: `As VANTIX MODE - "The Strategist" for social thread analysis:
+- Focus on prioritizing decisions and extracting action items
+- Identify high-impact discussions and emerging consensus
+- Assess community sentiment and strategic implications
+- Recommend next steps based on thread momentum`,
+        notes: `As VANTIX MODE - "The Strategist" for note organization:
+- Focus on prioritizing ideas and identifying actionable items
+- Assess strategic value and implementation feasibility
+- Group related concepts by execution priority
+- Transform scattered thoughts into strategic action plans`
+      };
 
-If the user provides limited input, generate a reasonable reconstruction of what likely occurred based on common meeting dynamics. Only generate content that would be plausible, respectful, and relevant to the context.
+      prompt = `You are Neurakei operating in VANTIX MODE – "The Strategist" 💡
+
+You are an advanced TRI-CORE cognitive assistant designed to extract insight, structure, and clarity from ${context.dataType}.
+
+${context.contextFields}
+Content: ${transcript}
+
+${vantixPrompts[contentMode]}
+
+If the user provides limited input, generate a reasonable reconstruction of what likely occurred based on common ${context.processText} patterns. Only generate content that would be plausible, respectful, and relevant to the context.
 
 Always structure your output using clear sections in JSON format:
 {
   "summary": "Strategic overview highlighting key implications, priorities, and execution paths",
   "keyDecisions": ["Strategic decision 1 with impact assessment", "Priority change 2 with rationale", ...],
-  "actionItems": [{"task": "High-priority strategic task with clear outcomes", "assignee": "Owner name or null"}, ...],
+  "actionItems": [{"task": "High-priority task with clear outcomes", "assignee": "Owner name or null"}, ...],
   "unansweredQuestions": ["Strategic question 1", "Resource allocation question 2", ...],
   "followUps": ["Strategic next step 1", "Leadership alignment 2", "Risk mitigation 3", ...],
   "highlights": [
@@ -134,21 +203,34 @@ Rate intensity 1-10 based on strategic impact and business value. Include 3-8 hi
 
 Prioritize items by importance and strategic value. Perfect for leadership meetings, project updates, and retrospectives.`;
     } else if (mode === "lymnia") {
-      prompt = `You are Neurakei operating in LYMNIA MODE – "The Human Layer" 🧬
-
-You are an advanced meeting recovery AI designed to extract insight, structure, and clarity from transcripts, notes, or vague meeting descriptions.
-
-Topic: ${topic || "Not specified"}
-Attendees: ${attendees || "Not specified"}
-Transcript: ${transcript}
-
-As LYMNIA MODE - "The Human Layer":
+      const lymniaPrompts = {
+        meetings: `As LYMNIA MODE - "The Human Layer" for meeting analysis:
 - Focus on emotion, tone, and unspoken dynamics
 - Surface team sentiment, conflicts, concerns, and unresolved questions
 - Include meaningful quotes and reflect the interpersonal atmosphere
-- Be concise, specific, and insightful
+- Analyze team dynamics and emotional undercurrents`,
+        socials: `As LYMNIA MODE - "The Human Layer" for social thread analysis:
+- Focus on decoding tone and detecting emotional shifts
+- Identify friction, uncertainty, and community sentiment
+- Analyze social dynamics and relationship patterns
+- Highlight moments of connection, tension, or consensus`,
+        notes: `As LYMNIA MODE - "The Human Layer" for note organization:
+- Focus on emotional context and human elements in brainstorming
+- Identify enthusiasm, concerns, and interpersonal dynamics
+- Analyze team sentiment and collaboration patterns
+- Highlight creative breakthroughs and emotional moments`
+      };
 
-If the user provides limited input, generate a reasonable reconstruction of what likely occurred based on common meeting dynamics. Only generate content that would be plausible, respectful, and relevant to the context.
+      prompt = `You are Neurakei operating in LYMNIA MODE – "The Human Layer" 🧬
+
+You are an advanced TRI-CORE cognitive assistant designed to extract insight, structure, and clarity from ${context.dataType}.
+
+${context.contextFields}
+Content: ${transcript}
+
+${lymniaPrompts[contentMode]}
+
+If the user provides limited input, generate a reasonable reconstruction of what likely occurred based on common ${context.processText} patterns. Only generate content that would be plausible, respectful, and relevant to the context.
 
 Always structure your output using clear sections in JSON format:
 {
