@@ -218,3 +218,19 @@ Set up monitoring for production:
 4. **Usage monitoring**: Track API costs and usage patterns
 
 Remember: The most common cause is missing or incorrect environment variables. Always verify your API key and database connection first.
+
+## SOLUTION FOUND: Model Name Issue
+
+**Root Cause**: The OpenRouter API was hanging because the model name was incorrect. The original model `deepseek/deepseek-r1-0528:free` should be `deepseek/deepseek-r1-0528` (without the `:free` suffix).
+
+**Fix Applied**:
+1. Changed model in `server/services/openai.ts` from `deepseek/deepseek-r1-0528:free` to `deepseek/deepseek-r1-0528`
+2. Added comprehensive error handling and logging to identify the issue
+3. Added timeout protection (60 seconds) to prevent indefinite hanging
+
+**Test Results**: Basic OpenRouter API connection now works correctly. Full analysis should work in both preview and deployment.
+
+**To verify the fix**:
+1. Check `/api/health` endpoint shows `hasApiKey: true`
+2. Test analysis with a simple meeting transcript
+3. Check server logs for `[OpenAI] Analysis completed successfully`

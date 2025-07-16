@@ -83,6 +83,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     }
   });
+
+
   
   // Get user info endpoint
   app.get("/api/user", authMiddleware, async (req: AuthenticatedRequest, res) => {

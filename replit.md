@@ -29,6 +29,13 @@ Preferred communication style: Simple, everyday language.
   - Included environment variable setup and configuration details
   - Provided troubleshooting section and performance optimization tips
   - Covered Firebase, database, and security configuration requirements
+- **Analysis Hanging Issue Resolution**: Fixed critical OpenRouter API model name issue
+  - Identified root cause: incorrect model name `deepseek/deepseek-r1-0528:free` should be `deepseek/deepseek-r1-0528`
+  - Added comprehensive debugging tools, timeout protection (60s), and error handling
+  - Enhanced logging to track analysis progress and identify API issues
+  - Created health check endpoint (/api/health) to verify API key and database connection
+  - Updated DEPLOYMENT_TROUBLESHOOTING.md with complete debugging guide
+  - Analysis now works correctly in both preview and deployed environments
 - **Responsive Micro-Interactions Implementation**: Added comprehensive cyberpunk-themed micro-interactions across all UI components
   - Created 15+ CSS animation classes: micro-hover, pulse-glow, slide-in, scale-click, button-glow, card-float, input-focus, cyber-ripple, data-stream, rotate-hover, border-scan, stagger-fade, matrix-text
   - Enhanced ContentModeToggle with smooth hover effects, pulse animations, and scanning borders

@@ -1,7 +1,7 @@
 import { MeetingAnalysis } from "@shared/schema";
 
 const OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions";
-const OPENROUTER_MODEL = "deepseek/deepseek-r1-0528:free";
+const OPENROUTER_MODEL = "deepseek/deepseek-r1-0528";
 
 export async function analyzeMeetingContent(
   transcript: string,
@@ -276,6 +276,9 @@ Focus on human dynamics, emotional subtext, and interpersonal elements. Perfect 
     console.log(`[OpenAI] Making API request to ${OPENROUTER_API_URL}`);
     console.log(`[OpenAI] Using model: ${OPENROUTER_MODEL}`);
     console.log(`[OpenAI] Prompt length: ${prompt.length} characters`);
+    
+    // Add debugging for API key
+    console.log(`[OpenAI] API key starts with: ${process.env.OPENROUTER_API_KEY?.substring(0, 10)}...`);
     
     const requestBody = {
       model: OPENROUTER_MODEL,
