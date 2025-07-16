@@ -61,6 +61,29 @@ const upload = multer({
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
+  // Health check endpoint
+  app.get("/api/health", async (req, res) => {
+    try {
+      const hasApiKey = !!process.env.OPENROUTER_API_KEY;
+      const hasDbUrl = !!process.env.DATABASE_URL;
+      
+      res.json({
+        status: "ok",
+        timestamp: new Date().toISOString(),
+        environment: process.env.NODE_ENV || "development",
+        hasApiKey,
+        hasDbUrl,
+        version: "1.0.0"
+      });
+    } catch (error) {
+      res.status(500).json({
+        status: "error",
+        message: "Health check failed",
+        error: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+  
   // Get user info endpoint
   app.get("/api/user", authMiddleware, async (req: AuthenticatedRequest, res) => {
     try {
@@ -136,14 +159,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
         analysis 
       });
     } catch (error) {
-      console.error("Analysis error:", error);
+      console.error("[Routes] Analysis error:", error);
+      
       // If analysis fails, refund the credit
-      const user = await storage.getUserByFirebaseUid(req.user!.uid);
-      if (user) {
-        await storage.updateUserCredits(req.user!.uid, user.credits + 1);
+      try {
+        const user = await storage.getUserByFirebaseUid(req.user!.uid);
+        if (user) {
+          await storage.updateUserCredits(req.user!.uid, user.credits + 1);
+          console.log(`[Routes] Refunded 1 credit to user ${req.user!.uid}`);
+        }
+      } catch (refundError) {
+        console.error("[Routes] Failed to refund credit:", refundError);
       }
-      res.status(400).json({ 
-        error: error instanceof Error ? error.message : "Failed to analyze meeting content" 
+      
+      // Provide detailed error response
+      const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+      res.status(500).json({ 
+        error: errorMessage,
+        timestamp: new Date().toISOString()
       });
     }
   });

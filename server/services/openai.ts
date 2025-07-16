@@ -11,6 +11,15 @@ export async function analyzeMeetingContent(
   mode: "synthrax" | "vantix" | "lymnia" | "emergency" = "synthrax",
   contentMode: "meetings" | "socials" | "notes" = "meetings"
 ): Promise<MeetingAnalysis> {
+  console.log(`[OpenAI] Starting analysis with mode: ${mode}, contentMode: ${contentMode}`);
+  console.log(`[OpenAI] Transcript length: ${transcript.length} characters`);
+  
+  // Check for API key
+  if (!process.env.OPENROUTER_API_KEY) {
+    console.error("[OpenAI] OPENROUTER_API_KEY is not set");
+    throw new Error("OpenRouter API key is not configured");
+  }
+  
   try {
     let prompt = "";
     
@@ -264,35 +273,62 @@ Rate intensity 1-10 based on emotional impact and interpersonal significance. In
 Focus on human dynamics, emotional subtext, and interpersonal elements. Perfect for client meetings, conflict resolution, and 1:1 check-ins.`;
     }
 
-    const response = await fetch(OPENROUTER_API_URL, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
-        "HTTP-Referer": "https://neurakei.replit.app",
-        "X-Title": "NEURAKEI - Meeting Recovery System",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        model: OPENROUTER_MODEL,
-        messages: [
-          {
-            role: "system",
-            content: "You are a meeting analysis expert. Always respond with valid JSON in the exact format specified. Do not include any markdown formatting, code blocks, or explanatory text - only the raw JSON object."
-          },
-          {
-            role: "user",
-            content: prompt
-          }
-        ],
-        temperature: 0.3,
-      })
+    console.log(`[OpenAI] Making API request to ${OPENROUTER_API_URL}`);
+    console.log(`[OpenAI] Using model: ${OPENROUTER_MODEL}`);
+    console.log(`[OpenAI] Prompt length: ${prompt.length} characters`);
+    
+    const requestBody = {
+      model: OPENROUTER_MODEL,
+      messages: [
+        {
+          role: "system",
+          content: "You are a meeting analysis expert. Always respond with valid JSON in the exact format specified. Do not include any markdown formatting, code blocks, or explanatory text - only the raw JSON object."
+        },
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      temperature: 0.3,
+      max_tokens: 4000,
+      timeout: 30000
+    };
+
+    // Create a timeout promise
+    const timeoutPromise = new Promise<never>((_, reject) => {
+      setTimeout(() => reject(new Error('Request timeout after 60 seconds')), 60000);
     });
 
+    const response = await Promise.race([
+      fetch(OPENROUTER_API_URL, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          "HTTP-Referer": "https://neurakei.replit.app",
+          "X-Title": "NEURAKEI - Meeting Recovery System",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(requestBody)
+      }),
+      timeoutPromise
+    ]);
+
+    console.log(`[OpenAI] Response status: ${response.status} ${response.statusText}`);
+
     if (!response.ok) {
-      throw new Error(`OpenRouter API error: ${response.status} ${response.statusText}`);
+      const errorText = await response.text();
+      console.error(`[OpenAI] API error response: ${errorText}`);
+      throw new Error(`OpenRouter API error: ${response.status} ${response.statusText} - ${errorText}`);
     }
 
     const data = await response.json();
+    console.log(`[OpenAI] Raw API response:`, JSON.stringify(data, null, 2));
+    
+    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+      console.error(`[OpenAI] Invalid response structure:`, data);
+      throw new Error("Invalid response structure from OpenRouter API");
+    }
+    
     let content = data.choices[0].message.content || "{}";
     
     // Extract JSON from markdown code blocks if present
@@ -311,17 +347,38 @@ Focus on human dynamics, emotional subtext, and interpersonal elements. Perfect 
       }
     }
     
-    const result = JSON.parse(content);
+    console.log(`[OpenAI] Cleaned content:`, content);
     
-    return {
+    const result = JSON.parse(content);
+    console.log(`[OpenAI] Parsed result:`, result);
+    
+    const analysis = {
       summary: result.summary || "No summary available",
       keyDecisions: result.keyDecisions || [],
       actionItems: result.actionItems || [],
       unansweredQuestions: result.unansweredQuestions || [],
-      followUps: result.followUps || []
+      followUps: result.followUps || [],
+      highlights: result.highlights || []
     };
+    
+    console.log(`[OpenAI] Analysis completed successfully`);
+    return analysis;
   } catch (error) {
-    console.error("OpenRouter API Error:", error);
-    throw new Error("Failed to analyze meeting content. Please check your API key and try again.");
+    console.error("[OpenAI] Analysis failed:", error);
+    
+    // Provide more specific error messages
+    if (error instanceof Error) {
+      if (error.message.includes('timeout')) {
+        throw new Error("Analysis request timed out. Please try again with a shorter transcript.");
+      } else if (error.message.includes('401') || error.message.includes('403')) {
+        throw new Error("Invalid API key. Please check your OpenRouter API key configuration.");
+      } else if (error.message.includes('429')) {
+        throw new Error("Rate limit exceeded. Please try again in a few minutes.");
+      } else if (error.message.includes('500') || error.message.includes('502') || error.message.includes('503')) {
+        throw new Error("OpenRouter service is temporarily unavailable. Please try again later.");
+      }
+    }
+    
+    throw new Error(`Analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
 }
