@@ -51,12 +51,14 @@ export default function UploadPanel({
     onSuccess: async (response) => {
       const data = await response.json();
       setTranscript(data.transcript);
+      setIsProcessing(false);
       toast({
         title: "File uploaded successfully",
         description: `Processed ${data.filename}`,
       });
     },
     onError: (error) => {
+      setIsProcessing(false);
       toast({
         title: "Upload failed",
         description: error instanceof Error ? error.message : "Failed to upload file",
@@ -79,12 +81,14 @@ export default function UploadPanel({
     },
     onSuccess: (data) => {
       setAnalysis(data.analysis);
+      setIsProcessing(false);
       toast({
         title: "Emergency recovery complete",
         description: "Meeting reconstruction generated",
       });
     },
     onError: (error) => {
+      setIsProcessing(false);
       toast({
         title: "Emergency recovery failed",
         description: error instanceof Error ? error.message : "Failed to generate recovery",
