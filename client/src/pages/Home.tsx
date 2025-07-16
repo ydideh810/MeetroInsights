@@ -45,12 +45,12 @@ export default function Home() {
   return (
     <div className="bg-cyber-bg text-cyber-orange font-mono min-h-screen">
       {/* Header */}
-      <header className="border-b-2 border-cyber-orange bg-cyber-panel p-4 district-7-grid">
+      <header className="border-b-2 border-cyber-orange bg-cyber-panel p-4 district-7-grid border-scan">
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-6">
-            <div className="text-4xl font-bold cyber-glow animate-flicker tracking-wider font-doto">NEURAKEI</div>
+            <div className="text-4xl font-bold cyber-glow animate-flicker tracking-wider font-doto matrix-text">NEURAKEI</div>
             <div className="text-sm text-cyber-cyan">
-              <div>SHINRAI RECOVERY SYSTEM</div>
+              <div className="data-stream">SHINRAI RECOVERY SYSTEM</div>
               <div className="text-xs text-cyber-teal">DISTRICT-7 ZENTRA</div>
             </div>
           </div>
@@ -64,7 +64,7 @@ export default function Home() {
             </div>
             <Button
               onClick={() => setShowMemoryBank(!showMemoryBank)}
-              className={`bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black transition-colors ${
+              className={`bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black transition-colors micro-hover scale-click button-glow cyber-ripple ${
                 showMemoryBank ? 'bg-cyber-orange text-black' : ''
               }`}
             >
@@ -73,7 +73,7 @@ export default function Home() {
             </Button>
             <Button
               onClick={() => setShowLoadingDemo(!showLoadingDemo)}
-              className={`bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black transition-colors ${
+              className={`bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black transition-colors micro-hover scale-click button-glow cyber-ripple ${
                 showLoadingDemo ? 'bg-cyber-orange text-black' : ''
               }`}
             >
@@ -96,7 +96,7 @@ export default function Home() {
       </header>
 
       {/* Main Interface */}
-      <main className="container mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-6 min-h-screen">
+      <main className="container mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-6 min-h-screen stagger-fade">
         <UploadPanel
           transcript={transcript}
           setTranscript={setTranscript}

@@ -121,7 +121,7 @@ export default function ProcessingCenter({
       <div className="relative">
         <div className="text-center mb-8">
           <div className="text-sm text-cyber-cyan mb-2 font-tourney tracking-wider">TRI-CORE COGNITIVE SYSTEM</div>
-          <div className="text-3xl font-bold cyber-glow animate-pulse font-doto">TOKYO-3</div>
+          <div className="text-3xl font-bold cyber-glow animate-pulse font-doto">DISTRICT-7</div>
           <div className="text-sm text-cyber-orange font-tourney">ZENTRA</div>
           <div className="mt-2 text-xs text-cyber-cyan/70 font-tourney">
             {contentMode === "meetings" && "MEETING RECOVERY PROTOCOL"}
@@ -139,9 +139,9 @@ export default function ProcessingCenter({
           {/* Top Hexagon - Vantix */}
           <button
             onClick={() => setSelectedMode("vantix")}
-            className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button magi-sync-animation magi-delay-2 ${
+            className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button magi-sync-animation magi-delay-2 micro-hover scale-click cyber-ripple data-stream ${
               selectedMode === "vantix" 
-                ? "magi-panel animate-pulse-glow scale-110" 
+                ? "magi-panel animate-pulse-glow scale-110 pulse-glow" 
                 : "bg-cyber-panel cyber-border hover:magi-panel"
             }`}
           >
@@ -155,9 +155,9 @@ export default function ProcessingCenter({
           {/* Bottom Left Hexagon - Synthrax */}
           <button
             onClick={() => setSelectedMode("synthrax")}
-            className={`absolute bottom-0 left-8 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button magi-sync-animation magi-delay-1 ${
+            className={`absolute bottom-0 left-8 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button magi-sync-animation magi-delay-1 micro-hover scale-click cyber-ripple data-stream ${
               selectedMode === "synthrax" 
-                ? "magi-panel animate-pulse-glow scale-110" 
+                ? "magi-panel animate-pulse-glow scale-110 pulse-glow" 
                 : "bg-cyber-panel cyber-border hover:magi-panel"
             }`}
           >
@@ -171,9 +171,9 @@ export default function ProcessingCenter({
           {/* Bottom Right Hexagon - Lymnia */}
           <button
             onClick={() => setSelectedMode("lymnia")}
-            className={`absolute bottom-0 right-8 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button magi-sync-animation magi-delay-3 ${
+            className={`absolute bottom-0 right-8 w-32 h-32 hex-clip flex items-center justify-center cursor-pointer z-10 magi-button magi-sync-animation magi-delay-3 micro-hover scale-click cyber-ripple data-stream ${
               selectedMode === "lymnia" 
-                ? "magi-panel animate-pulse-glow scale-110" 
+                ? "magi-panel animate-pulse-glow scale-110 pulse-glow" 
                 : "bg-cyber-panel cyber-border hover:magi-panel"
             }`}
           >
@@ -232,7 +232,7 @@ export default function ProcessingCenter({
           <Button
             onClick={handleRecovery}
             disabled={isProcessing || analyzeMutation.isPending}
-            className="w-full nerv-unlock text-black px-8 py-4 rounded-lg font-bold text-xl transition-all animate-pulse-glow"
+            className="w-full nerv-unlock text-black px-8 py-4 rounded-lg font-bold text-xl transition-all animate-pulse-glow micro-hover scale-click button-glow cyber-ripple"
           >
             <div className="flex items-center justify-center space-x-2 font-doto">
               <span>{isProcessing ? "PROCESSING..." : `ANALYZE WITH ${selectedMode.toUpperCase()}`}</span>

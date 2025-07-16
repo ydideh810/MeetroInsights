@@ -71,7 +71,7 @@ export default function ContentModeToggle({ currentMode, onModeChange }: Content
     <div className="space-y-4">
       {/* Mode Toggle Bar */}
       <div className="flex justify-center">
-        <div className="bg-cyber-panel border-2 border-cyber-border rounded-lg p-1 flex">
+        <div className="bg-cyber-panel border-2 border-cyber-border rounded-lg p-1 flex border-scan">
           {modes.map((mode) => (
             <Button
               key={mode.id}
@@ -79,8 +79,9 @@ export default function ContentModeToggle({ currentMode, onModeChange }: Content
               variant="ghost"
               className={`
                 px-6 py-3 mx-1 rounded-md transition-all duration-300 flex items-center gap-2
+                micro-hover scale-click button-glow cyber-ripple
                 ${currentMode === mode.id 
-                  ? `${mode.color} text-black font-bold shadow-lg cyber-glow` 
+                  ? `${mode.color} text-black font-bold shadow-lg cyber-glow pulse-glow` 
                   : `text-cyber-cyan hover:${mode.textColor} hover:bg-cyber-dark-panel`
                 }
               `}
@@ -93,15 +94,15 @@ export default function ContentModeToggle({ currentMode, onModeChange }: Content
       </div>
 
       {/* Current Mode Description */}
-      <Card className="bg-cyber-panel border-cyber-border">
+      <Card className="bg-cyber-panel border-cyber-border card-float slide-in">
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className={`p-2 rounded-lg ${currentModeData?.color}`}>
+              <div className={`p-2 rounded-lg ${currentModeData?.color} rotate-hover`}>
                 {currentModeData?.icon}
               </div>
               <div>
-                <CardTitle className="text-lg font-tourney text-cyber-cyan">
+                <CardTitle className="text-lg font-tourney text-cyber-cyan matrix-text">
                   {currentModeData?.name} MODE
                 </CardTitle>
                 <CardDescription className="text-cyber-cyan/70">
@@ -113,7 +114,7 @@ export default function ContentModeToggle({ currentMode, onModeChange }: Content
               variant="ghost"
               size="sm"
               onClick={() => setIsExpanded(!isExpanded)}
-              className="text-cyber-cyan hover:text-cyber-orange"
+              className="text-cyber-cyan hover:text-cyber-orange micro-hover scale-click"
             >
               {isExpanded ? "COLLAPSE" : "EXPAND"}
             </Button>

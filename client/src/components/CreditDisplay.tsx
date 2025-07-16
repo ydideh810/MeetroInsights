@@ -31,10 +31,10 @@ export default function CreditDisplay() {
     <div className="flex items-center gap-2">
       <Badge 
         variant={isLowCredits ? "destructive" : "outline"}
-        className={isLowCredits ? 
+        className={`pulse-glow ${isLowCredits ? 
           "text-red-400 border-red-400/20 bg-red-400/10" : 
           "text-cyan-400 border-cyan-400/20"
-        }
+        }`}
       >
         {credits} Credits
       </Badge>
@@ -42,7 +42,7 @@ export default function CreditDisplay() {
         size="sm"
         variant="outline"
         onClick={handleBuyCredits}
-        className={`text-xs ${isLowCredits ? 
+        className={`text-xs micro-hover scale-click button-glow cyber-ripple ${isLowCredits ? 
           "text-orange-400 border-orange-400/20 hover:bg-orange-400/10" :
           "text-cyan-400 border-cyan-400/20 hover:bg-cyan-400/10"
         }`}

@@ -180,10 +180,10 @@ export default function UploadPanel({
         onModeChange={setContentMode}
       />
 
-      <div className="magi-panel rounded-lg p-6">
+      <div className="magi-panel rounded-lg p-6 card-float slide-in">
         <div className="relative z-10">
-          <h2 className="text-xl font-bold mb-4 cyber-glow tracking-wide font-doto">INPUT MODULE</h2>
-          <div className="text-xs text-cyber-cyan mb-4 font-tourney">TRI-CORE COGNITIVE INTERFACE • ONLINE</div>
+          <h2 className="text-xl font-bold mb-4 cyber-glow tracking-wide font-doto matrix-text">INPUT MODULE</h2>
+          <div className="text-xs text-cyber-cyan mb-4 font-tourney data-stream">TRI-CORE COGNITIVE INTERFACE • ONLINE</div>
         
           {/* File Upload Area */}
           <FileUpload
@@ -199,7 +199,7 @@ export default function UploadPanel({
             <Textarea
               value={transcript}
               onChange={(e) => setTranscript(e.target.value)}
-              className="w-full h-32 terminal-input rounded p-3 text-sm resize-none"
+              className="w-full h-32 terminal-input rounded p-3 text-sm resize-none input-focus border-scan"
               placeholder={getPlaceholderText()}
             />
           </div>
@@ -211,7 +211,7 @@ export default function UploadPanel({
               <Input
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
-                className="w-full terminal-input rounded p-2 text-sm"
+                className="w-full terminal-input rounded p-2 text-sm input-focus"
                 placeholder={labels.topicPlaceholder}
               />
             </div>
@@ -220,7 +220,7 @@ export default function UploadPanel({
               <Input
                 value={attendees}
                 onChange={(e) => setAttendees(e.target.value)}
-                className="w-full terminal-input rounded p-2 text-sm"
+                className="w-full terminal-input rounded p-2 text-sm input-focus"
                 placeholder={labels.attendeesPlaceholder}
               />
             </div>
@@ -229,7 +229,7 @@ export default function UploadPanel({
               <Input
                 value={knownInfo}
                 onChange={(e) => setKnownInfo(e.target.value)}
-                className="w-full terminal-input rounded p-2 text-sm"
+                className="w-full terminal-input rounded p-2 text-sm input-focus"
                 placeholder={labels.contextPlaceholder}
               />
             </div>
@@ -238,10 +238,10 @@ export default function UploadPanel({
       </div>
       
       {/* Emergency Recovery Mode */}
-      <div className="auth-panel p-6">
+      <div className="auth-panel p-6 card-float stagger-fade">
         <div className="relative z-10">
-          <h3 className="text-lg font-bold mb-4 text-cyber-red cyber-glow tracking-wide">EMERGENCY RECOVERY</h3>
-          <div className="text-xs text-cyber-cyan mb-4 font-mono">MOTION: COGNITIVE RECONSTRUCTION</div>
+          <h3 className="text-lg font-bold mb-4 text-cyber-red cyber-glow tracking-wide matrix-text">EMERGENCY RECOVERY</h3>
+          <div className="text-xs text-cyber-cyan mb-4 font-mono data-stream">MOTION: COGNITIVE RECONSTRUCTION</div>
           
           <div className="space-y-3">
             <div className="text-sm text-cyber-cyan/70 mb-2">
@@ -252,7 +252,7 @@ export default function UploadPanel({
             <Button
               onClick={handleEmergencyRecovery}
               disabled={emergencyRecoveryMutation.isPending}
-              className="w-full nerv-unlock text-white px-4 py-2 rounded font-bold transition-colors"
+              className="w-full nerv-unlock text-white px-4 py-2 rounded font-bold transition-colors micro-hover scale-click button-glow cyber-ripple"
             >
               {emergencyRecoveryMutation.isPending ? "RECONSTRUCTING..." : "EMERGENCY RECONSTRUCT"}
             </Button>

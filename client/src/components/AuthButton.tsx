@@ -61,7 +61,7 @@ export default function AuthButton() {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button className="bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black transition-colors">
+          <Button className="bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black transition-colors micro-hover scale-click button-glow">
             <Avatar className="w-6 h-6 mr-2">
               <AvatarImage src={user.photoURL || ""} alt={user.displayName || "User"} />
               <AvatarFallback className="bg-cyber-orange text-black text-xs">
@@ -108,7 +108,7 @@ export default function AuthButton() {
     <Button
       onClick={handleSignIn}
       disabled={isSigningIn}
-      className="bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black transition-colors"
+      className="bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black transition-colors micro-hover scale-click button-glow cyber-ripple"
     >
       <LogIn className="w-4 h-4 mr-2" />
       {isSigningIn ? "SIGNING IN..." : "SIGN IN"}

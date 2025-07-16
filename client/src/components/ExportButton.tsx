@@ -140,7 +140,7 @@ ${analysis.followUps.map(followUp => `- ${followUp}`).join('\n')}
     <Button
       onClick={handleClick}
       disabled={!analysis || (type === "download" && exportMutation.isPending)}
-      className={`${getButtonStyles()} px-2 py-1 text-xs rounded font-bold transition-colors`}
+      className={`${getButtonStyles()} px-2 py-1 text-xs rounded font-bold transition-colors micro-hover scale-click button-glow cyber-ripple`}
       size="sm"
     >
       {getButtonText()}
