@@ -45,13 +45,13 @@ export default function Home() {
   return (
     <div className="bg-cyber-bg text-cyber-orange font-mono min-h-screen">
       {/* Header */}
-      <header className="border-b-2 border-cyber-orange bg-cyber-panel p-4 tokyo-3-grid">
+      <header className="border-b-2 border-cyber-orange bg-cyber-panel p-4 district-7-grid">
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-6">
             <div className="text-4xl font-bold cyber-glow animate-flicker tracking-wider font-doto">NEURAKEI</div>
             <div className="text-sm text-cyber-cyan">
               <div>SHINRAI RECOVERY SYSTEM</div>
-              <div className="text-xs text-cyber-teal">TOKYO-3 ZENTRA</div>
+              <div className="text-xs text-cyber-teal">DISTRICT-7 ZENTRA</div>
             </div>
           </div>
           <div className="flex items-center space-x-6">
