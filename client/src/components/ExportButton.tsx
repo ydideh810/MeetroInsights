@@ -3,13 +3,15 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { MeetingAnalysis } from "@shared/schema";
+import { Copy, Download, FileText } from "lucide-react";
 
 interface ExportButtonProps {
   type: "copy" | "download" | "notion";
   analysis: MeetingAnalysis | null;
+  variant?: "header" | "menu";
 }
 
-export default function ExportButton({ type, analysis }: ExportButtonProps) {
+export default function ExportButton({ type, analysis, variant = "header" }: ExportButtonProps) {
   const { toast } = useToast();
 
   const exportMutation = useMutation({
@@ -111,6 +113,10 @@ ${analysis.followUps.map(followUp => `- ${followUp}`).join('\n')}
   };
 
   const getButtonStyles = () => {
+    if (variant === "menu") {
+      return "w-full justify-start text-cyber-cyan hover:bg-cyber-orange hover:text-black bg-transparent border border-cyber-border";
+    }
+    
     switch (type) {
       case "copy":
         return "bg-cyber-teal text-black hover:bg-cyan-400";
@@ -124,6 +130,19 @@ ${analysis.followUps.map(followUp => `- ${followUp}`).join('\n')}
   };
 
   const getButtonText = () => {
+    if (variant === "menu") {
+      switch (type) {
+        case "copy":
+          return "Copy to Clipboard";
+        case "download":
+          return "Download as Text";
+        case "notion":
+          return "Export to Notion";
+        default:
+          return "Copy to Clipboard";
+      }
+    }
+    
     switch (type) {
       case "copy":
         return "📄 COPY";
@@ -136,13 +155,27 @@ ${analysis.followUps.map(followUp => `- ${followUp}`).join('\n')}
     }
   };
 
+  const getButtonIcon = () => {
+    switch (type) {
+      case "copy":
+        return <Copy className="w-4 h-4 mr-2" />;
+      case "download":
+        return <Download className="w-4 h-4 mr-2" />;
+      case "notion":
+        return <FileText className="w-4 h-4 mr-2" />;
+      default:
+        return <Copy className="w-4 h-4 mr-2" />;
+    }
+  };
+
   return (
     <Button
       onClick={handleClick}
       disabled={!analysis || (type === "download" && exportMutation.isPending)}
-      className={`${getButtonStyles()} px-2 py-1 text-xs rounded font-bold transition-colors micro-hover scale-click button-glow cyber-ripple`}
+      className={`${getButtonStyles()} ${variant === "menu" ? "text-sm" : "px-2 py-1 text-xs"} rounded font-bold transition-colors micro-hover scale-click button-glow cyber-ripple`}
       size="sm"
     >
+      {variant === "menu" && getButtonIcon()}
       {getButtonText()}
     </Button>
   );

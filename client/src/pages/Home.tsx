@@ -55,13 +55,6 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-center space-x-6">
-            {/* Export Options */}
-            <div className="flex items-center space-x-2">
-              <div className="text-xs text-cyber-cyan font-mono mr-2">EXPORT:</div>
-              <ExportButton type="copy" analysis={analysis} />
-              <ExportButton type="download" analysis={analysis} />
-              <ExportButton type="notion" analysis={analysis} />
-            </div>
             <Button
               onClick={() => setShowMemoryBank(!showMemoryBank)}
               className={`bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black transition-colors micro-hover scale-click button-glow cyber-ripple ${
@@ -82,7 +75,7 @@ export default function Home() {
             </Button>
             <ShinraiGuide />
             <CreditDisplay />
-            <AuthButton />
+            <AuthButton analysis={analysis} />
             <div className="text-right text-xs text-cyber-cyan font-mono">
               <div>DIRECT LINK: <span className="text-cyber-orange">OPENROUTER-01</span></div>
               <div>ACCESS: <span className="text-cyber-orange animate-pulse">SUPERUSER</span></div>

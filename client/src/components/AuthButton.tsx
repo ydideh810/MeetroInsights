@@ -5,10 +5,16 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
-import { LogIn, LogOut, User, CreditCard, Settings, ExternalLink, Gift } from "lucide-react";
+import { LogIn, LogOut, User, CreditCard, Settings, ExternalLink, Gift, Copy, Download, FileText } from "lucide-react";
 import LicenseKeyRedemption from "./LicenseKeyRedemption";
+import ExportButton from "./ExportButton";
+import { MeetingAnalysis } from "@shared/schema";
 
-export default function AuthButton() {
+interface AuthButtonProps {
+  analysis?: MeetingAnalysis | null;
+}
+
+export default function AuthButton({ analysis }: AuthButtonProps) {
   const { user, loading } = useAuth();
   const [isSigningIn, setIsSigningIn] = useState(false);
   const { toast } = useToast();
@@ -72,8 +78,23 @@ export default function AuthButton() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-cyber-dark-panel border-cyber-orange w-56">
+          {/* Export Options */}
+          {analysis && (
+            <>
+              <div className="px-2 py-1 text-xs text-cyber-cyan font-mono border-b border-cyber-border">
+                EXPORT OPTIONS
+              </div>
+              <div className="p-2 space-y-1">
+                <ExportButton type="copy" analysis={analysis} variant="menu" />
+                <ExportButton type="download" analysis={analysis} variant="menu" />
+                <ExportButton type="notion" analysis={analysis} variant="menu" />
+              </div>
+              <DropdownMenuSeparator className="bg-cyber-border" />
+            </>
+          )}
+          
           <DropdownMenuItem
-            onClick={() => window.open('https://niddamhub.lemonsqueezy.com/buy/be00a64f-fe92-44a6-a654-d6187a4e864a', '_blank')}
+            onClick={() => window.open('https://payhip.com/b/dAc53', '_blank')}
             className="text-cyber-cyan hover:bg-cyber-orange hover:text-black cursor-pointer"
           >
             <CreditCard className="w-4 h-4 mr-2" />
