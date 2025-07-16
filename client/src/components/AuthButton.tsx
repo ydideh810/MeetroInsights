@@ -77,14 +77,14 @@ export default function AuthButton({ analysis }: AuthButtonProps) {
             {user.displayName || user.email}
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-cyber-dark-panel border-cyber-orange w-56">
+        <DropdownMenuContent className="bg-cyber-dark-panel border-2 border-cyber-orange w-56 backdrop-blur-sm shadow-lg shadow-cyber-orange/20" style={{ backgroundColor: 'hsl(0, 0%, 8%)' }}>
           {/* Export Options */}
           {analysis && (
             <>
-              <div className="px-2 py-1 text-xs text-cyber-cyan font-mono border-b border-cyber-border">
+              <div className="px-2 py-1 text-xs text-cyber-cyan font-mono border-b border-cyber-border bg-cyber-panel">
                 EXPORT OPTIONS
               </div>
-              <div className="p-2 space-y-1">
+              <div className="p-2 space-y-1 bg-cyber-dark-panel">
                 <ExportButton type="copy" analysis={analysis} variant="menu" />
                 <ExportButton type="download" analysis={analysis} variant="menu" />
                 <ExportButton type="notion" analysis={analysis} variant="menu" />
