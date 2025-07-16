@@ -11,6 +11,15 @@ Preferred communication style: Simple, everyday language.
 ## Recent Changes
 
 ### January 16, 2025
+- **Export Options UI Update**: Moved export options (copy, download, notion) from header to user account dropdown menu
+  - Added proper styling for menu-based export buttons with full-width layout and icons
+  - Created separate "EXPORT OPTIONS" section within user menu that only appears when analysis is available
+  - Updated ExportButton component to support both header and menu variants
+  - Cleaner header layout focused on core system functions
+- **Loading Demo Removal**: Removed loading demo showcase button and overlay from header interface
+  - Simplified header layout by removing the "LOADING DEMO" button
+  - Removed associated state management and overlay components
+  - Maintained core functionality while streamlining the interface
 - **Responsive Micro-Interactions Implementation**: Added comprehensive cyberpunk-themed micro-interactions across all UI components
   - Created 15+ CSS animation classes: micro-hover, pulse-glow, slide-in, scale-click, button-glow, card-float, input-focus, cyber-ripple, data-stream, rotate-hover, border-scan, stagger-fade, matrix-text
   - Enhanced ContentModeToggle with smooth hover effects, pulse animations, and scanning borders

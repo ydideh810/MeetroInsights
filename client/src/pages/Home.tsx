@@ -9,12 +9,12 @@ import ShinraiGuide from "@/components/ShinraiGuide";
 import MemoryBank from "@/components/MemoryBank";
 import AuthButton from "@/components/AuthButton";
 import CreditDisplay from "@/components/CreditDisplay";
-import LoadingDemo from "@/components/LoadingDemo";
+
 import ContextualGuidance from "@/components/ContextualGuidance";
 import { ContentMode } from "@/components/ContentModeToggle";
 import { MeetingAnalysis } from "@shared/schema";
 import { Button } from "@/components/ui/button";
-import { Database, Monitor } from "lucide-react";
+import { Database } from "lucide-react";
 
 export default function Home() {
   const { user } = useAuth();
@@ -26,7 +26,7 @@ export default function Home() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [currentShinraiMode, setCurrentShinraiMode] = useState<string>("");
   const [showMemoryBank, setShowMemoryBank] = useState(false);
-  const [showLoadingDemo, setShowLoadingDemo] = useState(false);
+
   const [analysisCount, setAnalysisCount] = useState(0);
   const [contentMode, setContentMode] = useState<ContentMode>("meetings");
 
@@ -64,15 +64,7 @@ export default function Home() {
               <Database className="w-4 h-4 mr-2" />
               MEMORY BANK
             </Button>
-            <Button
-              onClick={() => setShowLoadingDemo(!showLoadingDemo)}
-              className={`bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black transition-colors micro-hover scale-click button-glow cyber-ripple ${
-                showLoadingDemo ? 'bg-cyber-orange text-black' : ''
-              }`}
-            >
-              <Monitor className="w-4 h-4 mr-2" />
-              LOADING DEMO
-            </Button>
+
             <ShinraiGuide />
             <CreditDisplay />
             <AuthButton analysis={analysis} />
@@ -136,23 +128,7 @@ export default function Home() {
         )}
       </main>
 
-      {/* Loading Demo Overlay */}
-      {showLoadingDemo && (
-        <div className="fixed inset-0 bg-cyber-bg/95 backdrop-blur-sm z-50 p-6 overflow-y-auto">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-cyber-orange cyber-glow">LOADING SYSTEMS</h2>
-              <Button
-                onClick={() => setShowLoadingDemo(false)}
-                className="bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black"
-              >
-                ✕ CLOSE
-              </Button>
-            </div>
-            <LoadingDemo />
-          </div>
-        </div>
-      )}
+
 
       {/* Contextual AI Guidance */}
       <ContextualGuidance
