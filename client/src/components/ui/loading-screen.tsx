@@ -198,7 +198,7 @@ export default function LoadingScreen({
 
   return (
     <div className={cn(
-      "fixed inset-0 bg-cyber-bg/95 backdrop-blur-sm flex flex-col items-center justify-center z-50",
+      "fixed inset-0 bg-cyber-bg flex flex-col items-center justify-center z-50",
       className
     )}>
       {renderLoader()}

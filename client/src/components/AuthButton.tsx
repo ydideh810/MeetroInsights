@@ -77,7 +77,7 @@ export default function AuthButton({ analysis }: AuthButtonProps) {
             {user.displayName || user.email}
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-cyber-dark-panel border-2 border-cyber-orange w-56 backdrop-blur-sm shadow-lg shadow-cyber-orange/20" style={{ backgroundColor: 'hsl(0, 0%, 8%)' }}>
+        <DropdownMenuContent className="bg-cyber-dark-panel border-2 border-cyber-orange w-56 shadow-lg shadow-cyber-orange/20" style={{ backgroundColor: 'hsl(0, 0%, 8%)' }}>
           {/* Export Options */}
           {analysis && (
             <>

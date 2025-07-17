@@ -225,7 +225,7 @@ export default function ContextualGuidance({
 
   return (
     <div className="fixed bottom-4 right-4 z-50 max-w-sm">
-      <Card className="bg-cyber-dark-panel border-cyber-cyan shadow-lg">
+      <Card className="bg-cyber-dark-panel border-cyber-cyan shadow-lg" style={{ backgroundColor: 'hsl(0, 0%, 8%)' }}>
         <CardHeader className="pb-3">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-2">
