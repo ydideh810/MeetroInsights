@@ -114,18 +114,18 @@ ${analysis.followUps.map(followUp => `- ${followUp}`).join('\n')}
 
   const getButtonStyles = () => {
     if (variant === "menu") {
-      return "w-full justify-start text-cyber-cyan hover:bg-cyber-orange hover:text-black bg-transparent border border-cyber-border";
+      return "w-full justify-start text-cyber-cyan hover:bg-cyber-orange hover:text-cyber-dark-panel bg-transparent border border-cyber-border";
     }
     
     switch (type) {
       case "copy":
-        return "bg-cyber-teal text-black hover:bg-cyan-400";
+        return "bg-cyber-teal text-cyber-dark-panel hover:bg-cyan-400";
       case "download":
-        return "bg-cyber-orange text-black hover:bg-orange-600";
+        return "bg-cyber-orange text-cyber-dark-panel hover:bg-orange-600";
       case "notion":
         return "bg-cyber-red text-white hover:bg-red-700";
       default:
-        return "bg-cyber-teal text-black hover:bg-cyan-400";
+        return "bg-cyber-teal text-cyber-dark-panel hover:bg-cyan-400";
     }
   };
 

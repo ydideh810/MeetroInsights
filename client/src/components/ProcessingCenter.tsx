@@ -232,7 +232,7 @@ export default function ProcessingCenter({
           <Button
             onClick={handleRecovery}
             disabled={isProcessing || analyzeMutation.isPending}
-            className="w-full nerv-unlock text-black px-8 py-4 rounded-lg font-bold text-xl transition-all animate-pulse-glow micro-hover scale-click button-glow cyber-ripple"
+            className="w-full nerv-unlock text-cyber-dark-panel px-8 py-4 rounded-lg font-bold text-xl transition-all animate-pulse-glow micro-hover scale-click button-glow cyber-ripple"
           >
             <div className="flex items-center justify-center space-x-2 font-doto">
               <span>{isProcessing ? "PROCESSING..." : `ANALYZE WITH ${selectedMode.toUpperCase()}`}</span>

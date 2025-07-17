@@ -67,10 +67,10 @@ export default function AuthButton({ analysis }: AuthButtonProps) {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button className="bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black transition-colors micro-hover scale-click button-glow">
+          <Button className="bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-cyber-dark-panel transition-colors micro-hover scale-click button-glow">
             <Avatar className="w-6 h-6 mr-2">
               <AvatarImage src={user.photoURL || ""} alt={user.displayName || "User"} />
-              <AvatarFallback className="bg-cyber-orange text-black text-xs">
+              <AvatarFallback className="bg-cyber-orange text-cyber-dark-panel text-xs">
                 {user.displayName?.charAt(0) || user.email?.charAt(0) || "U"}
               </AvatarFallback>
             </Avatar>
@@ -95,7 +95,7 @@ export default function AuthButton({ analysis }: AuthButtonProps) {
           
           <DropdownMenuItem
             onClick={() => window.open('https://payhip.com/b/dAc53', '_blank')}
-            className="text-cyber-cyan hover:bg-cyber-orange hover:text-black cursor-pointer"
+            className="text-cyber-cyan hover:bg-cyber-orange hover:text-cyber-dark-panel cursor-pointer"
           >
             <CreditCard className="w-4 h-4 mr-2" />
             Refill Credits
@@ -115,7 +115,7 @@ export default function AuthButton({ analysis }: AuthButtonProps) {
           <DropdownMenuSeparator className="bg-cyber-border" />
           <DropdownMenuItem
             onClick={handleSignOut}
-            className="text-cyber-cyan hover:bg-cyber-orange hover:text-black cursor-pointer"
+            className="text-cyber-cyan hover:bg-cyber-orange hover:text-cyber-dark-panel cursor-pointer"
           >
             <LogOut className="w-4 h-4 mr-2" />
             Sign Out
@@ -129,7 +129,7 @@ export default function AuthButton({ analysis }: AuthButtonProps) {
     <Button
       onClick={handleSignIn}
       disabled={isSigningIn}
-      className="bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black transition-colors micro-hover scale-click button-glow cyber-ripple"
+      className="bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-cyber-dark-panel transition-colors micro-hover scale-click button-glow cyber-ripple"
     >
       <LogIn className="w-4 h-4 mr-2" />
       {isSigningIn ? "SIGNING IN..." : "SIGN IN"}

@@ -57,8 +57,8 @@ export default function Home() {
           <div className="flex items-center space-x-6">
             <Button
               onClick={() => setShowMemoryBank(!showMemoryBank)}
-              className={`bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black transition-colors micro-hover scale-click button-glow cyber-ripple ${
-                showMemoryBank ? 'bg-cyber-orange text-black' : ''
+              className={`bg-cyber-panel border-2 border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-cyber-dark-panel transition-colors micro-hover scale-click button-glow cyber-ripple ${
+                showMemoryBank ? 'bg-cyber-orange text-cyber-dark-panel' : ''
               }`}
             >
               <Database className="w-4 h-4 mr-2" />

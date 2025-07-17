@@ -212,7 +212,7 @@ function SaveMeetingDialog({ analysis, transcript, topic, attendees, knownInfo, 
               <Button
                 onClick={handleCreateTag}
                 disabled={!newTagName || createTagMutation.isPending}
-                className="bg-cyber-orange text-black hover:bg-orange-600"
+                className="bg-cyber-orange text-cyber-dark-panel hover:bg-orange-600"
               >
                 <Plus className="w-4 h-4" />
               </Button>
@@ -223,14 +223,14 @@ function SaveMeetingDialog({ analysis, transcript, topic, attendees, knownInfo, 
             <Button
               onClick={handleSave}
               disabled={saveMutation.isPending}
-              className="bg-cyber-orange text-black hover:bg-orange-600 font-bold flex-1"
+              className="bg-cyber-orange text-cyber-dark-panel hover:bg-orange-600 font-bold flex-1"
             >
               {saveMutation.isPending ? "SAVING..." : "SAVE TO MEMORY BANK"}
             </Button>
             <Button
               onClick={() => setIsOpen(false)}
               variant="outline"
-              className="border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-black"
+              className="border-cyber-orange text-cyber-cyan hover:bg-cyber-orange hover:text-cyber-dark-panel"
             >
               Cancel
             </Button>
@@ -331,7 +331,7 @@ export default function MemoryBank() {
           <Button
             onClick={handleSearch}
             disabled={searchMutation.isPending}
-            className="bg-cyber-orange text-black hover:bg-orange-600"
+            className="bg-cyber-orange text-cyber-dark-panel hover:bg-orange-600"
           >
             <Search className="w-4 h-4" />
           </Button>

@@ -111,7 +111,7 @@ export default function LicenseKeyRedemption({ onSuccess }: LicenseKeyRedemption
             <Button
               type="submit"
               disabled={redeemMutation.isPending}
-              className="flex-1 bg-cyber-orange text-black hover:bg-cyber-orange/90"
+              className="flex-1 bg-cyber-orange text-cyber-dark-panel hover:bg-cyber-orange/90"
             >
               {redeemMutation.isPending ? "Redeeming..." : "Redeem"}
             </Button>

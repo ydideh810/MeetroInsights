@@ -48,14 +48,14 @@ export default function OutputPanel({
             <TabsList className="grid w-full grid-cols-2 bg-cyber-bg border border-cyber-orange">
               <TabsTrigger 
                 value="analysis" 
-                className="text-cyber-cyan data-[state=active]:bg-cyber-orange data-[state=active]:text-black"
+                className="text-cyber-cyan data-[state=active]:bg-cyber-orange data-[state=active]:text-cyber-dark-panel"
               >
                 <FileText className="w-4 h-4 mr-2" />
                 ANALYSIS
               </TabsTrigger>
               <TabsTrigger 
                 value="highlights" 
-                className="text-cyber-cyan data-[state=active]:bg-cyber-orange data-[state=active]:text-black"
+                className="text-cyber-cyan data-[state=active]:bg-cyber-orange data-[state=active]:text-cyber-dark-panel"
               >
                 <Play className="w-4 h-4 mr-2" />
                 HIGHLIGHTS
